@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_base_app/screens/home_screen.dart';
+import 'package:nectar_app/screens/home_screen.dart';
 
 void main() {
   runApp(const NectarApp());
@@ -16,7 +16,7 @@ class NectarApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 255, 248, 228)),
       ),
-      home: const MyHomePage(title: 'Nectar'),
+      home: const HomeScreen(title: 'Nectar'),
     );
   }
 }

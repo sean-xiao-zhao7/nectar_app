@@ -1,5 +1,5 @@
-name: flutter_base_app
-description: A base Flutter application.
+name: nectar_app
+description: Virtual business card.
 publish_to: "none"
 
 version: 1.0.0+1
