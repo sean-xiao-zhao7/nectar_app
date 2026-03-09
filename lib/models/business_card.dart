@@ -1,5 +1,7 @@
 class BusinessCard {
   const BusinessCard({
+    required this.id,
+    required this.ownerUserId,
     required this.fullName,
     required this.jobTitle,
     required this.companyName,
@@ -16,6 +18,8 @@ class BusinessCard {
     this.xHandle,
   });
 
+  final String id;
+  final String ownerUserId;
   final String fullName;
   final String jobTitle;
   final String companyName;
@@ -32,6 +36,8 @@ class BusinessCard {
   final String? xHandle;
 
   BusinessCard copyWith({
+    String? id,
+    String? ownerUserId,
     String? fullName,
     String? jobTitle,
     String? companyName,
@@ -48,6 +54,8 @@ class BusinessCard {
     String? xHandle,
   }) {
     return BusinessCard(
+      id: id ?? this.id,
+      ownerUserId: ownerUserId ?? this.ownerUserId,
       fullName: fullName ?? this.fullName,
       jobTitle: jobTitle ?? this.jobTitle,
       companyName: companyName ?? this.companyName,
@@ -67,6 +75,8 @@ class BusinessCard {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'ownerUserId': ownerUserId,
       'fullName': fullName,
       'jobTitle': jobTitle,
       'companyName': companyName,
@@ -86,6 +96,8 @@ class BusinessCard {
 
   factory BusinessCard.fromJson(Map<String, dynamic> json) {
     return BusinessCard(
+      id: json['id'] as String? ?? '',
+      ownerUserId: json['ownerUserId'] as String? ?? '',
       fullName: json['fullName'] as String? ?? '',
       jobTitle: json['jobTitle'] as String? ?? '',
       companyName: json['companyName'] as String? ?? '',
