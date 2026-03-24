@@ -1,23 +1,7 @@
-class BusinessCard {
-  const BusinessCard({
-    required this.id,
-    required this.ownerUserId,
-    required this.fullName,
-    required this.jobTitle,
-    required this.companyName,
-    required this.phoneNumber,
-    required this.email,
-    required this.website,
-    required this.addressLine1,
-    required this.city,
-    required this.stateOrRegion,
-    required this.postalCode,
-    required this.country,
-    this.tagline,
-    this.linkedInUrl,
-    this.xHandle,
-  });
+import 'package:nectar_app/helpers/id_generator.dart';
 
+/// Represents a single business card owned by a user.
+class BusinessCard {
   final String id;
   final String ownerUserId;
   final String fullName;
@@ -35,6 +19,27 @@ class BusinessCard {
   final String? linkedInUrl;
   final String? xHandle;
 
+  /// Creates a business card with identity, ownership, and contact details.
+  BusinessCard({
+    String? id,
+    required this.ownerUserId,
+    required this.fullName,
+    required this.jobTitle,
+    required this.companyName,
+    required this.phoneNumber,
+    required this.email,
+    required this.website,
+    required this.addressLine1,
+    required this.city,
+    required this.stateOrRegion,
+    required this.postalCode,
+    required this.country,
+    this.tagline,
+    this.linkedInUrl,
+    this.xHandle,
+  }) : id = id ?? generatePrefixedId('card');
+
+  /// Returns a new [BusinessCard] with only the provided fields replaced.
   BusinessCard copyWith({
     String? id,
     String? ownerUserId,
@@ -73,6 +78,7 @@ class BusinessCard {
     );
   }
 
+  /// Serializes this business card into a JSON-compatible map.
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -94,6 +100,7 @@ class BusinessCard {
     };
   }
 
+  /// Builds a [BusinessCard] from a JSON map.
   factory BusinessCard.fromJson(Map<String, dynamic> json) {
     return BusinessCard(
       id: json['id'] as String? ?? '',

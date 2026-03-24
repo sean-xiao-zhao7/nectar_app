@@ -1,3 +1,4 @@
+import 'package:nectar_app/helpers/id_generator.dart';
 import 'package:nectar_app/models/business_card.dart';
 
 /// Represents an app user profile and the business cards they own (0 to 3).
@@ -15,7 +16,7 @@ class User {
 
   /// Creates a user and validates ownership/card-count constraints.
   User({
-    required this.id,
+    String? id,
     required this.firstName,
     required this.lastName,
     required this.email,
@@ -24,14 +25,16 @@ class User {
     this.isActive = true,
     DateTime? createdAt,
     this.businessCards = const <BusinessCard>[],
-  }) : createdAt = createdAt ?? DateTime.now() {
+  })  : id = id ?? generatePrefixedId('user'),
+        createdAt = createdAt ?? DateTime.now() {
     if (businessCards.length > maxBusinessCards) {
       throw ArgumentError(
         'You can only add a maximum of $maxBusinessCards business cards.',
       );
     }
 
-    final ownsAllCards = businessCards.every((card) => card.ownerUserId == id);
+    final ownsAllCards =
+        businessCards.every((card) => card.ownerUserId == this.id);
     if (!ownsAllCards) {
       throw ArgumentError(
         'Trying to add a business card that does not belong to you!',
@@ -42,11 +45,47 @@ class User {
   /// Returns the user's display name as "FirstName LastName".
   String get fullName => '$firstName $lastName';
 
-  /// Adds a business card if ownership matches and the 3-card limit is not exceeded.
-  User addBusinessCard(BusinessCard card) {
-    if (card.ownerUserId != id) {
+  /// Adds an existing card or creates one from user canonical values.
+  /// When [card] is omitted, a new card is created using [id], [ownerUserId],
+  /// and defaults from this user ([fullName], [email], [phoneNumber]).
+  User addBusinessCard({
+    BusinessCard? card,
+    String? id,
+    String? ownerUserId,
+    String jobTitle = '',
+    String companyName = '',
+    String website = '',
+    String addressLine1 = '',
+    String city = '',
+    String stateOrRegion = '',
+    String postalCode = '',
+    String country = '',
+    String? tagline,
+    String? linkedInUrl,
+    String? xHandle,
+  }) {
+    final cardToAdd = card ??
+        BusinessCard(
+          id: id,
+          ownerUserId: ownerUserId ?? this.id,
+          fullName: fullName,
+          jobTitle: jobTitle,
+          companyName: companyName,
+          phoneNumber: phoneNumber ?? '',
+          email: email,
+          website: website,
+          addressLine1: addressLine1,
+          city: city,
+          stateOrRegion: stateOrRegion,
+          postalCode: postalCode,
+          country: country,
+          tagline: tagline,
+          linkedInUrl: linkedInUrl,
+          xHandle: xHandle,
+        );
+    if (cardToAdd.ownerUserId != this.id) {
       throw ArgumentError(
-        'Trying to add a business card that does not belong to you! Id: ${card.id}',
+        'Trying to add a business card that does not belong to you! Id: ${cardToAdd.id}',
       );
     }
     if (businessCards.length >= maxBusinessCards) {
@@ -55,7 +94,7 @@ class User {
       );
     }
     return copyWith(
-      businessCards: <BusinessCard>[...businessCards, card],
+      businessCards: <BusinessCard>[...businessCards, cardToAdd],
     );
   }
 
@@ -87,7 +126,7 @@ class User {
         .cast<Map<String, dynamic>>();
 
     return User(
-      id: json['id'] as String? ?? '',
+      id: json['id'] as String?,
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
       email: json['email'] as String? ?? '',
