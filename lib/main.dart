@@ -19,7 +19,8 @@ class NectarApp extends StatelessWidget {
             primaryContainer: const Color.fromARGB(255, 255, 209, 72),
             onPrimary: Colors.white,
             secondaryContainer: Colors.white,
-            onSecondaryContainer: const Color.fromARGB(255, 175, 131, 0),
+            onSecondaryContainer: const Color.fromARGB(255, 169, 127, 0),
+            tertiaryContainer: const Color.fromARGB(255, 255, 250, 234),
           )),
       home: const HomeScreen(),
     );
