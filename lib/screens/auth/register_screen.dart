@@ -37,7 +37,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign up to Nectar'),
+        titleSpacing: 0,
+        title: Text('Sign up to Nectar'),
       ),
       body: SafeArea(
         child: Padding(
@@ -103,8 +104,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Password is required.';
                     }
-                    if (value.length < 8) {
-                      return 'Password must be at least 8 characters.';
+                    if (value.length < 6) {
+                      return 'Password must be at least 6 characters.';
                     }
                     return null;
                   },

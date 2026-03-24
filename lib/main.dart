@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/home_screen.dart';
 
 void main() {
   runApp(const NectarApp());
@@ -13,10 +13,15 @@ class NectarApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nectar',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 255, 248, 228)),
-      ),
-      home: const RegisterScreen(),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 255, 209, 72),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.amber,
+            primaryContainer: const Color.fromARGB(255, 255, 209, 72),
+            onPrimary: Colors.white,
+            secondaryContainer: Colors.white,
+            onSecondaryContainer: const Color.fromARGB(255, 175, 131, 0),
+          )),
+      home: const HomeScreen(),
     );
   }
 }
