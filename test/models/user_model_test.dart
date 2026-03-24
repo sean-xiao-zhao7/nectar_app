@@ -26,6 +26,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
     );
 
     expect(user.id, isNotEmpty);
@@ -58,6 +59,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
     );
 
     final updated = user
@@ -74,6 +76,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
       businessCards: <BusinessCard>[
         _card('card_1', 'user_1'),
         _card('card_2', 'user_1'),
@@ -93,6 +96,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
     );
 
     expect(
@@ -107,6 +111,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
       phoneNumber: '555-0101',
     );
 
@@ -136,6 +141,7 @@ void main() {
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
+      password: 'password123',
       businessCards: <BusinessCard>[_card('card_1', 'user_1')],
     );
 

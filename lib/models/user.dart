@@ -8,6 +8,7 @@ class User {
   final String firstName;
   final String lastName;
   final String email;
+  final String password;
   final String? phoneNumber;
   final String? avatarUrl;
   final bool isActive;
@@ -20,6 +21,7 @@ class User {
     required this.firstName,
     required this.lastName,
     required this.email,
+    required this.password,
     this.phoneNumber,
     this.avatarUrl,
     this.isActive = true,
@@ -32,7 +34,7 @@ class User {
         'You can only add a maximum of $maxBusinessCards business cards.',
       );
     }
-
+    // check if initial list of business cards belong to this user id.
     final ownsAllCards =
         businessCards.every((card) => card.ownerUserId == this.id);
     if (!ownsAllCards) {
@@ -44,6 +46,8 @@ class User {
 
   /// Returns the user's display name as "FirstName LastName".
   String get fullName => '$firstName $lastName';
+
+  // business card functions below
 
   /// Adds an existing card or creates one from user canonical values.
   /// When [card] is omitted, a new card is created using [id], [ownerUserId],
@@ -105,6 +109,8 @@ class User {
     );
   }
 
+  // IO functions below
+
   /// Serializes the user and owned business cards into a JSON-compatible map.
   Map<String, dynamic> toJson() {
     return {
@@ -112,6 +118,7 @@ class User {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
+      'password': password,
       'phoneNumber': phoneNumber,
       'avatarUrl': avatarUrl,
       'isActive': isActive,
@@ -130,6 +137,7 @@ class User {
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
       email: json['email'] as String? ?? '',
+      password: json['password'] as String? ?? '',
       phoneNumber: json['phoneNumber'] as String?,
       avatarUrl: json['avatarUrl'] as String?,
       isActive: json['isActive'] as bool? ?? true,
@@ -145,6 +153,7 @@ class User {
     String? firstName,
     String? lastName,
     String? email,
+    String? password,
     String? phoneNumber,
     String? avatarUrl,
     bool? isActive,
@@ -156,6 +165,7 @@ class User {
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
+      password: password ?? this.password,
       phoneNumber: phoneNumber ?? this.phoneNumber,
       avatarUrl: avatarUrl ?? this.avatarUrl,
       isActive: isActive ?? this.isActive,

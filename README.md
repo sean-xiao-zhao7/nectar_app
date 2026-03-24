@@ -1,3 +1,3 @@
-# Nectar
+# NectarApp
 
 A virtual business card application.
