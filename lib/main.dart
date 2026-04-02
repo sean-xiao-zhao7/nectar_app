@@ -13,6 +13,7 @@ class NectarApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nectar',
       theme: ThemeData(
+          fontFamily: 'Inter',
           scaffoldBackgroundColor: const Color.fromARGB(255, 255, 209, 72),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.amber,
@@ -21,6 +22,18 @@ class NectarApp extends StatelessWidget {
             secondaryContainer: Colors.white,
             onSecondaryContainer: const Color.fromARGB(255, 169, 127, 0),
             tertiaryContainer: const Color.fromARGB(255, 255, 250, 234),
+          ),
+          appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+              fontFamily: 'Lora',
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          textTheme: const TextTheme(
+            headlineLarge: TextStyle(fontFamily: 'Lora'),
+            headlineMedium: TextStyle(fontFamily: 'Lora'),
+            headlineSmall: TextStyle(fontFamily: 'Lora'),
           )),
       home: const HomeScreen(),
     );
