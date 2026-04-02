@@ -11,9 +11,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primaryContainer,
       drawer: Drawer(
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         child: SafeArea(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -62,15 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        foregroundColor: Theme.of(context).colorScheme.onSecondaryContainer,
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        title: Text('Nectar'),
+        title: Text(
+          'Nectar',
+        ),
       ),
       body: Center(
         child: Column(
