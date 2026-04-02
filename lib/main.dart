@@ -13,6 +13,7 @@ class NectarApp extends StatelessWidget {
     // Nectar Primary Yellow
     const nectarLightYellow = Color.fromARGB(255, 255, 209, 72);
     const nectarDarkYellow = Color.fromARGB(255, 169, 127, 0);
+    const nectarWhite = Colors.white;
 
     return MaterialApp(
       title: 'Nectar',
@@ -33,7 +34,7 @@ class NectarApp extends StatelessWidget {
             headlineSmall: TextStyle(fontFamily: 'Lora'),
           ),
           drawerTheme: DrawerThemeData(
-            backgroundColor: nectarLightYellow,
+            backgroundColor: nectarWhite,
           )),
       home: const HomeScreen(),
     );

@@ -18,11 +18,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               SizedBox(
                 height: 100,
-                child: DrawerHeader(
+                child: Container(
                   margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(0),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimary,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   child: Center(
                     child: Column(
@@ -31,17 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Text(
                             'Jean Cyan',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer),
                           ),
                           Text(
                             'jean.cyan@nectar.io',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer),
                           ),
                         ]),
                   ),
