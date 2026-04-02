@@ -18,31 +18,37 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: <Widget>[
-              UserAccountsDrawerHeader(
-                  currentAccountPicture: CircleAvatar(
-                    backgroundColor:
-                        Theme.of(context).colorScheme.primaryContainer,
-                    child: Text('JP',
-                        style: TextStyle(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimaryContainer)),
-                  ),
-                  accountName: Text(
-                    'Jean Cyan',
-                    style: TextStyle(
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
-                  ),
-                  accountEmail: Text(
-                    'jean.cyan@nectar.io',
-                    style: TextStyle(
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
-                  ),
+              SizedBox(
+                height: 100,
+                child: DrawerHeader(
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                  )),
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  child: Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Jean Cyan',
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer),
+                          ),
+                          Text(
+                            'jean.cyan@nectar.io',
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onPrimaryContainer),
+                          ),
+                        ]),
+                  ),
+                ),
+              ),
               ListTile(
                 leading: Icon(Icons.home),
                 title: Text('Home'),
