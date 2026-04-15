@@ -32,6 +32,8 @@ class NectarApp extends StatelessWidget {
               surface: nectarLightYellow,
               onSurface: nectarWhite),
           appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: nectarDarkYellow),
+            backgroundColor: nectarWhite,
             titleTextStyle: TextStyle(
                 fontFamily: 'Lora',
                 fontSize: 22,
@@ -43,9 +45,7 @@ class NectarApp extends StatelessWidget {
             headlineMedium: TextStyle(fontFamily: 'Lora'),
             headlineSmall: TextStyle(fontFamily: 'Lora'),
           ),
-          drawerTheme: DrawerThemeData(
-            backgroundColor: nectarWhite,
-          )),
+          drawerTheme: DrawerThemeData()),
       home: const HomeScreen(),
     );
   }
