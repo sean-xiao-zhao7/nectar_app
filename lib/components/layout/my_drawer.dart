@@ -8,13 +8,17 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle profileTextStyle =
-        TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 20);
+    final TextStyle profileTextStyle = TextStyle(
+        color: Theme.of(context).colorScheme.secondary,
+        fontSize: 20,
+        fontWeight: FontWeight.w500);
+    final TextStyle menuTextStyle =
+        TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
 
     return Drawer(
       child: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
+          spacing: 14,
           children: <Widget>[
             SizedBox(
               height: 120,
@@ -42,12 +46,24 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: Icon(
+                Icons.home,
+                size: 34,
+              ),
+              title: Text(
+                'Home',
+                style: menuTextStyle,
+              ),
             ),
             ListTile(
-              leading: Icon(Icons.account_box),
-              title: Text('Sign up'),
+              leading: Icon(
+                Icons.account_box,
+                size: 32,
+              ),
+              title: Text(
+                'Sign up',
+                style: menuTextStyle,
+              ),
             ),
           ],
         ),
