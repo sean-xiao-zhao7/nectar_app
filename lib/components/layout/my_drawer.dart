@@ -8,18 +8,21 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle profileTextStyle =
+        TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 20);
+
     return Drawer(
       child: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             SizedBox(
-              height: 100,
+              height: 120,
               child: Container(
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
                 child: Center(
                   child: Column(
@@ -27,10 +30,12 @@ class MyDrawer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userTitle, //'Jean Cyan',
+                          userTitle,
+                          style: profileTextStyle,
                         ),
                         Text(
-                          userSubTitle, //'jean.cyan@nectar.io',
+                          userSubTitle,
+                          style: profileTextStyle,
                         ),
                       ]),
                 ),
