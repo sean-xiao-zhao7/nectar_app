@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/components/layout/my_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,17 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      appBar: AppBar(
-        leading: Builder(
-          builder: (context) => IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () => Scaffold.of(context).openDrawer(),
-          ),
-        ),
-        title: Text(
-          'Nectar',
-        ),
-      ),
+      appBar: MyAppBar(title: 'Nectar'),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
