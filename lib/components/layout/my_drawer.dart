@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// The main drawer
+///
+/// Has a profile section at top.
+/// Then a column of menu items.
+/// 
+/// The drawer opening hamburger icon is controlled in appBar.
 class MyDrawer extends StatelessWidget {
   final String userTitle;
   final String userSubTitle;
@@ -10,17 +16,17 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
         color: Theme.of(context).colorScheme.secondary,
-        fontSize: 24,
-        fontWeight: FontWeight.w500);
+        fontSize: 22,
+        fontWeight: FontWeight.w600);
     final TextStyle profileSubTextStyle =
-        TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+        TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
     final TextStyle menuTextStyle =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 
     return Drawer(
       child: SafeArea(
         child: Column(
-          spacing: 5,
+          spacing: 10,
           children: <Widget>[
             SizedBox(
               width: double.infinity,
@@ -55,7 +61,7 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             ListTile(
               leading: Icon(

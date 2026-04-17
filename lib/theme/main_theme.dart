@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
 /// Theme for the entire app
@@ -35,9 +34,9 @@ ThemeData initTheme(Brightness brightness) {
     appBarTheme: AppBarTheme(
       iconTheme: const IconThemeData(color: nectarDarkYellow),
       backgroundColor: nectarWhite,
-      titleTextStyle: GoogleFonts.lora(
-        fontSize: 22,
-        fontWeight: FontWeight.w400,
+      titleTextStyle: GoogleFonts.inter(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
         color: nectarDarkYellow,
       ),
     ),
