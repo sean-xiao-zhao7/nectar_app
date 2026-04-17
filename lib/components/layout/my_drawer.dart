@@ -10,18 +10,18 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
         color: Theme.of(context).colorScheme.secondary,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.w500);
     final TextStyle menuTextStyle =
-        TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 
     return Drawer(
       child: SafeArea(
         child: Column(
-          spacing: 14,
+          spacing: 5,
           children: <Widget>[
             SizedBox(
-              height: 120,
+              height: 100,
               child: Container(
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0),
@@ -44,6 +44,9 @@ class MyDrawer extends StatelessWidget {
                       ]),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 5,
             ),
             ListTile(
               leading: Icon(
