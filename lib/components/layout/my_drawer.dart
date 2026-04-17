@@ -10,10 +10,12 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
         color: Theme.of(context).colorScheme.secondary,
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: FontWeight.w500);
+    final TextStyle profileSubTextStyle =
+        TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
     final TextStyle menuTextStyle =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
 
     return Drawer(
       child: SafeArea(
@@ -21,32 +23,39 @@ class MyDrawer extends StatelessWidget {
           spacing: 5,
           children: <Widget>[
             SizedBox(
-              height: 100,
+              width: double.infinity,
               child: Container(
                 margin: EdgeInsets.all(0.0),
-                padding: EdgeInsets.all(0),
+                padding: EdgeInsets.only(left: 25, right: 25),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
-                child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          userTitle,
-                          style: profileTextStyle,
-                        ),
-                        Text(
-                          userSubTitle,
-                          style: profileTextStyle,
-                        ),
-                      ]),
-                ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        userTitle,
+                        style: profileTextStyle,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        userSubTitle,
+                        style: profileSubTextStyle,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ]),
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
             ListTile(
               leading: Icon(

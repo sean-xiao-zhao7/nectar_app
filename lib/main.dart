@@ -13,6 +13,7 @@ class NectarApp extends StatelessWidget {
     // Nectar Primary Yellow
     const nectarLightYellow = Color.fromARGB(255, 255, 209, 72);
     const nectarDarkYellow = Color.fromARGB(255, 169, 127, 0);
+    const nectarDarkerYellow = Color.fromARGB(255, 95, 68, 0);
     const nectarWhite = Colors.white;
     const nectarRed = Colors.red;
 
@@ -22,15 +23,18 @@ class NectarApp extends StatelessWidget {
           fontFamily: 'Inter',
           scaffoldBackgroundColor: nectarLightYellow,
           colorScheme: ColorScheme(
-              primary: nectarLightYellow,
-              onPrimary: nectarWhite,
-              secondary: nectarDarkYellow,
-              onSecondary: nectarWhite,
-              brightness: Brightness.light,
-              error: nectarRed,
-              onError: nectarWhite,
-              surface: nectarLightYellow,
-              onSurface: nectarWhite),
+            primary: nectarLightYellow,
+            onPrimary: nectarWhite,
+            secondary: nectarDarkYellow,
+            onSecondary: nectarWhite,
+            tertiary: nectarDarkerYellow,
+            onTertiary: nectarWhite,
+            brightness: Brightness.light,
+            error: nectarRed,
+            onError: nectarWhite,
+            surface: nectarLightYellow,
+            onSurface: nectarDarkerYellow,
+          ),
           appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: nectarDarkYellow),
             backgroundColor: nectarWhite,
