@@ -14,6 +14,7 @@ class NectarApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Nectar',
+      debugShowCheckedModeBanner: false,
       theme: initTheme(Brightness.light),
       home: const HomeScreen(),
     );

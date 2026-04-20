@@ -1,6 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// Screen transition animation
+///
+/// Fade in + slide right
+class _FadeSlideFromTopTransitionsBuilder extends PageTransitionsBuilder {
+  const _FadeSlideFromTopTransitionsBuilder();
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    final curved = CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeInOut,
+    );
+
+    return FadeTransition(
+      opacity: curved,
+      child: SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(0.15, 0),
+          end: Offset.zero,
+        ).animate(curved),
+        child: child,
+      ),
+    );
+  }
+}
+
 /// Theme for the entire app
 ///
 /// Define the "yellow" colours used.
@@ -44,6 +76,12 @@ ThemeData initTheme(Brightness brightness) {
       headlineLarge: GoogleFonts.lora(),
       headlineMedium: GoogleFonts.lora(),
       headlineSmall: GoogleFonts.lora(),
+    ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: _FadeSlideFromTopTransitionsBuilder(),
+        TargetPlatform.iOS: _FadeSlideFromTopTransitionsBuilder(),
+      },
     ),
     drawerTheme: const DrawerThemeData(),
   );
