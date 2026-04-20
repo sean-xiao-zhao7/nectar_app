@@ -39,7 +39,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-      appBar: MyAppBar(),
+      appBar: MyAppBar(
+        title: 'Sign up',
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),

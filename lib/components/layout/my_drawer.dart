@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/home_screen.dart';
 
 /// The main drawer
 ///
@@ -75,6 +77,14 @@ class MyDrawer extends StatelessWidget {
                 'Home',
                 style: menuTextStyle,
               ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const HomeScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(
@@ -85,6 +95,14 @@ class MyDrawer extends StatelessWidget {
                 'Sign up',
                 style: menuTextStyle,
               ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const RegisterScreen(),
+                  ),
+                );
+              },
             ),
           ],
         ),
