@@ -13,11 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(
-        userTitle: 'CyanJ',
-        userSubTitle: 'AI Engineer',
-      ),
-      appBar: MyAppBar(title: 'Nectar'),
+      drawer: MyDrawer(),
+      appBar: MyAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

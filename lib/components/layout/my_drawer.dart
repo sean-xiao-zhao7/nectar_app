@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 ///
 /// Has a profile section at top.
 /// Then a column of menu items.
-/// 
+///
 /// The drawer opening hamburger icon is controlled in appBar.
 class MyDrawer extends StatelessWidget {
   final String userTitle;
   final String userSubTitle;
 
-  const MyDrawer({super.key, this.userTitle = '', this.userSubTitle = ''});
+  const MyDrawer(
+      {super.key,
+      this.userTitle = 'Jean-Paul',
+      this.userSubTitle = 'Engineer'});
 
   @override
   Widget build(BuildContext context) {

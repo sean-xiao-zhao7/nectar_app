@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/components/layout/my_app_bar.dart';
+import 'package:nectar_app/components/layout/my_drawer.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -36,10 +38,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        titleSpacing: 0,
-        title: Text('Sign up to Nectar'),
-      ),
+      drawer: MyDrawer(),
+      appBar: MyAppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),

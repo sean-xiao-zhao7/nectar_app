@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
-  const MyAppBar({super.key, this.title = ''});
+  const MyAppBar({super.key, this.title = 'Nectar'});
 
   @override
   Widget build(BuildContext context) {
