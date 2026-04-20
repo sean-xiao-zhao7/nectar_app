@@ -1,45 +1,66 @@
 import 'package:nectar_app/helpers/id_generator.dart';
 import 'package:nectar_app/models/business_card.dart';
 
-/// Represents an app user profile and the business cards they own (0 to 3).
+/// An user in Nectar.
+///
+/// Has 0 to 3 business cards.
+/// Has personal infos as well as auth info.
+///
 class User {
+  // An user can only created at most 3 cards for now.
   static const int maxBusinessCards = 3;
-  final String id;
+
+  // Required params upon init.
   final String firstName;
   final String lastName;
   final String email;
   final String password;
-  final String? phoneNumber;
-  final String? avatarUrl;
-  final bool isActive;
-  final DateTime createdAt;
+
+  // Optional params to be added later or upon init.
+  final String phone;
+  final String website;
+  final String job;
+  final String company;
+  final String city;
+  final String state;
+  final String country;
+  final String address;
+  final String postal;
+  final String avatarUrl;
+
+  // List of business cards this user owns.
   final List<BusinessCard> businessCards;
 
-  /// Creates a user and validates ownership/card-count constraints.
+  // Auto generated params
+  final String userId;
+  final bool isActive;
+  final DateTime createdAt;
+
   User({
-    String? id,
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.password,
-    this.phoneNumber,
-    this.avatarUrl,
+    this.phone = '',
+    this.avatarUrl = '',
+    this.website = '',
+    this.address = '',
+    this.city = '',
+    this.state = '',
+    this.country = '',
+    this.company = '',
+    this.job = '',
+    this.postal = '',
+    this.businessCards = const <BusinessCard>[],
     this.isActive = true,
     DateTime? createdAt,
-    this.businessCards = const <BusinessCard>[],
-  })  : id = id ?? generatePrefixedId('user'),
+    String? userId,
+  })  : userId = userId ?? generatePrefixedId('user'),
         createdAt = createdAt ?? DateTime.now() {
+    // check for max 3 business cards before initing the user.
     if (businessCards.length > maxBusinessCards) {
       throw ArgumentError(
         'You can only add a maximum of $maxBusinessCards business cards.',
-      );
-    }
-    // check if initial list of business cards belong to this user id.
-    final ownsAllCards =
-        businessCards.every((card) => card.ownerUserId == this.id);
-    if (!ownsAllCards) {
-      throw ArgumentError(
-        'Trying to add a business card that does not belong to you!',
       );
     }
   }
@@ -47,126 +68,75 @@ class User {
   /// Returns the user's display name as "FirstName LastName".
   String get fullName => '$firstName $lastName';
 
-  // business card functions below
-
-  /// Adds an existing card or creates one from user canonical values.
-  /// When [card] is omitted, a new card is created using [id], [ownerUserId],
-  /// and defaults from this user ([fullName], [email], [phoneNumber]).
+  /// Adds a new business card.
+  /// Pull info from user info if any field is omitted from input here.
   User addBusinessCard({
-    BusinessCard? card,
-    String? id,
-    String? ownerUserId,
-    String jobTitle = '',
-    String companyName = '',
-    String website = '',
-    String addressLine1 = '',
-    String city = '',
-    String stateOrRegion = '',
-    String postalCode = '',
-    String country = '',
-    String? tagline,
-    String? linkedInUrl,
-    String? xHandle,
+    String? firstName,
+    String? lastName,
+    String? phone,
+    String? email,
+    String? job,
+    String? company,
+    String? website,
+    String? address,
+    String? city,
+    String? state,
+    String? country,
+    String? postal,
   }) {
-    final cardToAdd = card ??
-        BusinessCard(
-          id: id,
-          ownerUserId: ownerUserId ?? this.id,
-          fullName: fullName,
-          jobTitle: jobTitle,
-          companyName: companyName,
-          phoneNumber: phoneNumber ?? '',
-          email: email,
-          website: website,
-          addressLine1: addressLine1,
-          city: city,
-          stateOrRegion: stateOrRegion,
-          postalCode: postalCode,
-          country: country,
-          tagline: tagline,
-          linkedInUrl: linkedInUrl,
-          xHandle: xHandle,
-        );
-    if (cardToAdd.ownerUserId != this.id) {
-      throw ArgumentError(
-        'Trying to add a business card that does not belong to you! Id: ${cardToAdd.id}',
-      );
-    }
     if (businessCards.length >= maxBusinessCards) {
       throw StateError(
         'Cannot add more than $maxBusinessCards business cards per user.',
       );
     }
+
+    final BusinessCard cardToAdd = BusinessCard(
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      job: job ?? this.job,
+      company: company ?? this.company,
+      website: website ?? this.website,
+      address: address ?? this.address,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      country: country ?? this.country,
+      postal: postal ?? this.postal,
+      ownerUserId: userId,
+    );
     return copyWith(
       businessCards: <BusinessCard>[...businessCards, cardToAdd],
     );
   }
 
-  /// Returns a new [User] with the business card matching [cardId] removed.
-  User removeBusinessCardById(String cardId) {
+  // Remove a card with cardId [targetCardId].
+  User removeBusinessCardById(String targetCardId) {
     return copyWith(
-      businessCards: businessCards.where((card) => card.id != cardId).toList(),
-    );
-  }
-
-  // IO functions below
-
-  /// Serializes the user and owned business cards into a JSON-compatible map.
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'password': password,
-      'phoneNumber': phoneNumber,
-      'avatarUrl': avatarUrl,
-      'isActive': isActive,
-      'createdAt': createdAt.toIso8601String(),
-      'businessCards': businessCards.map((card) => card.toJson()).toList(),
-    };
-  }
-
-  /// Builds a [User] from JSON and re-validates ownership/card constraints.
-  factory User.fromJson(Map<String, dynamic> json) {
-    final cardJson = (json['businessCards'] as List<dynamic>? ?? <dynamic>[])
-        .cast<Map<String, dynamic>>();
-
-    return User(
-      id: json['id'] as String?,
-      firstName: json['firstName'] as String? ?? '',
-      lastName: json['lastName'] as String? ?? '',
-      email: json['email'] as String? ?? '',
-      password: json['password'] as String? ?? '',
-      phoneNumber: json['phoneNumber'] as String?,
-      avatarUrl: json['avatarUrl'] as String?,
-      isActive: json['isActive'] as bool? ?? true,
-      createdAt: DateTime.tryParse(json['createdAt'] as String? ?? ''),
       businessCards:
-          cardJson.map((card) => BusinessCard.fromJson(card)).toList(),
+          businessCards.where((card) => card.cardId != targetCardId).toList(),
     );
   }
 
-  /// Returns a new [User] with selected fields replaced.
   User copyWith({
-    String? id,
+    String? userId,
     String? firstName,
     String? lastName,
     String? email,
     String? password,
-    String? phoneNumber,
+    String? phone,
     String? avatarUrl,
     bool? isActive,
     DateTime? createdAt,
     List<BusinessCard>? businessCards,
   }) {
     return User(
-      id: id ?? this.id,
+      userId: userId ?? this.userId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       email: email ?? this.email,
       password: password ?? this.password,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phone: phone ?? this.phone,
       avatarUrl: avatarUrl ?? this.avatarUrl,
       isActive: isActive ?? this.isActive,
       createdAt: createdAt ?? this.createdAt,

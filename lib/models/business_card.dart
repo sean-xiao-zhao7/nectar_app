@@ -1,124 +1,78 @@
 import 'package:nectar_app/helpers/id_generator.dart';
 
-/// Represents a single business card owned by a user.
+/// A single business card.
+///
+/// Must be owned by an user - ownerUserId.
+///
 class BusinessCard {
-  final String id;
-  final String ownerUserId;
-  final String fullName;
-  final String jobTitle;
-  final String companyName;
-  final String phoneNumber;
+  final String firstName;
+  final String lastName;
+  final String phone;
   final String email;
+
+  final String job;
+  final String company;
   final String website;
-  final String addressLine1;
+
+  final String address;
   final String city;
-  final String stateOrRegion;
-  final String postalCode;
   final String country;
-  final String? tagline;
-  final String? linkedInUrl;
-  final String? xHandle;
+  final String state;
+  final String postal;
 
-  /// Creates a business card with identity, ownership, and contact details.
+  final String cardId;
+  final String ownerUserId;
+
+  /// Make a new business card for user ownerUserId.
+  /// No optional fields. The user's add business function copies fields from user's info if needed.
+  /// It's assumed only an user can add a business card.
   BusinessCard({
-    String? id,
-    required this.ownerUserId,
-    required this.fullName,
-    required this.jobTitle,
-    required this.companyName,
-    required this.phoneNumber,
+    required this.firstName,
+    required this.lastName,
+    required this.phone,
     required this.email,
+    required this.job,
+    required this.company,
     required this.website,
-    required this.addressLine1,
+    required this.address,
     required this.city,
-    required this.stateOrRegion,
-    required this.postalCode,
+    required this.state,
     required this.country,
-    this.tagline,
-    this.linkedInUrl,
-    this.xHandle,
-  }) : id = id ?? generatePrefixedId('card');
+    required this.postal,
+    required this.ownerUserId,
+    String? cardId,
+  }) : cardId = cardId ?? generatePrefixedId('card');
 
-  /// Returns a new [BusinessCard] with only the provided fields replaced.
   BusinessCard copyWith({
-    String? id,
-    String? ownerUserId,
-    String? fullName,
-    String? jobTitle,
-    String? companyName,
-    String? phoneNumber,
+    String? firstName,
+    String? lastName,
+    String? phone,
     String? email,
+    String? job,
+    String? company,
     String? website,
-    String? addressLine1,
+    String? address,
     String? city,
-    String? stateOrRegion,
-    String? postalCode,
+    String? state,
     String? country,
-    String? tagline,
-    String? linkedInUrl,
-    String? xHandle,
+    String? postal,
+    String? cardId,
+    String? ownerUserId,
   }) {
     return BusinessCard(
-      id: id ?? this.id,
-      ownerUserId: ownerUserId ?? this.ownerUserId,
-      fullName: fullName ?? this.fullName,
-      jobTitle: jobTitle ?? this.jobTitle,
-      companyName: companyName ?? this.companyName,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      email: email ?? this.email,
-      website: website ?? this.website,
-      addressLine1: addressLine1 ?? this.addressLine1,
-      city: city ?? this.city,
-      stateOrRegion: stateOrRegion ?? this.stateOrRegion,
-      postalCode: postalCode ?? this.postalCode,
-      country: country ?? this.country,
-      tagline: tagline ?? this.tagline,
-      linkedInUrl: linkedInUrl ?? this.linkedInUrl,
-      xHandle: xHandle ?? this.xHandle,
-    );
-  }
-
-  /// Serializes this business card into a JSON-compatible map.
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'ownerUserId': ownerUserId,
-      'fullName': fullName,
-      'jobTitle': jobTitle,
-      'companyName': companyName,
-      'phoneNumber': phoneNumber,
-      'email': email,
-      'website': website,
-      'addressLine1': addressLine1,
-      'city': city,
-      'stateOrRegion': stateOrRegion,
-      'postalCode': postalCode,
-      'country': country,
-      'tagline': tagline,
-      'linkedInUrl': linkedInUrl,
-      'xHandle': xHandle,
-    };
-  }
-
-  /// Builds a [BusinessCard] from a JSON map.
-  factory BusinessCard.fromJson(Map<String, dynamic> json) {
-    return BusinessCard(
-      id: json['id'] as String? ?? '',
-      ownerUserId: json['ownerUserId'] as String? ?? '',
-      fullName: json['fullName'] as String? ?? '',
-      jobTitle: json['jobTitle'] as String? ?? '',
-      companyName: json['companyName'] as String? ?? '',
-      phoneNumber: json['phoneNumber'] as String? ?? '',
-      email: json['email'] as String? ?? '',
-      website: json['website'] as String? ?? '',
-      addressLine1: json['addressLine1'] as String? ?? '',
-      city: json['city'] as String? ?? '',
-      stateOrRegion: json['stateOrRegion'] as String? ?? '',
-      postalCode: json['postalCode'] as String? ?? '',
-      country: json['country'] as String? ?? '',
-      tagline: json['tagline'] as String?,
-      linkedInUrl: json['linkedInUrl'] as String?,
-      xHandle: json['xHandle'] as String?,
-    );
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
+        phone: phone ?? this.phone,
+        email: email ?? this.email,
+        job: job ?? this.job,
+        company: company ?? this.company,
+        website: website ?? this.website,
+        address: address ?? this.address,
+        city: city ?? this.city,
+        state: state ?? this.state,
+        country: country ?? this.country,
+        postal: postal ?? this.postal,
+        cardId: cardId ?? this.cardId,
+        ownerUserId: ownerUserId ?? this.ownerUserId);
   }
 }
