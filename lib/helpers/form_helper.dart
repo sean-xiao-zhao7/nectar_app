@@ -1,5 +1,40 @@
 import 'package:flutter/material.dart';
 
+/// Base wrapper around Material TextFormField
+Widget myTextFormField({
+  required BuildContext context,
+  required TextEditingController controller,
+  required String labelText,
+  required TextInputAction textInputAction,
+  List<FormFieldValidatorFn> validators = const <FormFieldValidatorFn>[],
+  TextInputType? keyboardType,
+  bool obscureText = false,
+}) {
+  return TextFormField(
+    controller: controller,
+    decoration: fieldDecoration(context, labelText),
+    textInputAction: textInputAction,
+    validator: (value) => runValidators(value, validators),
+    keyboardType: keyboardType,
+    obscureText: obscureText,
+    style: TextStyle(fontSize: 18),
+  );
+}
+
+/// Material TextFormField input decoration for label and text field.
+InputDecoration fieldDecoration(BuildContext context, String labelText) {
+  return InputDecoration(
+    labelStyle: TextStyle(fontSize: 18),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    labelText: labelText,
+    filled: true,
+    fillColor: Colors.white,
+    border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(7), gapPadding: 5),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+  );
+}
+
 /// Reusable validators for form fields.
 ///
 /// Each field validator is a function that takes null/string
@@ -7,6 +42,7 @@ import 'package:flutter/material.dart';
 /// TODO: return all errors not just the first.
 ///
 /// Current validators: required(empty), email, minLength
+/// Note that email/minLength does *not* need "required" to also be ran.
 typedef FormFieldValidatorFn = String? Function(String? value);
 
 class FormValidators {
@@ -71,43 +107,4 @@ String? runValidators(
     }
   }
   return null;
-}
-
-/// Material TextFormField input decoration for label and text field.
-InputDecoration fieldDecoration(BuildContext context, String labelText) {
-  return InputDecoration(
-    floatingLabelBehavior: FloatingLabelBehavior.never,
-    labelText: labelText,
-    filled: true,
-    fillColor: Colors.white,
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10), gapPadding: 10),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-  );
-}
-
-/// Wrapper around Material TextFormField
-Widget formTextField({
-  required BuildContext context,
-  required TextEditingController controller,
-  required String labelText,
-  required TextInputAction textInputAction,
-  List<FormFieldValidatorFn> validators = const <FormFieldValidatorFn>[],
-  TextInputType? keyboardType,
-  bool obscureText = false,
-}) {
-  return TextFormField(
-    controller: controller,
-    decoration: fieldDecoration(context, labelText),
-    textInputAction: textInputAction,
-    validator: (value) => runValidators(value, validators),
-    keyboardType: keyboardType,
-    obscureText: obscureText,
-  );
 }
