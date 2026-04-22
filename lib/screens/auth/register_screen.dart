@@ -50,62 +50,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Text('Enter a few details to get started with Nectar.'),
+                const Text('Enter a few details to get started with Nectar.'),
                 const SizedBox(height: 24),
-                TextFormField(
+                formTextField(
+                  context: context,
                   controller: _firstNameController,
-                  decoration: fieldDecoration(context, 'First name'),
+                  labelText: 'First name',
                   textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'First name is required.';
-                    }
-                    return null;
-                  },
+                  validators: <FormFieldValidatorFn>[
+                    FormValidators.required('First name'),
+                  ],
                 ),
                 const SizedBox(height: 24),
-                TextFormField(
+                formTextField(
+                  context: context,
                   controller: _lastNameController,
-                  decoration: fieldDecoration(context, 'Last name'),
+                  labelText: 'Last name',
                   textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Last name is required.';
-                    }
-                    return null;
-                  },
+                  validators: <FormFieldValidatorFn>[
+                    FormValidators.required('Last name'),
+                  ],
                 ),
                 const SizedBox(height: 24),
-                TextFormField(
+                formTextField(
+                  context: context,
                   controller: _emailController,
-                  decoration: fieldDecoration(context, 'Email'),
+                  labelText: 'Email',
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Email is required.';
-                    }
-                    if (!value.contains('@')) {
-                      return 'Enter a valid email.';
-                    }
-                    return null;
-                  },
+                  validators: <FormFieldValidatorFn>[
+                    FormValidators.required('Email'),
+                    FormValidators.email(),
+                  ],
                 ),
                 const SizedBox(height: 24),
-                TextFormField(
+                formTextField(
+                  context: context,
                   controller: _passwordController,
-                  decoration: fieldDecoration(context, 'Password'),
+                  labelText: 'Password',
                   obscureText: true,
                   textInputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password is required.';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters.';
-                    }
-                    return null;
-                  },
+                  validators: <FormFieldValidatorFn>[
+                    FormValidators.required('Password'),
+                    FormValidators.minLength(6, 'Password'),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
