@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Reusable validators for form fields.
+///
+/// Each field validator is a function that takes null/string
+/// and returns null if no error, or a single string indicating the first error it encountered.
+/// TODO: return all errors not just the first.
+///
+/// Current validators: required(empty), email, minLength
 typedef FormFieldValidatorFn = String? Function(String? value);
 
-/// A small catalog of reusable validators for form fields.
 class FormValidators {
   static const List<String> available = <String>[
     'required',
@@ -50,6 +56,10 @@ class FormValidators {
   }
 }
 
+/// Called by form
+/// Passing a list of validators it wants to run.
+/// The first error encountered will be returned as a string.
+/// null is returned if no error.
 String? runValidators(
   String? value,
   List<FormFieldValidatorFn> validators,
@@ -63,6 +73,7 @@ String? runValidators(
   return null;
 }
 
+/// Material TextFormField input decoration for label and text field.
 InputDecoration fieldDecoration(BuildContext context, String labelText) {
   return InputDecoration(
     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -81,6 +92,7 @@ InputDecoration fieldDecoration(BuildContext context, String labelText) {
   );
 }
 
+/// Wrapper around Material TextFormField
 Widget formTextField({
   required BuildContext context,
   required TextEditingController controller,

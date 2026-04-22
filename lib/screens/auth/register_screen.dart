@@ -3,6 +3,7 @@ import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 
+/// Register a new user
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
