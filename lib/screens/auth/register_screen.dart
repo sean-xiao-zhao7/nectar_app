@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
@@ -96,14 +97,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FormValidators.minLength(6, 'Password'),
                   ],
                 ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _submit,
-                    child: const Text('Sign up'),
-                  ),
-                ),
+                // const SizedBox(height: 24),
+                const SizedBox(height: 24),
+                MyRegularButton(label: 'Sign up to Nectar', onPressed: _submit)
               ],
             ),
           ),

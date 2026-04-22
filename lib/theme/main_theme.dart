@@ -41,8 +41,9 @@ class _FadeSlideFromTopTransitionsBuilder extends PageTransitionsBuilder {
 ThemeData initTheme(Brightness brightness) {
   final baseTheme = ThemeData(brightness: brightness);
 
-  // define static colors for the entire app
+  // define static colors for the entire apps
   const nectarLightYellow = Color.fromARGB(255, 255, 209, 72);
+  const nectarMediumYellow = Color.fromARGB(255, 136, 102, 0);
   const nectarDarkYellow = Color.fromARGB(255, 169, 127, 0);
   const nectarDarkerYellow = Color.fromARGB(255, 95, 68, 0);
   const nectarWhite = Colors.white;
@@ -60,7 +61,9 @@ ThemeData initTheme(Brightness brightness) {
       error: nectarRed,
       onError: nectarWhite,
       surface: nectarLightYellow,
-      onSurface: nectarDarkerYellow,
+      onSurface: nectarMediumYellow,
+      primaryContainer: nectarWhite,
+      onPrimaryContainer: nectarMediumYellow,
       brightness: Brightness.light,
     ),
     appBarTheme: AppBarTheme(
