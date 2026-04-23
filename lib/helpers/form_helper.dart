@@ -39,10 +39,8 @@ InputDecoration fieldDecoration(BuildContext context, String labelText) {
 ///
 /// Each field validator is a function that takes null/string
 /// and returns null if no error, or a single string indicating the first error it encountered.
-/// TODO: return all errors not just the first.
 ///
 /// Current validators: required(empty), email, minLength
-/// Note that email/minLength does *not* need "required" to also be ran.
 typedef FormFieldValidatorFn = String? Function(String? value);
 
 class FormValidators {
@@ -63,11 +61,8 @@ class FormValidators {
 
   static FormFieldValidatorFn email() {
     return (value) {
-      if (_isEmpty(value)) {
-        return null;
-      }
       final input = value!.trim();
-      if (!input.contains('@')) {
+      if (_isEmpty(input) || !input.contains('@')) {
         return 'Enter a valid email.';
       }
       return null;
@@ -76,11 +71,8 @@ class FormValidators {
 
   static FormFieldValidatorFn minLength(int min, String fieldLabel) {
     return (value) {
-      if (_isEmpty(value)) {
-        return null;
-      }
       final input = value!.trim();
-      if (input.length < min) {
+      if (_isEmpty(input) || input.length < min) {
         return '$fieldLabel must be at least $min characters.';
       }
       return null;
