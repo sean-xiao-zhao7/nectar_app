@@ -60,6 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   context: context,
                   controller: _firstNameController,
                   labelText: 'First name',
+                  capitalize: true,
                   textInputAction: TextInputAction.next,
                   validators: <FormFieldValidatorFn>[
                     FormValidators.required('First name'),
@@ -70,6 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   context: context,
                   controller: _lastNameController,
                   labelText: 'Last name',
+                  capitalize: true,
                   textInputAction: TextInputAction.next,
                   validators: <FormFieldValidatorFn>[
                     FormValidators.required('Last name'),

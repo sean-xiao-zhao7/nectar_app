@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// Base wrapper around Material TextFormField
-Widget myTextFormField({
-  required BuildContext context,
-  required TextEditingController controller,
-  required String labelText,
-  required TextInputAction textInputAction,
-  List<FormFieldValidatorFn> validators = const <FormFieldValidatorFn>[],
-  TextInputType? keyboardType,
-  bool obscureText = false,
-}) {
+Widget myTextFormField(
+    {required BuildContext context,
+    required TextEditingController controller,
+    required String labelText,
+    required TextInputAction textInputAction,
+    List<FormFieldValidatorFn> validators = const <FormFieldValidatorFn>[],
+    TextInputType? keyboardType,
+    bool obscureText = false,
+    bool capitalize = false}) {
   return TextFormField(
     controller: controller,
     decoration: fieldDecoration(context, labelText),
@@ -17,6 +17,8 @@ Widget myTextFormField({
     validator: (value) => runValidators(value, validators),
     keyboardType: keyboardType,
     obscureText: obscureText,
+    textCapitalization:
+        capitalize ? TextCapitalization.sentences : TextCapitalization.none,
     style: TextStyle(fontSize: 18),
   );
 }
