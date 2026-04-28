@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
+import 'package:nectar_app/components/text/my_regular_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: <Widget>[MyRegularText('Welcome to Nectar!')],
         ),
       ),
     );

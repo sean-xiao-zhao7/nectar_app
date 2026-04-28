@@ -63,8 +63,11 @@ class FormValidators {
 
   static FormFieldValidatorFn email() {
     return (value) {
+      if (_isEmpty(value)) {
+        return null;
+      }
       final input = value!.trim();
-      if (_isEmpty(input) || !input.contains('@')) {
+      if (!input.contains('@')) {
         return 'Enter a valid email.';
       }
       return null;
@@ -73,8 +76,11 @@ class FormValidators {
 
   static FormFieldValidatorFn minLength(int min, String fieldLabel) {
     return (value) {
+      if (_isEmpty(value)) {
+        return null;
+      }
       final input = value!.trim();
-      if (_isEmpty(input) || input.length < min) {
+      if (input.length < min) {
         return '$fieldLabel must be at least $min characters.';
       }
       return null;

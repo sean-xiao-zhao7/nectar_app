@@ -19,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isAgreementChecked = false;
 
   @override
   void dispose() {
@@ -99,9 +100,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FormValidators.minLength(6, 'Password'),
                   ],
                 ),
-                // const SizedBox(height: 24),
                 const SizedBox(height: 24),
-                MyRegularButton(label: 'Sign up to Nectar', onPressed: _submit)
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Checkbox(
+                      value: _isAgreementChecked,
+                      onChanged: (value) {
+                        setState(() {
+                          _isAgreementChecked = value ?? false;
+                        });
+                      },
+                    ),
+                    const Expanded(
+                      child: MyRegularText(
+                        'I agree to Nectar\'s Terms of Service and Privacy Policy.',
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                MyRegularButton(
+                  label: 'Sign up to Nectar',
+                  onPressed: _isAgreementChecked ? _submit : null,
+                )
               ],
             ),
           ),
