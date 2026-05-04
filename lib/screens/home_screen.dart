@@ -16,10 +16,22 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: MyAppBar(),
-      body: Center(
+      body: Container(
+        margin: EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onPrimary,
+            borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[MyRegularText('Welcome to Nectar!')],
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: 20,
+          children: <Widget>[
+            MyRegularText('Welcome!'),
+            MyRegularText(
+                'Sign in to your account by tapping the top left drawer, then Sign in.'),
+          ],
         ),
       ),
     );
