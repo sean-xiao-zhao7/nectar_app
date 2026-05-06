@@ -16,23 +16,39 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: MyAppBar(),
-      body: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onPrimary,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          spacing: 20,
-          children: <Widget>[
-            MyRegularText('Welcome!'),
-            MyRegularText(
-                'Sign in to your account by tapping the top left drawer, then Sign in.'),
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            margin: EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.onPrimary,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: 20,
+              children: <Widget>[
+                MyRegularText(
+                  'Welcome to Nectar!',
+                  fontWeight: FontWeight.w600,
+                ),
+                MyRegularText(
+                  'Sign in to your account by tapping the top left drawer, then "Sign in".',
+                  fontSize: 16,
+                ),
+                MyRegularText(
+                  'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.',
+                  fontSize: 16,
+                ),
+              ],
+            ),
+          ),
+          Container(
+              padding: EdgeInsets.only(bottom: 50),
+              child: MyRegularText('\u00a9 2026 Nectar Inc.')),
+        ],
       ),
     );
   }
