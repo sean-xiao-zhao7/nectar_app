@@ -24,12 +24,12 @@ void main() {
   });
 
   group('FormValidators.email', () {
-    test('returns null for null/empty input', () {
+    test('returns required error for null/empty input', () {
       final validator = FormValidators.email();
 
-      expect(validator(null), isNull);
-      expect(validator(''), isNull);
-      expect(validator('   '), isNull);
+      expect(validator(null), 'Email is required.');
+      expect(validator(''), 'Email is required.');
+      expect(validator('   '), 'Email is required.');
     });
 
     test('returns error for invalid email', () {
@@ -44,12 +44,12 @@ void main() {
   });
 
   group('FormValidators.minLength', () {
-    test('returns null for null/empty input', () {
+    test('returns required error for null/empty input', () {
       final validator = FormValidators.minLength(6, 'Password');
 
-      expect(validator(null), isNull);
-      expect(validator(''), isNull);
-      expect(validator('   '), isNull);
+      expect(validator(null), 'Password is required.');
+      expect(validator(''), 'Password is required.');
+      expect(validator('   '), 'Password is required.');
     });
 
     test('returns error when shorter than minimum', () {
