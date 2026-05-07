@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:197889035376:android:107e5830508fbceedab8b5",
+        "android_client_info": {
+          "package_name": "com.example.nectar_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197889035376-mjeakrmgnb3llla8tcjflc15hv8h8r15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyOS9-hqrEKj1TxQrDwW4oXCKqeAE3xVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197889035376-mjeakrmgnb3llla8tcjflc15hv8h8r15.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "197889035376-4von7ai2p929g1vdb9ok9qs1hjot0ard.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterBaseApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:197889035376:android:ab7a2ab0c4e47514dab8b5",
         "android_client_info": {
           "package_name": "com.nectar.app"
