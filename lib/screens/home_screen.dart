@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Welcome to Nectar!',
                 ),
                 MyRegularText(
-                    'Sign in to your account by tapping the top left drawer, then "Sign in".'),
+                    'Sign in to your account by tapping the top left drawer, then "Log in".'),
                 MyRegularText(
                     'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
               ],

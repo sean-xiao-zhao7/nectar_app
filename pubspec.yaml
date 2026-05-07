@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   google_fonts: ^6.2.1 # GoogleFonts downloads fonts on-demand, reducing app bundle size.
+  firebase_core: ^4.7.0
 
 dev_dependencies:
   flutter_test:

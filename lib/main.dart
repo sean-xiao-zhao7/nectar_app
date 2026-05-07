@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:nectar_app/theme/main_theme.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+
 /// Nectar App entry point
 ///
 /// A material app with theme based on "yellow" colour. See theme file.
