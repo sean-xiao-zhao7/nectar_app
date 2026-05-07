@@ -6,26 +6,21 @@ import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
-/// Register a new user
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+/// Log in an existing user
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isAgreementChecked = false;
 
   @override
   void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -37,7 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
 
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Sign up successful.')),
+      const SnackBar(content: Text('Log in successful.')),
     );
 
     Navigator.of(context).push(
@@ -52,7 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       drawer: MyDrawer(),
       appBar: MyAppBar(
-        title: 'Sign up',
+        title: 'Log in',
       ),
       body: SafeArea(
         child: Padding(
@@ -61,30 +56,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                const MyRegularText(
-                    'A few details to get started with Nectar.'),
-                const SizedBox(height: 24),
-                myTextFormField(
-                  context: context,
-                  controller: _firstNameController,
-                  labelText: 'First name',
-                  capitalize: true,
-                  textInputAction: TextInputAction.next,
-                  validators: <FormFieldValidatorFn>[
-                    FormValidators.required('First name'),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                myTextFormField(
-                  context: context,
-                  controller: _lastNameController,
-                  labelText: 'Last name',
-                  capitalize: true,
-                  textInputAction: TextInputAction.next,
-                  validators: <FormFieldValidatorFn>[
-                    FormValidators.required('Last name'),
-                  ],
-                ),
+                const MyRegularText('Log in to your personal Nectar account.'),
                 const SizedBox(height: 24),
                 myTextFormField(
                   context: context,
@@ -108,28 +80,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Checkbox(
-                      value: _isAgreementChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          _isAgreementChecked = value ?? false;
-                        });
-                      },
-                    ),
-                    const Expanded(
-                      child: MyRegularText(
-                        'I agree to Nectar\'s Terms of Service and Privacy Policy.',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
                 MyRegularButton(
-                  label: 'Sign up to Nectar',
-                  onPressed: _isAgreementChecked ? _submit : null,
+                  label: 'Log in to Nectar',
+                  onPressed: _submit,
                 )
               ],
             ),

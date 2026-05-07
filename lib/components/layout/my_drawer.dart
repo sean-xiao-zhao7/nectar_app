@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
@@ -88,7 +89,7 @@ class MyDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: Icon(
-                Icons.account_box,
+                Icons.account_circle_sharp,
                 size: 32,
               ),
               title: Text(
@@ -100,6 +101,24 @@ class MyDrawer extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute<void>(
                     builder: (_) => const RegisterScreen(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.login,
+                size: 34,
+              ),
+              title: Text(
+                'Log in',
+                style: menuTextStyle,
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const LoginScreen(),
                   ),
                 );
               },

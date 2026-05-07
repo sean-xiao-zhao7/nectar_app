@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "197889035376",
+    "firebase_url": "https://nectarapp-b1390-default-rtdb.firebaseio.com",
+    "project_id": "nectarapp-b1390",
+    "storage_bucket": "nectarapp-b1390.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197889035376:android:ab7a2ab0c4e47514dab8b5",
+        "android_client_info": {
+          "package_name": "com.nectar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197889035376-mjeakrmgnb3llla8tcjflc15hv8h8r15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyOS9-hqrEKj1TxQrDwW4oXCKqeAE3xVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197889035376-mjeakrmgnb3llla8tcjflc15hv8h8r15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

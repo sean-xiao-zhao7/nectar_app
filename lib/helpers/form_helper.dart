@@ -64,7 +64,7 @@ class FormValidators {
   static FormFieldValidatorFn email() {
     return (value) {
       if (_isEmpty(value)) {
-        return null;
+        return 'Email is required.';
       }
       final input = value!.trim();
       if (!input.contains('@')) {
@@ -77,7 +77,7 @@ class FormValidators {
   static FormFieldValidatorFn minLength(int min, String fieldLabel) {
     return (value) {
       if (_isEmpty(value)) {
-        return null;
+        return '$fieldLabel is required.';
       }
       final input = value!.trim();
       if (input.length < min) {
