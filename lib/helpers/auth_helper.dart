@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
+import 'package:nectar_app/screens/auth/login_screen.dart';
+import 'package:nectar_app/screens/home_screen.dart';
 
-// sign up using password firebase call
+// Sign up using email and password firebase call
+// Returns an empty string if no error, or the actual English error message.
 Future<String> signUpHelper(String emailVal, String passwordVal) async {
   String resultMessage = '';
   try {
@@ -19,7 +23,8 @@ Future<String> signUpHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
-// log in using password firebase call
+// Log in using email and password firebase call
+// Returns an empty string if no error, or the actual English error message.
 Future<String> loginHelper(String emailVal, String passwordVal) async {
   String resultMessage = '';
   try {
@@ -34,4 +39,29 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
   }
 
   return resultMessage;
+}
+
+// Check firebase auth status at any time.
+// Used at app launch, also used in other screens to conditional render UI.
+// https://firebase.google.com/docs/auth/flutter/manage-users
+StreamBuilder<User?> getAuthState() {
+  return StreamBuilder<User?>(
+    stream: FirebaseAuth.instance.authStateChanges(),
+    builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+      if (snapshot.hasError) {
+        return const Text('Network error during authentication.');
+      }
+
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Text('Waiting for authentication.');
+      }
+
+      if (!snapshot.hasData) {
+        return const LoginScreen();
+      }
+
+      // final user = snapshot.data!;
+      return HomeScreen();
+    },
+  );
 }

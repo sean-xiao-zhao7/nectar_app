@@ -3,6 +3,7 @@ import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/helpers/auth_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    getAuthState();
+
     return Scaffold(
       drawer: MyDrawer(),
       appBar: MyAppBar(),
