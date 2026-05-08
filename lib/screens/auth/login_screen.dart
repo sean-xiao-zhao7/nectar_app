@@ -3,6 +3,7 @@ import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
@@ -26,20 +27,32 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  void _submit() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Log in successful.')),
-    );
+    String resultMessage =
+        await loginHelper(_emailController.text, _passwordController.text);
+    if (resultMessage.isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Log in successful.')),
+        );
 
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const HomeScreen(),
-      ),
-    );
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => const HomeScreen(),
+          ),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(resultMessage)),
+        );
+      }
+    }
   }
 
   @override
