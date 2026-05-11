@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
@@ -29,103 +31,185 @@ class MyDrawer extends StatelessWidget {
     final TextStyle menuTextStyle =
         TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 
-    return Drawer(
-      child: SafeArea(
-        child: Column(
-          spacing: 10,
-          children: <Widget>[
-            SizedBox(
-              width: double.infinity,
-              child: Container(
-                margin: EdgeInsets.all(0.0),
-                padding: EdgeInsets.only(left: 25, right: 25),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.onPrimary,
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          final user = snapshot.data;
+
+          List<Widget> drawerMenu = <Widget>[CircularProgressIndicator()];
+          if (user == null) {
+            drawerMenu = [
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.only(left: 25, right: 25),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          'Nectar',
+                          style: profileTextStyle,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Virtual Business Card',
+                          style: profileSubTextStyle,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ]),
                 ),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        userTitle,
-                        style: profileTextStyle,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        userSubTitle,
-                        style: profileSubTextStyle,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ]),
               ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.home,
-                size: 34,
+              SizedBox(
+                height: 5,
               ),
-              title: Text(
-                'Home',
-                style: menuTextStyle,
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                  size: 34,
+                ),
+                title: Text(
+                  'Home',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const HomeScreen(),
+                    ),
+                  );
+                },
               ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const HomeScreen(),
+              ListTile(
+                leading: Icon(
+                  Icons.account_circle_sharp,
+                  size: 32,
+                ),
+                title: Text(
+                  'Sign up',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const RegisterScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.login,
+                  size: 34,
+                ),
+                title: Text(
+                  'Log in',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const LoginScreen(),
+                    ),
+                  );
+                },
+              ),
+            ];
+          } else {
+            drawerMenu = [
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  margin: EdgeInsets.all(0.0),
+                  padding: EdgeInsets.only(left: 25, right: 25),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.onPrimary,
                   ),
-                );
-              },
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          userTitle,
+                          style: profileTextStyle,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          userSubTitle,
+                          style: profileSubTextStyle,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ]),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                  size: 34,
+                ),
+                title: Text(
+                  'Home',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const HomeScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  size: 34,
+                ),
+                title: Text(
+                  'Log out',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const LoginScreen(),
+                    ),
+                  );
+                },
+              ),
+            ];
+          }
+
+          return Drawer(
+            child: SafeArea(
+              child: Column(spacing: 10, children: drawerMenu),
             ),
-            ListTile(
-              leading: Icon(
-                Icons.account_circle_sharp,
-                size: 32,
-              ),
-              title: Text(
-                'Sign up',
-                style: menuTextStyle,
-              ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const RegisterScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.login,
-                size: 34,
-              ),
-              title: Text(
-                'Log in',
-                style: menuTextStyle,
-              ),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                    builder: (_) => const LoginScreen(),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }
