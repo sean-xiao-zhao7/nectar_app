@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
@@ -42,7 +43,6 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
 }
 
 // Check firebase auth status at any time.
-// Used at app launch, also used in other screens to conditional render UI.
 // https://firebase.google.com/docs/auth/flutter/manage-users
 StreamBuilder<User?> getAuthState() {
   return StreamBuilder<User?>(
@@ -53,7 +53,7 @@ StreamBuilder<User?> getAuthState() {
       }
 
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Text('Waiting for authentication.');
+        return CircularProgressIndicator();
       }
 
       if (!snapshot.hasData) {
