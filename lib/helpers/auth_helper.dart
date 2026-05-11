@@ -42,6 +42,17 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
+Future<String> logoutHelper() async {
+  String resultMessage = '';
+  try {
+    await FirebaseAuth.instance.signOut();
+  } on FirebaseAuthException catch (e) {
+    resultMessage = 'Server error during log out. Please try again later.';
+  }
+
+  return resultMessage;
+}
+
 // Check firebase auth status at any time.
 // https://firebase.google.com/docs/auth/flutter/manage-users
 StreamBuilder<User?> getAuthState() {
