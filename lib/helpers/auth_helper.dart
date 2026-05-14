@@ -46,7 +46,7 @@ Future<String> logoutHelper() async {
   String resultMessage = '';
   try {
     await FirebaseAuth.instance.signOut();
-  } on FirebaseAuthException catch (e) {
+  } on FirebaseAuthException catch (_) {
     resultMessage = 'Server error during log out. Please try again later.';
   }
 
