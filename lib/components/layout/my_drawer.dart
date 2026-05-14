@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:nectar_app/screens/auth/login_screen.dart';
+import 'package:nectar_app/screens/auth/logout_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
@@ -94,24 +95,6 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.account_circle_sharp,
-                  size: 32,
-                ),
-                title: Text(
-                  'Sign up',
-                  style: menuTextStyle,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const RegisterScreen(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(
                   Icons.login,
                   size: 34,
                 ),
@@ -124,6 +107,24 @@ class MyDrawer extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) => const LoginScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.account_circle_sharp,
+                  size: 32,
+                ),
+                title: Text(
+                  'Sign up',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const RegisterScreen(),
                     ),
                   );
                 },
@@ -197,7 +198,7 @@ class MyDrawer extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                      builder: (_) => const LoginScreen(),
+                      builder: (_) => const LogoutScreen(),
                     ),
                   );
                 },

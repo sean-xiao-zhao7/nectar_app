@@ -15,11 +15,12 @@ class LogoutScreen extends StatefulWidget {
 
 class _LogoutScreenState extends State<LogoutScreen> {
   void _doLogout() async {
-    String resultMessage = await logoutHelper();
+    await logoutHelper();
   }
 
   @override
   Widget build(BuildContext context) {
+    _doLogout();
     return Scaffold(
       drawer: MyDrawer(),
       appBar: MyAppBar(
