@@ -23,7 +23,7 @@ BusinessCard _card(String cardId, String ownerUserId) {
 
 void main() {
   test('user auto-generates id when omitted', () {
-    final user = User(
+    final user = NectarUser(
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
@@ -56,7 +56,7 @@ void main() {
   });
 
   test('user can own up to 3 business cards', () {
-    final user = User(
+    final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',
@@ -73,16 +73,13 @@ void main() {
       postal: '94105',
     );
 
-    final updated = user
-        .addBusinessCard()
-        .addBusinessCard()
-        .addBusinessCard();
+    final updated = user.addBusinessCard().addBusinessCard().addBusinessCard();
 
     expect(updated.businessCards.length, 3);
   });
 
   test('adding a 4th card throws StateError', () {
-    final user = User(
+    final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',
@@ -102,7 +99,7 @@ void main() {
   });
 
   test('addBusinessCard uses canonical values from user when omitted', () {
-    final user = User(
+    final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',
@@ -130,7 +127,7 @@ void main() {
   });
 
   test('removeBusinessCardById removes matching card', () {
-    final user = User(
+    final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',

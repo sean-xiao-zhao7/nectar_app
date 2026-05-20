@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
@@ -32,13 +33,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
   }
 
+  /// Callback for register button
   void _submit() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    String resultMessage =
-        await signUpHelper(_emailController.text, _passwordController.text);
+    String resultMessage = await signUpHelper(
+        _emailController.text,
+        _passwordController.text,
+        _firstNameController.text,
+        _lastNameController.text);
     if (resultMessage.isEmpty) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

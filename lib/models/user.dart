@@ -6,7 +6,7 @@ import 'package:nectar_app/models/business_card.dart';
 /// Has 0 to 3 business cards.
 /// Has personal infos as well as auth info.
 ///
-class User {
+class NectarUser {
   // An user can only created at most 3 cards for now.
   static const int maxBusinessCards = 3;
 
@@ -36,11 +36,11 @@ class User {
   final bool isActive;
   final DateTime createdAt;
 
-  User({
+  NectarUser({
     required this.firstName,
     required this.lastName,
     required this.email,
-    required this.password,
+    this.password = '',
     this.phone = '',
     this.avatarUrl = '',
     this.website = '',
@@ -70,7 +70,7 @@ class User {
 
   /// Adds a new business card.
   /// Pull info from user info if any field is omitted from input here.
-  User addBusinessCard({
+  NectarUser addBusinessCard({
     String? firstName,
     String? lastName,
     String? phone,
@@ -111,14 +111,14 @@ class User {
   }
 
   // Remove a card with cardId [targetCardId].
-  User removeBusinessCardById(String targetCardId) {
+  NectarUser removeBusinessCardById(String targetCardId) {
     return copyWith(
       businessCards:
           businessCards.where((card) => card.cardId != targetCardId).toList(),
     );
   }
 
-  User copyWith({
+  NectarUser copyWith({
     String? userId,
     String? firstName,
     String? lastName,
@@ -130,7 +130,7 @@ class User {
     DateTime? createdAt,
     List<BusinessCard>? businessCards,
   }) {
-    return User(
+    return NectarUser(
       userId: userId ?? this.userId,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,

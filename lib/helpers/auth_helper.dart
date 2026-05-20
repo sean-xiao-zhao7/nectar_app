@@ -1,18 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:nectar_app/models/user.dart';
 
-import 'package:nectar_app/screens/auth/login_screen.dart';
-import 'package:nectar_app/screens/home_screen.dart';
-
-// Sign up using email and password firebase call
-// Returns an empty string if no error, or the actual English error message.
-Future<String> signUpHelper(String emailVal, String passwordVal) async {
+/// Sign up using email and password firebase call
+///
+/// Returns an empty string if no error, or the actual English error message.
+Future<String> signUpHelper(String emailVal, String passwordVal,
+    String firstName, String lastName) async {
   String resultMessage = '';
   try {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    final userCreds =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailVal,
       password: passwordVal,
     );
+    await _addUserDB(emailVal, firstName, lastName, userCreds.user!.uid);
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
       resultMessage = 'The password provided is too weak.';
@@ -24,8 +26,26 @@ Future<String> signUpHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
-// Log in using email and password firebase call
-// Returns an empty string if no error, or the actual English error message.
+/// Call Firebase to add new user
+Future<String> _addUserDB(
+    String email, String firstName, String lastName, String uid) async {
+  String result = '';
+  try {
+    DatabaseReference ref = FirebaseDatabase.instance.ref('users').push();
+    await ref.set({
+      'email': email,
+      'firstName': firstName,
+      'lastName': lastName,
+      'uid': uid
+    });
+  } on FirebaseException catch (_) {
+    result = 'Server error. Please try again later.';
+  }
+  return result;
+}
+
+/// Log in using email and password firebase call
+/// Returns an empty string if no error, or the actual English error message.
 Future<String> loginHelper(String emailVal, String passwordVal) async {
   String resultMessage = '';
   try {
@@ -42,6 +62,7 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
+/// Log out
 Future<String> logoutHelper() async {
   String resultMessage = '';
   try {
@@ -53,26 +74,21 @@ Future<String> logoutHelper() async {
   return resultMessage;
 }
 
-// Check firebase auth status at any time.
-// https://firebase.google.com/docs/auth/flutter/manage-users
-StreamBuilder<User?> getAuthState() {
-  return StreamBuilder<User?>(
-    stream: FirebaseAuth.instance.authStateChanges(),
-    builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-      if (snapshot.hasError) {
-        return const Text('Network error during authentication.');
-      }
-
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return CircularProgressIndicator();
-      }
-
-      if (!snapshot.hasData) {
-        return const LoginScreen();
-      }
-
-      // final user = snapshot.data!;
-      return HomeScreen();
-    },
-  );
-}
+// /// Get user info
+// Future<NectarUser> fetchUserInfo(String firebaseId) async {
+//   try {
+//     final event =
+//         await FirebaseDatabase.instance.ref('users/$firebaseId').once();
+//     if (event.snapshot.exists) {
+//       final result = event.snapshot.value as Map;
+//       final nectarUser = NectarUser(
+//           firstName: result['firstName'],
+//           lastName: result['lastName'],
+//           email: result['email']);
+//       return nectarUser;
+//     }
+//   } on FirebaseException catch (e) {
+//     print(e.message);
+//     throw Error();
+//   }
+// }
