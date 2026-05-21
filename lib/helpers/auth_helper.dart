@@ -27,7 +27,7 @@ Future<String> signUpHelper(String emailVal, String passwordVal,
 }
 
 /// Helper function for signUpHelper
-/// 
+///
 /// Add user into Firebase Realtime Database.
 /// User object in RD is indexed by the same UID from Auth.
 Future<String> _addUserDB(
@@ -63,18 +63,6 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
-/// Log out
-Future<String> logoutHelper() async {
-  String resultMessage = '';
-  try {
-    await FirebaseAuth.instance.signOut();
-  } on FirebaseAuthException catch (_) {
-    resultMessage = 'Server error during log out. Please try again later.';
-  }
-
-  return resultMessage;
-}
-
 /// Get current user info from Firebase Realtime Database
 /// firebaseUid is uid field from Firebase Auth.
 Future<NectarUser> fetchUserInfo(String firebaseUid) async {
@@ -94,5 +82,18 @@ Future<NectarUser> fetchUserInfo(String firebaseUid) async {
         'Unable to fetch user info from Firebase Realtime Database.\n${e.message}');
   }
 
-  throw Exception('Unable to fetch user info from Firebase Realtime Database.');
+  throw Exception(
+      'No user object found in RD for $firebaseUid.\nPossible desync between RD and Auth in Firebase.');
+}
+
+/// Log out
+Future<String> logoutHelper() async {
+  String resultMessage = '';
+  try {
+    await FirebaseAuth.instance.signOut();
+  } on FirebaseAuthException catch (_) {
+    resultMessage = 'Server error during log out. Please try again later.';
+  }
+
+  return resultMessage;
 }
