@@ -74,21 +74,21 @@ Future<String> logoutHelper() async {
   return resultMessage;
 }
 
-// /// Get user info
-// Future<NectarUser> fetchUserInfo(String firebaseId) async {
-//   try {
-//     final event =
-//         await FirebaseDatabase.instance.ref('users/$firebaseId').once();
-//     if (event.snapshot.exists) {
-//       final result = event.snapshot.value as Map;
-//       final nectarUser = NectarUser(
-//           firstName: result['firstName'],
-//           lastName: result['lastName'],
-//           email: result['email']);
-//       return nectarUser;
-//     }
-//   } on FirebaseException catch (e) {
-//     print(e.message);
-//     throw Error();
-//   }
-// }
+/// Get user info
+Future<NectarUser> fetchUserInfo(String firebaseId) async {
+  try {
+    final event =
+        await FirebaseDatabase.instance.ref('users/$firebaseId').once();
+    if (event.snapshot.exists) {
+      final result = event.snapshot.value as Map;
+      final nectarUser = NectarUser(
+          firstName: result['firstName'],
+          lastName: result['lastName'],
+          email: result['email']);
+      return nectarUser;
+    }
+  } on FirebaseException catch (_) {
+    // print(e.message);
+  }
+  throw Error();
+}

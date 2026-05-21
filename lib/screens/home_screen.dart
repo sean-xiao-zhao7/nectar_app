@@ -6,6 +6,7 @@ import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
+import 'package:nectar_app/models/user.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,17 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userName = '';
-
-  // Future<void> getUserInfo(String uid) async {
-  //   try {
-  //     final userInfo = await fetchUserInfo(uid) as Map;
-  //     setState(() {
-  //       userName = userInfo['firstName'];
-  //     });
-  //   } on FirebaseException catch (_) {}
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -43,12 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
             ];
           } else {
-            // print(snapshot.data!.uid);
-            // getUserInfo(snapshot.data!.uid);
             widgetTree = [
-              MyLargeText(
-                'Welcome to Nectar $userName.',
-              ),
+              FutureBuilder<NectarUser>(
+                  future: fetchUserInfo(snapshot.data!.uid),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<NectarUser> snapshot) {
+                    if (snapshot.hasData) {
+                      return MyLargeText('Welcome to Nectar ${snapshot.data}.');
+                    } else {
+                      return MyLargeText('Welcome to Nectar');
+                    }
+                  }),
               MyRegularText(
                   'Access your cards from the drawer menu on the left.'),
               MyRegularText(
