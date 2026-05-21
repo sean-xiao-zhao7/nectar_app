@@ -39,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (BuildContext context,
                       AsyncSnapshot<NectarUser> snapshot) {
                     if (snapshot.hasData) {
-                      return MyLargeText('Welcome to Nectar ${snapshot.data}.');
+                      return MyLargeText(
+                          'Welcome to Nectar ${snapshot.data!.firstName}.');
                     } else {
                       return MyLargeText('Welcome to Nectar');
                     }
