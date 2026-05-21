@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:nectar_app/models/user.dart';
 
-/// Sign up using email and password firebase call
+/// Sign up using email and password
 ///
-/// Returns an empty string if no error, or the actual English error message.
+/// Add user into FirebaseAuth and Firebase Realtime Database.
 Future<String> signUpHelper(String emailVal, String passwordVal,
     String firstName, String lastName) async {
   String resultMessage = '';
@@ -26,26 +26,27 @@ Future<String> signUpHelper(String emailVal, String passwordVal,
   return resultMessage;
 }
 
-/// Call Firebase to add new user
+/// Helper function for signUpHelper
+/// 
+/// Add user into Firebase Realtime Database.
+/// User object in RD is indexed by the same UID from Auth.
 Future<String> _addUserDB(
     String email, String firstName, String lastName, String uid) async {
-  String result = '';
   try {
-    DatabaseReference ref = FirebaseDatabase.instance.ref('users').push();
+    DatabaseReference ref = FirebaseDatabase.instance.ref('users/$uid');
     await ref.set({
       'email': email,
       'firstName': firstName,
       'lastName': lastName,
-      'uid': uid
     });
-  } on FirebaseException catch (_) {
-    result = 'Server error. Please try again later.';
+    return ref.key!;
+  } on FirebaseException catch (e) {
+    throw Exception(
+        'Unable to add user to realtime database. Please try again later.\nFirebase message: ${e.message}');
   }
-  return result;
 }
 
-/// Log in using email and password firebase call
-/// Returns an empty string if no error, or the actual English error message.
+/// Log in using email and password
 Future<String> loginHelper(String emailVal, String passwordVal) async {
   String resultMessage = '';
   try {
@@ -74,11 +75,12 @@ Future<String> logoutHelper() async {
   return resultMessage;
 }
 
-/// Get user info
-Future<NectarUser> fetchUserInfo(String firebaseId) async {
+/// Get current user info from Firebase Realtime Database
+/// firebaseUid is uid field from Firebase Auth.
+Future<NectarUser> fetchUserInfo(String firebaseUid) async {
   try {
     final event =
-        await FirebaseDatabase.instance.ref('users/$firebaseId').once();
+        await FirebaseDatabase.instance.ref('users/$firebaseUid').once();
     if (event.snapshot.exists) {
       final result = event.snapshot.value as Map;
       final nectarUser = NectarUser(
@@ -87,8 +89,10 @@ Future<NectarUser> fetchUserInfo(String firebaseId) async {
           email: result['email']);
       return nectarUser;
     }
-  } on FirebaseException catch (_) {
-    // print(e.message);
+  } on FirebaseException catch (e) {
+    throw Exception(
+        'Unable to fetch user info from Firebase Realtime Database.\n${e.message}');
   }
-  throw Error();
+
+  throw Exception('Unable to fetch user info from Firebase Realtime Database.');
 }
