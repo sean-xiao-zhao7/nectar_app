@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-import 'package:nectar_app/models/business_card.dart';
+import 'package:nectar_app/models/nectar_card.dart';
 
 /// Get current user's all cards from Firebase Realtime Database
 /// userId is the firebaseAuth id.

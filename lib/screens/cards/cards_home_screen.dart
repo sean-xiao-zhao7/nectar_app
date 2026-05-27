@@ -5,8 +5,10 @@ import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+
 import 'package:nectar_app/helpers/cards_helper.dart';
-import 'package:nectar_app/models/user.dart';
+import 'package:nectar_app/models/nectar_card.dart';
+
 import 'package:nectar_app/screens/auth/login_screen.dart';
 
 class CardsHomeScreen extends StatefulWidget {
@@ -32,10 +34,10 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
             );
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
-            widgetTree = FutureBuilder<NectarUser>(
+            widgetTree = FutureBuilder<List<NectarCard>>(
                 future: fetchUserAllCards(snapshotAuth.data!.uid),
                 builder: (BuildContext context,
-                    AsyncSnapshot<NectarUser> snapshotCards) {
+                    AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     return Column(

@@ -5,42 +5,40 @@ import 'package:nectar_app/helpers/id_generator.dart';
 /// Must be owned by an user - ownerUserId.
 ///
 class NectarCard {
+  final String cardId;
+  final String ownerUserId;
+
   final String firstName;
   final String lastName;
   final String phone;
   final String email;
-
   final String job;
   final String company;
   final String website;
-
   final String address;
   final String city;
   final String country;
   final String state;
   final String postal;
 
-  final String cardId;
-  final String ownerUserId;
-
   /// Make a new business card for user ownerUserId.
   /// No optional fields. The user's add business function copies fields from user's info if needed.
   /// It's assumed only an user can add a business card.
   NectarCard({
+    String? cardId,
+    required this.ownerUserId,
     required this.firstName,
     required this.lastName,
-    required this.phone,
-    required this.email,
-    required this.job,
-    required this.company,
-    required this.website,
-    required this.address,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.postal,
-    required this.ownerUserId,
-    String? cardId,
+    this.phone = '',
+    this.email = '',
+    this.job = '',
+    this.company = '',
+    this.website = '',
+    this.address = '',
+    this.city = '',
+    this.state = '',
+    this.country = '',
+    this.postal = '',
   }) : cardId = cardId ?? generatePrefixedId('card');
 
   NectarCard copyWith({

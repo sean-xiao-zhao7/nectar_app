@@ -1,5 +1,5 @@
 import 'package:nectar_app/helpers/id_generator.dart';
-import 'package:nectar_app/models/business_card.dart';
+import 'package:nectar_app/models/nectar_card.dart';
 
 /// An user in Nectar.
 ///
@@ -7,8 +7,11 @@ import 'package:nectar_app/models/business_card.dart';
 /// Has personal infos as well as auth info.
 ///
 class NectarUser {
-  // An user can only created at most 3 cards for now.
+  final String userId;
+  final bool isActive;
+  final DateTime createdAt;
   static const int maxNectarCards = 3;
+  final List<NectarCard> nectarCards;
 
   // Required params upon init.
   final String firstName;
@@ -28,14 +31,6 @@ class NectarUser {
   final String postal;
   final String avatarUrl;
 
-  // List of business cards this user owns.
-  final List<NectarCard> businessCards;
-
-  // Auto generated params
-  final String userId;
-  final bool isActive;
-  final DateTime createdAt;
-
   NectarUser({
     required this.firstName,
     required this.lastName,
@@ -51,14 +46,13 @@ class NectarUser {
     this.company = '',
     this.job = '',
     this.postal = '',
-    this.businessCards = const <NectarCard>[],
+    this.nectarCards = const <NectarCard>[],
     this.isActive = true,
     DateTime? createdAt,
     String? userId,
   })  : userId = userId ?? generatePrefixedId('user'),
         createdAt = createdAt ?? DateTime.now() {
-    // check for max 3 business cards before initing the user.
-    if (businessCards.length > maxNectarCards) {
+    if (nectarCards.length > maxNectarCards) {
       throw ArgumentError(
         'You can only add a maximum of $maxNectarCards business cards.',
       );
@@ -84,7 +78,7 @@ class NectarUser {
     String? country,
     String? postal,
   }) {
-    if (businessCards.length >= maxNectarCards) {
+    if (nectarCards.length >= maxNectarCards) {
       throw StateError(
         'Cannot add more than $maxNectarCards business cards per user.',
       );
@@ -106,15 +100,15 @@ class NectarUser {
       ownerUserId: userId,
     );
     return copyWith(
-      businessCards: <NectarCard>[...businessCards, cardToAdd],
+      nectarCards: <NectarCard>[...nectarCards, cardToAdd],
     );
   }
 
   // Remove a card with cardId [targetCardId].
   NectarUser removeNectarCardById(String targetCardId) {
     return copyWith(
-      businessCards:
-          businessCards.where((card) => card.cardId != targetCardId).toList(),
+      nectarCards:
+          nectarCards.where((card) => card.cardId != targetCardId).toList(),
     );
   }
 
@@ -128,7 +122,7 @@ class NectarUser {
     String? avatarUrl,
     bool? isActive,
     DateTime? createdAt,
-    List<NectarCard>? businessCards,
+    List<NectarCard>? nectarCards,
   }) {
     return NectarUser(
       userId: userId ?? this.userId,
@@ -140,7 +134,7 @@ class NectarUser {
       avatarUrl: avatarUrl ?? this.avatarUrl,
       isActive: isActive ?? this.isActive,
       createdAt: createdAt ?? this.createdAt,
-      businessCards: businessCards ?? this.businessCards,
+      nectarCards: nectarCards ?? this.nectarCards,
     );
   }
 }

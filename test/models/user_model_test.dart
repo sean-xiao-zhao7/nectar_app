@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:nectar_app/models/business_card.dart';
-import 'package:nectar_app/models/user.dart';
+import 'package:nectar_app/models/nectar_card.dart';
+import 'package:nectar_app/models/nectar_user.dart';
 
-BusinessCard _card(String cardId, String ownerUserId) {
-  return BusinessCard(
+NectarCard _card(String cardId, String ownerUserId) {
+  return NectarCard(
     cardId: cardId,
     ownerUserId: ownerUserId,
     firstName: 'Jane',
@@ -35,7 +35,7 @@ void main() {
   });
 
   test('business card auto-generates id when omitted', () {
-    final card = BusinessCard(
+    final card = NectarCard(
       ownerUserId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',
@@ -73,7 +73,7 @@ void main() {
       postal: '94105',
     );
 
-    final updated = user.addBusinessCard().addBusinessCard().addBusinessCard();
+    final updated = user.addNectarCard().addNectarCard().addNectarCard();
 
     expect(updated.businessCards.length, 3);
   });
@@ -85,7 +85,7 @@ void main() {
       lastName: 'Doe',
       email: 'jane@nectar.app',
       password: 'password123',
-      businessCards: <BusinessCard>[
+      businessCards: <NectarCard>[
         _card('card_1', 'user_1'),
         _card('card_2', 'user_1'),
         _card('card_3', 'user_1'),
@@ -93,12 +93,12 @@ void main() {
     );
 
     expect(
-      () => user.addBusinessCard(),
+      () => user.addNectarCard(),
       throwsStateError,
     );
   });
 
-  test('addBusinessCard uses canonical values from user when omitted', () {
+  test('addNectarCard uses canonical values from user when omitted', () {
     final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
@@ -116,7 +116,7 @@ void main() {
       postal: '94105',
     );
 
-    final updated = user.addBusinessCard();
+    final updated = user.addNectarCard();
 
     final createdCard = updated.businessCards.first;
     expect(createdCard.firstName, 'Jane');
@@ -126,17 +126,17 @@ void main() {
     expect(createdCard.phone, '555-0101');
   });
 
-  test('removeBusinessCardById removes matching card', () {
+  test('removeNectarCardById removes matching card', () {
     final user = NectarUser(
       userId: 'user_1',
       firstName: 'Jane',
       lastName: 'Doe',
       email: 'jane@nectar.app',
       password: 'password123',
-      businessCards: <BusinessCard>[_card('card_1', 'user_1')],
+      businessCards: <NectarCard>[_card('card_1', 'user_1')],
     );
 
-    final updated = user.removeBusinessCardById('card_1');
+    final updated = user.removeNectarCardById('card_1');
 
     expect(updated.businessCards, isEmpty);
   });
