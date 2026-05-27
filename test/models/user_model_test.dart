@@ -75,7 +75,7 @@ void main() {
 
     final updated = user.addNectarCard().addNectarCard().addNectarCard();
 
-    expect(updated.businessCards.length, 3);
+    expect(updated.nectarCards.length, 3);
   });
 
   test('adding a 4th card throws StateError', () {
@@ -85,7 +85,7 @@ void main() {
       lastName: 'Doe',
       email: 'jane@nectar.app',
       password: 'password123',
-      businessCards: <NectarCard>[
+      nectarCards: <NectarCard>[
         _card('card_1', 'user_1'),
         _card('card_2', 'user_1'),
         _card('card_3', 'user_1'),
@@ -118,7 +118,7 @@ void main() {
 
     final updated = user.addNectarCard();
 
-    final createdCard = updated.businessCards.first;
+    final createdCard = updated.nectarCards.first;
     expect(createdCard.firstName, 'Jane');
     expect(createdCard.lastName, 'Doe');
     expect(createdCard.ownerUserId, 'user_1');
@@ -133,11 +133,11 @@ void main() {
       lastName: 'Doe',
       email: 'jane@nectar.app',
       password: 'password123',
-      businessCards: <NectarCard>[_card('card_1', 'user_1')],
+      nectarCards: <NectarCard>[_card('card_1', 'user_1')],
     );
 
     final updated = user.removeNectarCardById('card_1');
 
-    expect(updated.businessCards, isEmpty);
+    expect(updated.nectarCards, isEmpty);
   });
 }

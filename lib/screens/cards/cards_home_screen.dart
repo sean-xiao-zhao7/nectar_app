@@ -40,15 +40,24 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
+                    List<Widget> children = [];
+                    if (snapshotCards.data!.isEmpty) {
+                      children = [
+                        MyLargeText('You have no cards yet.'),
+                      ];
+                    } else {
+                      children = [
+                        MyLargeText('Here are your cards.'),
+                        MyRegularText(
+                            'You can manage each card by tapping on it.'),
+                      ];
+                    }
+
                     return Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         spacing: 20,
-                        children: [
-                          MyLargeText('Here are your cards.'),
-                          MyRegularText(
-                              'You can manage each card by tapping on it.'),
-                        ]);
+                        children: children);
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }

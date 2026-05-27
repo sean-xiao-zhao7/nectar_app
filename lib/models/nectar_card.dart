@@ -3,7 +3,7 @@ import 'package:nectar_app/helpers/id_generator.dart';
 /// A single business card.
 ///
 /// Must be owned by an user - ownerUserId.
-///
+/// In database, all cards are under the user's firebaseAuth id.
 class NectarCard {
   final String cardId;
   final String ownerUserId;

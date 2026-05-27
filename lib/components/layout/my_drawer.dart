@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/logout_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/cards/cards_home_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
 /// The main drawer
@@ -181,6 +182,24 @@ class MyDrawer extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) => const HomeScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.credit_card,
+                  size: 34,
+                ),
+                title: Text(
+                  'Cards',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const CardsHomeScreen(),
                     ),
                   );
                 },
