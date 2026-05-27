@@ -21,36 +21,50 @@ class _HomeScreenState extends State<HomeScreen> {
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
-          List<Widget> widgetTree = [];
-          if (snapshot.data == null) {
-            widgetTree = [
-              MyLargeText(
-                'Welcome to Nectar!',
-              ),
-              MyRegularText(
-                  'Sign in to your account by tapping the top left drawer, then "Log in".'),
-              MyRegularText(
-                  'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
-            ];
-          } else {
-            widgetTree = [
-              FutureBuilder<NectarUser>(
-                  future: fetchUserInfo(snapshot.data!.uid),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<NectarUser> snapshot) {
-                    if (snapshot.hasData) {
-                      return MyLargeText(
-                          'Welcome to Nectar ${snapshot.data!.firstName}.');
-                    } else {
-                      return MyLargeText('Welcome to Nectar');
-                    }
-                  }),
-              MyRegularText(
-                  'Access your cards from the drawer menu on the left.'),
-              MyRegularText(
-                  'For help, select the "Help" option from the drawer on the left.'),
-              MyRegularText('We hope you enjoy your experience with Nectar!'),
-            ];
+          Widget widgetTree = Center(child: CircularProgressIndicator());
+          if (snapshot.connectionState == ConnectionState.active &&
+              !snapshot.hasData) {
+            widgetTree = Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 20,
+                children: [
+                  MyLargeText(
+                    'Welcome to Nectar!',
+                  ),
+                  MyRegularText(
+                      'Sign in to your account by tapping the top left drawer, then "Log in".'),
+                  MyRegularText(
+                      'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
+                ]);
+          } else if (snapshot.connectionState == ConnectionState.active &&
+              snapshot.hasData) {
+            widgetTree = FutureBuilder<NectarUser>(
+                future: fetchUserInfo(snapshot.data!.uid),
+                builder: (BuildContext context,
+                    AsyncSnapshot<NectarUser> snapshotUserInfo) {
+                  print(snapshotUserInfo.connectionState);
+                  if (snapshotUserInfo.connectionState ==
+                          ConnectionState.done &&
+                      snapshotUserInfo.hasData) {
+                    return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        spacing: 20,
+                        children: [
+                          MyLargeText(
+                              'Welcome to Nectar ${snapshotUserInfo.data!.firstName}.'),
+                          MyRegularText(
+                              'Access your cards from the drawer menu on the left.'),
+                          MyRegularText(
+                              'For help, select the "Help" option from the drawer on the left.'),
+                          MyRegularText(
+                              'We hope you enjoy your experience with Nectar!'),
+                        ]);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                });
           }
 
           return Scaffold(
@@ -72,11 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 offset: Offset(0, 3),
                               ),
                             ]),
-                        child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            spacing: 20,
-                            children: widgetTree)),
+                        child: widgetTree),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),
                         child: MyRegularText('\u00a9 2026 Nectar Inc.'))
