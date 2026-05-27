@@ -18,9 +18,7 @@ class MyDrawer extends StatelessWidget {
   final String userSubTitle;
 
   const MyDrawer(
-      {super.key,
-      this.userTitle = 'Jean-Paul',
-      this.userSubTitle = 'Engineer'});
+      {super.key, this.userTitle = 'User', this.userSubTitle = 'User Title'});
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +147,7 @@ class MyDrawer extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          userTitle,
+                          user.email!,
                           style: profileTextStyle,
                         ),
                         SizedBox(

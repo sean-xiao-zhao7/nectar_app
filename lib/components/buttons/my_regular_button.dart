@@ -12,14 +12,15 @@ class MyRegularButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final bool isFullWidth;
   final EdgeInsetsGeometry? padding;
+  final IconData? iconData;
 
-  const MyRegularButton({
-    super.key,
-    required this.label,
-    required this.onPressed,
-    this.isFullWidth = true,
-    this.padding,
-  });
+  const MyRegularButton(
+      {super.key,
+      required this.label,
+      required this.onPressed,
+      this.isFullWidth = true,
+      this.padding,
+      this.iconData = Icons.login_rounded});
 
   @override
   State<MyRegularButton> createState() => _MyRegularButtonState();
@@ -58,7 +59,7 @@ class _MyRegularButtonState extends State<MyRegularButton> {
               child: const CircularProgressIndicator(
                 strokeWidth: 3,
               ))
-          : const Icon(Icons.login_rounded),
+          : Icon(widget.iconData),
     );
 
     if (widget.isFullWidth) {

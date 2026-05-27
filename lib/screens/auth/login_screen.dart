@@ -5,6 +5,7 @@ import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
+import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
 /// Log in an existing user
@@ -55,6 +56,30 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _submitGoogle() async {
+    final resultMessage = await loginHelperGoogle();
+    if (!mounted) {
+      return;
+    }
+
+    if (resultMessage.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Google login successful.')),
+      );
+
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => const HomeScreen(),
+        ),
+      );
+      return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(resultMessage)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +94,15 @@ class _LoginScreenState extends State<LoginScreen> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                const MyRegularText('Log in to your personal Nectar account.'),
+                const MyRegularText('Access your Nectar account.'),
+                const SizedBox(height: 24),
+                MyRegularButton(
+                  label: 'Log in with Google',
+                  onPressed: _submitGoogle,
+                  iconData: Icons.g_mobiledata,
+                ),
+                const SizedBox(height: 24),
+                const MyRegularText('OR'),
                 const SizedBox(height: 24),
                 myTextFormField(
                   context: context,
@@ -96,7 +129,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 MyRegularButton(
                   label: 'Log in to Nectar',
                   onPressed: _submit,
-                )
+                ),
+                const SizedBox(height: 24),
+                TextButton(
+                    onPressed: () => {
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (_) => const RegisterScreen(),
+                            ),
+                          )
+                        },
+                    child: MyRegularText(
+                        'Sign up here instead.'))
               ],
             ),
           ),

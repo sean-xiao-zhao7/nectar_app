@@ -63,6 +63,21 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
   return resultMessage;
 }
 
+/// Log in using Google provider.
+Future<String> loginHelperGoogle() async {
+  String resultMessage = '';
+  try {
+    final resultGoogle =
+        await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
+    print(resultGoogle);
+    // await _addUserDB(emailVal, firstName, lastName, userCreds.user!.uid);
+  } on FirebaseAuthException catch (e) {
+    resultMessage = e.message ?? 'Google login failed. Please try again.';
+  }
+
+  return resultMessage;
+}
+
 /// Get current user info from Firebase Realtime Database
 /// firebaseUid is uid field from Firebase Auth.
 Future<NectarUser> fetchUserInfo(String firebaseUid) async {
