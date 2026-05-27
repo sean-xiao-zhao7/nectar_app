@@ -5,17 +5,18 @@ import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
-import 'package:nectar_app/helpers/auth_helper.dart';
+import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/models/user.dart';
+import 'package:nectar_app/screens/auth/login_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class CardsHomeScreen extends StatefulWidget {
+  const CardsHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CardsHomeScreen> createState() => _CardsHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CardsHomeScreenState extends State<CardsHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -24,41 +25,27 @@ class _HomeScreenState extends State<HomeScreen> {
           Widget widgetTree = Center(child: CircularProgressIndicator());
           if (snapshotAuth.connectionState == ConnectionState.active &&
               !snapshotAuth.hasData) {
-            widgetTree = Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                spacing: 20,
-                children: [
-                  MyLargeText(
-                    'Welcome to Nectar!',
-                  ),
-                  MyRegularText(
-                      'Sign in to your account by tapping the top left drawer, then "Log in".'),
-                  MyRegularText(
-                      'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
-                ]);
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const LoginScreen(),
+              ),
+            );
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
             widgetTree = FutureBuilder<NectarUser>(
-                future: fetchUserInfo(snapshotAuth.data!.uid),
+                future: fetchUserAllCards(snapshotAuth.data!.uid),
                 builder: (BuildContext context,
-                    AsyncSnapshot<NectarUser> snapshotUserInfo) {
-                  if (snapshotUserInfo.connectionState ==
-                          ConnectionState.done &&
-                      snapshotUserInfo.hasData) {
+                    AsyncSnapshot<NectarUser> snapshotCards) {
+                  if (snapshotCards.connectionState == ConnectionState.done &&
+                      snapshotCards.hasData) {
                     return Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         spacing: 20,
                         children: [
-                          MyLargeText(
-                              'Welcome to Nectar ${snapshotUserInfo.data!.firstName}.'),
+                          MyLargeText('Here are your cards.'),
                           MyRegularText(
-                              'Access your cards from the drawer menu on the left.'),
-                          MyRegularText(
-                              'For help, select the "Help" option from the drawer on the left.'),
-                          MyRegularText(
-                              'We hope you enjoy your experience with Nectar!'),
+                              'You can manage each card by tapping on it.'),
                         ]);
                   } else {
                     return Center(child: CircularProgressIndicator());
@@ -68,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return Scaffold(
               drawer: MyDrawer(),
-              appBar: MyAppBar(),
+              appBar: MyAppBar(
+                title: 'My Cards',
+              ),
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
