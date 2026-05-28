@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:nectar_app/models/nectar_user.dart';
 
 /// Sign up using email and password
@@ -64,15 +66,20 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
 }
 
 /// Log in using Google provider.
+/// https://firebase.google.com/docs/auth/flutter/federated-auth
 Future<String> loginHelperGoogle() async {
   String resultMessage = '';
   try {
-    final resultGoogle =
-        await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
-    print(resultGoogle);
+    final GoogleSignInAccount googleUser =
+        await GoogleSignIn.instance.authenticate();
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+    print(googleAuth);
+    final credential =
+        GoogleAuthProvider.credential(idToken: googleAuth.idToken);
+    await FirebaseAuth.instance.signInWithCredential(credential);
     // await _addUserDB(emailVal, firstName, lastName, userCreds.user!.uid);
   } on FirebaseAuthException catch (e) {
-    resultMessage = e.message ?? 'Google login failed. Please try again.';
+    resultMessage = e.message ?? 'Google server error. Please try again later.';
   }
 
   return resultMessage;
