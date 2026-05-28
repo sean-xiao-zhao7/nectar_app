@@ -73,13 +73,17 @@ Future<String> loginHelperGoogle() async {
     final GoogleSignInAccount googleUser =
         await GoogleSignIn.instance.authenticate();
     final GoogleSignInAuthentication googleAuth = googleUser.authentication;
-    print(googleAuth);
-    final credential =
+    final googleCredential =
         GoogleAuthProvider.credential(idToken: googleAuth.idToken);
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    UserCredential firebaseCredential =
+        await FirebaseAuth.instance.signInWithCredential(googleCredential);
     // await _addUserDB(emailVal, firstName, lastName, userCreds.user!.uid);
   } on FirebaseAuthException catch (e) {
     resultMessage = e.message ?? 'Google server error. Please try again later.';
+  } on GoogleSignInException catch (e) {
+    if (e.code == GoogleSignInExceptionCode.canceled) {
+      resultMessage = e.description!;
+    }
   }
 
   return resultMessage;
