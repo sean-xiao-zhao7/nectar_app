@@ -67,6 +67,8 @@ Future<String> loginHelper(String emailVal, String passwordVal) async {
 
 /// Log in using Google provider.
 /// https://firebase.google.com/docs/auth/flutter/federated-auth
+///
+/// If first time login, save name and email into RDB.
 Future<String> loginHelperGoogle() async {
   String resultMessage = '';
   try {
@@ -75,9 +77,17 @@ Future<String> loginHelperGoogle() async {
     final GoogleSignInAuthentication googleAuth = googleUser.authentication;
     final googleCredential =
         GoogleAuthProvider.credential(idToken: googleAuth.idToken);
-    UserCredential firebaseCredential =
+    final firesbaseResult =
         await FirebaseAuth.instance.signInWithCredential(googleCredential);
-    // await _addUserDB(emailVal, firstName, lastName, userCreds.user!.uid);
+    // print(firesbaseResult);
+
+    if (firesbaseResult.additionalUserInfo!.isNewUser) {
+      await _addUserDB(
+          firesbaseResult.additionalUserInfo!.profile!['email'],
+          firesbaseResult.additionalUserInfo!.profile!['given_name'],
+          firesbaseResult.additionalUserInfo!.profile!['family_name'],
+          firesbaseResult.user!.uid);
+    }
   } on FirebaseAuthException catch (e) {
     resultMessage = e.message ?? 'Google server error. Please try again later.';
   } on GoogleSignInException catch (e) {
