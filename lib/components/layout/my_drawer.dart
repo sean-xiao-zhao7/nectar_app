@@ -14,11 +14,10 @@ import 'package:nectar_app/screens/home_screen.dart';
 ///
 /// The drawer opening hamburger icon is controlled in appBar.
 class MyDrawer extends StatelessWidget {
-  final String userTitle;
-  final String userSubTitle;
+  final String? userTitle;
+  final String? userSubTitle;
 
-  const MyDrawer(
-      {super.key, this.userTitle = 'User', this.userSubTitle = 'User Title'});
+  const MyDrawer({super.key, this.userTitle, this.userSubTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -147,14 +146,14 @@ class MyDrawer extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                          user.email!,
+                          userTitle == null ? user.email! : userTitle!,
                           style: profileTextStyle,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         Text(
-                          userSubTitle,
+                          userSubTitle == null ? 'Regular user' : userSubTitle!,
                           style: profileSubTextStyle,
                         ),
                         SizedBox(

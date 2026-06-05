@@ -74,7 +74,7 @@ Future<String> loginHelperGoogle() async {
           firesbaseResult.user!.uid);
     }
   } on FirebaseAuthException catch (e) {
-    resultMessage = e.message ?? 'Google server error. Please try again later.';
+    resultMessage = e.message ?? 'Server error. Please try again later.';
   } on GoogleSignInException catch (e) {
     if (e.code == GoogleSignInExceptionCode.canceled) {
       resultMessage = e.description!;
