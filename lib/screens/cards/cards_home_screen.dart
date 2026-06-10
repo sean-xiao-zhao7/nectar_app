@@ -50,6 +50,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                         MyRegularButton(
                             label: 'Add a card',
                             hasDelay: false,
+                            iconData: Icons.add,
                             onPressed: () =>
                                 myNavigate(context, AddSingleCardScreen()))
                       ];

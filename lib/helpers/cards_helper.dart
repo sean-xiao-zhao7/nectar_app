@@ -1,12 +1,45 @@
+import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:nectar_app/models/nectar_card.dart';
+import 'package:nectar_app/screens/cards/cards_home_screen.dart';
+
+/// Screen form on-click callback for adding a new card.
+Future<void> addNewCardFormHelper(
+  BuildContext context,
+  GlobalKey<FormState> formKey,
+  Map<String, String> controllerTexts,
+  String successText,
+) async {
+  final resultMessage = await _addSingleCard();
+  if (!context.mounted) {
+    return;
+  }
+
+  if (resultMessage.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Added a new card.')),
+    );
+
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const CardsHomeScreen(),
+      ),
+    );
+    return;
+  }
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(resultMessage)),
+  );
+}
 
 /// Add a single new card
 ///
 ///
-Future<String> addSingleCard() async {
+Future<String> _addSingleCard() async {
   return '';
 }
 
