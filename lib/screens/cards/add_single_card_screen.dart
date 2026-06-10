@@ -8,20 +8,18 @@ import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 
 import 'package:nectar_app/helpers/cards_helper.dart';
-import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 
 import 'package:nectar_app/screens/auth/login_screen.dart';
-import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 
-class CardsHomeScreen extends StatefulWidget {
-  const CardsHomeScreen({super.key});
+class AddSingleCardScreen extends StatefulWidget {
+  const AddSingleCardScreen({super.key});
 
   @override
-  State<CardsHomeScreen> createState() => _CardsHomeScreenState();
+  State<AddSingleCardScreen> createState() => _AddSingleCardScreenState();
 }
 
-class _CardsHomeScreenState extends State<CardsHomeScreen> {
+class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -43,23 +41,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
-                    List<Widget> children = [];
-                    if (snapshotCards.data!.isEmpty) {
-                      children = [
-                        MyLargeText('You have no cards yet.'),
-                        MyRegularButton(
-                            label: 'Add a card',
-                            hasDelay: false,
-                            onPressed: () =>
-                                myNavigate(context, AddSingleCardScreen()))
-                      ];
-                    } else {
-                      children = [
-                        MyLargeText('Here are your cards.'),
-                        MyRegularText(
-                            'You can manage each card by tapping on it.'),
-                      ];
-                    }
+                    List<Widget> children = [MyRegularText('Add a new card')];
 
                     return Column(
                         mainAxisSize: MainAxisSize.min,
@@ -75,7 +57,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
           return Scaffold(
               drawer: MyDrawer(),
               appBar: MyAppBar(
-                title: 'My Cards',
+                title: 'Add a new card',
               ),
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

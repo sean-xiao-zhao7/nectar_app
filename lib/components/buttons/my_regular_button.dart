@@ -13,6 +13,7 @@ class MyRegularButton extends StatefulWidget {
   final bool isFullWidth;
   final EdgeInsetsGeometry? padding;
   final IconData? iconData;
+  final bool? hasDelay;
 
   const MyRegularButton(
       {super.key,
@@ -20,7 +21,8 @@ class MyRegularButton extends StatefulWidget {
       required this.onPressed,
       this.isFullWidth = true,
       this.padding,
-      this.iconData = Icons.login_rounded});
+      this.iconData = Icons.login_rounded,
+      this.hasDelay = true});
 
   @override
   State<MyRegularButton> createState() => _MyRegularButtonState();
@@ -36,12 +38,19 @@ class _MyRegularButtonState extends State<MyRegularButton> {
         setState(() {
           _isLoading = true;
         });
-        Future.delayed(const Duration(seconds: 1), () {
+        if (widget.hasDelay!) {
+          Future.delayed(const Duration(seconds: 1), () {
+            widget.onPressed!();
+            setState(() {
+              _isLoading = false;
+            });
+          });
+        } else {
           widget.onPressed!();
           setState(() {
             _isLoading = false;
           });
-        });
+        }
       },
       style: ElevatedButton.styleFrom(
           padding: widget.padding ??

@@ -3,7 +3,15 @@ import 'package:firebase_database/firebase_database.dart';
 
 import 'package:nectar_app/models/nectar_card.dart';
 
+/// Add a single new card
+///
+///
+Future<String> addSingleCard() async {
+  return '';
+}
+
 /// Get current user's all cards from Firebase Realtime Database
+///
 /// userId is the firebaseAuth id.
 /// Return [] if the user does not have any cards.
 Future<List<NectarCard>> fetchUserAllCards(String userId) async {
