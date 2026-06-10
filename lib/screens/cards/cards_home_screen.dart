@@ -25,7 +25,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshotAuth) {
           Widget widgetTree = Center(child: CircularProgressIndicator());
-          if (snapshotAuth.connectionState == ConnectionState.active &&
+          if (snapshotAuth.connectionState == ConnectionState.done &&
               !snapshotAuth.hasData) {
             Navigator.of(context).push(
               MaterialPageRoute<void>(
