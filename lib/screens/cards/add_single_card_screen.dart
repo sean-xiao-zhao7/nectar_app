@@ -39,7 +39,6 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
   final _postalController = TextEditingController();
-  final bool _isFormValid = false;
 
   @override
   void dispose() {
@@ -127,9 +126,6 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                               labelText: 'Email',
                               keyboardType: TextInputType.emailAddress,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.email(),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
@@ -138,9 +134,6 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                               labelText: 'Phone',
                               keyboardType: TextInputType.phone,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.minLength(6, 'Phone'),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
@@ -244,29 +237,26 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                       margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
                       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
                       child: MyRegularButton(
-                        label: 'Complete adding a new card',
-                        iconData: Icons.done,
-                        onPressed: _isFormValid
-                            ? () => addNewCardFormHelper(
-                                context,
-                                _formKey,
-                                {
-                                  'firstName': _firstNameController.text,
-                                  'lastName': _lastNameController.text,
-                                  'email': _emailController.text,
-                                  'phone': _phoneController.text,
-                                  'job': _jobController.text,
-                                  'company': _companyController.text,
-                                  'website': _websiteController.text,
-                                  'address': _addressController.text,
-                                  'city': _cityController.text,
-                                  'state': _stateController.text,
-                                  'country': _countryController.text,
-                                  'postal': _postalController.text,
-                                },
-                                'Sign up successful')
-                            : null,
-                      ),
+                          label: 'Complete adding a new card',
+                          iconData: Icons.done,
+                          onPressed: () => addNewCardFormHelper(
+                              context,
+                              _formKey,
+                              {
+                                'firstName': _firstNameController.text,
+                                'lastName': _lastNameController.text,
+                                'email': _emailController.text,
+                                'phone': _phoneController.text,
+                                'job': _jobController.text,
+                                'company': _companyController.text,
+                                'website': _websiteController.text,
+                                'address': _addressController.text,
+                                'city': _cityController.text,
+                                'state': _stateController.text,
+                                'country': _countryController.text,
+                                'postal': _postalController.text,
+                              },
+                              'Sign up successful')),
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),

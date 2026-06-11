@@ -13,6 +13,10 @@ Future<void> addNewCardFormHelper(
   Map<String, String> controllerTexts,
   String successText,
 ) async {
+  if (!formKey.currentState!.validate()) {
+    return;
+  }
+
   final resultMessage = await _addSingleCard();
   if (!context.mounted) {
     return;
