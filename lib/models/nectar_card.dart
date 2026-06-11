@@ -1,15 +1,19 @@
 import 'package:nectar_app/helpers/id_generator.dart';
 
-/// A single business card.
+/// A single Nectar card.
 ///
+/// A new card only needs first and last names, which should be inherited from user model.
 /// Must be owned by an user - ownerUserId.
 /// In database, all cards are under the user's firebaseAuth id.
 class NectarCard {
   final String cardId;
   final String ownerUserId;
 
+  // required params for a new card
   final String firstName;
   final String lastName;
+
+  // optional params
   final String phone;
   final String email;
   final String job;

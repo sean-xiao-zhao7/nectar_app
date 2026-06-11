@@ -81,7 +81,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
                       MyRegularText(
-                        'Please fill in some details for your new card.',
+                        'Please fill in some details for your new card. Other than first/last names, other fields can be filled out later.',
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
@@ -112,6 +112,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 FormValidators.required('Last name'),
                               ],
                             ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Optional info below'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
