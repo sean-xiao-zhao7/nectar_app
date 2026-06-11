@@ -46,7 +46,10 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                     List<Widget> children = [];
                     if (snapshotCards.data!.isEmpty) {
                       children = [
-                        MyLargeText('You have no cards yet.'),
+                        MyLargeText(
+                          'You have no cards yet.',
+                          textAlign: TextAlign.center,
+                        ),
                         MyRegularButton(
                             label: 'Add a card',
                             hasDelay: false,

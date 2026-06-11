@@ -80,6 +80,13 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
+                      MyRegularText(
+                        'Please fill in some details for your new card.',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Form(
                         key: _formKey,
                         child: Column(
@@ -190,30 +197,6 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                               labelText: 'Postal code',
                               textInputAction: TextInputAction.done,
                             ),
-                            const SizedBox(height: 24),
-                            MyRegularButton(
-                              label: 'Complete adding a new card',
-                              onPressed: _isFormValid
-                                  ? () => addNewCardFormHelper(
-                                      context,
-                                      _formKey,
-                                      {
-                                        'firstName': _firstNameController.text,
-                                        'lastName': _lastNameController.text,
-                                        'email': _emailController.text,
-                                        'phone': _phoneController.text,
-                                        'job': _jobController.text,
-                                        'company': _companyController.text,
-                                        'website': _websiteController.text,
-                                        'address': _addressController.text,
-                                        'city': _cityController.text,
-                                        'state': _stateController.text,
-                                        'country': _countryController.text,
-                                        'postal': _postalController.text,
-                                      },
-                                      'Sign up successful')
-                                  : null,
-                            )
                           ],
                         ),
                       ),
@@ -248,6 +231,33 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 ),
                               ]),
                           child: widgetTree),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                      child: MyRegularButton(
+                        label: 'Complete adding a new card',
+                        onPressed: _isFormValid
+                            ? () => addNewCardFormHelper(
+                                context,
+                                _formKey,
+                                {
+                                  'firstName': _firstNameController.text,
+                                  'lastName': _lastNameController.text,
+                                  'email': _emailController.text,
+                                  'phone': _phoneController.text,
+                                  'job': _jobController.text,
+                                  'company': _companyController.text,
+                                  'website': _websiteController.text,
+                                  'address': _addressController.text,
+                                  'city': _cityController.text,
+                                  'state': _stateController.text,
+                                  'country': _countryController.text,
+                                  'postal': _postalController.text,
+                                },
+                                'Sign up successful')
+                            : null,
+                      ),
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),
