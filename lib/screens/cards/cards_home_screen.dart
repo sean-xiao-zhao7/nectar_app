@@ -71,7 +71,12 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                         spacing: 20,
                         children: children);
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(),
+                      ],
+                    );
                   }
                 });
           }
@@ -100,7 +105,9 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                         child: widgetTree),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),
-                        child: MyRegularText('\u00a9 2026 Nectar Inc.'))
+                        child: MyRegularText(
+                          '\u00a9 2026 Nectar Inc.',
+                        ))
                   ]));
         });
   }

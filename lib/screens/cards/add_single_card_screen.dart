@@ -255,6 +255,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 'state': _stateController.text,
                                 'country': _countryController.text,
                                 'postal': _postalController.text,
+                                'uid': snapshotAuth.data!.uid,
                               },
                               'Sign up successful')),
                     ),

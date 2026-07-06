@@ -10,14 +10,14 @@ import 'package:nectar_app/screens/cards/cards_home_screen.dart';
 Future<void> addNewCardFormHelper(
   BuildContext context,
   GlobalKey<FormState> formKey,
-  Map<String, String> controllerTexts,
+  Map<String, String> fields,
   String successText,
 ) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
 
-  final resultMessage = await _addSingleCard();
+  final resultMessage = await _addSingleCard(fields);
   if (!context.mounted) {
     return;
   }
@@ -43,8 +43,16 @@ Future<void> addNewCardFormHelper(
 /// Add a single new card
 ///
 ///
-Future<String> _addSingleCard() async {
-  return '';
+Future<String> _addSingleCard(Map<String, String> fields) async {
+  String resultMessage = '';
+  try {
+    final newCardRef =
+        FirebaseDatabase.instance.ref('cards/${fields['uid']}').push();
+    await newCardRef.set(fields);
+  } on FirebaseException catch (_) {
+    resultMessage = 'Server error. Please try again later.';
+  }
+  return resultMessage;
 }
 
 /// Get current user's all cards from Firebase Realtime Database
