@@ -63,7 +63,17 @@ Future<List<NectarCard>> fetchUserAllCards(String userId) async {
   try {
     final event = await FirebaseDatabase.instance.ref('cards/$userId').once();
     if (event.snapshot.exists) {
-      return event.snapshot.value as List<NectarCard>;
+      List<NectarCard> cardList = [];
+      Map<dynamic, dynamic> firebaseDataMap =
+          event.snapshot.value! as Map<dynamic, dynamic>;
+      for (String key in firebaseDataMap.keys) {
+        NectarCard card = NectarCard(
+            ownerUserId: userId,
+            firstName: firebaseDataMap[key]['firstName'],
+            lastName: firebaseDataMap[key]['lastName']);
+        cardList.add(card);
+      }
+      return cardList;
     } else {
       return [];
     }
