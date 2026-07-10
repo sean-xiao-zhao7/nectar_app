@@ -73,10 +73,12 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
             // Split displayName into first/last names.
-            String fullName = snapshotAuth.data!.displayName!;
-            int lastSpaceIndex = fullName.lastIndexOf(' ');
-            _firstNameController.text = fullName.substring(0, lastSpaceIndex);
-            _lastNameController.text = fullName.substring(lastSpaceIndex + 1);
+            if (snapshotAuth.data!.displayName != null) {
+              String fullName = snapshotAuth.data!.displayName!;
+              int lastSpaceIndex = fullName.lastIndexOf(' ');
+              _firstNameController.text = fullName.substring(0, lastSpaceIndex);
+              _lastNameController.text = fullName.substring(lastSpaceIndex + 1);
+            }
 
             widgetTree = FutureBuilder<List<NectarCard>>(
                 future: fetchUserAllCards(snapshotAuth.data!.uid),
