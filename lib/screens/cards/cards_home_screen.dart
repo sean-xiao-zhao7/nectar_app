@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
+import 'package:nectar_app/components/cards/cards_list_view.dart';
 
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
@@ -43,33 +44,38 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
-                    List<Widget> children = [];
                     if (snapshotCards.data!.isEmpty) {
-                      children = [
-                        MyLargeText(
-                          'You have no cards yet.',
-                          textAlign: TextAlign.center,
-                        ),
-                        MyRegularButton(
-                            label: 'Add a card',
-                            hasDelay: false,
-                            iconData: Icons.add,
-                            onPressed: () =>
-                                myNavigate(context, AddSingleCardScreen()))
-                      ];
+                      return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          spacing: 20,
+                          children: [
+                            MyLargeText(
+                              'You have no cards yet.',
+                              textAlign: TextAlign.center,
+                            ),
+                            MyRegularButton(
+                                label: 'Add a card',
+                                hasDelay: false,
+                                iconData: Icons.add,
+                                onPressed: () =>
+                                    myNavigate(context, AddSingleCardScreen())),
+                          ]);
                     } else {
-                      children = [
-                        MyLargeText('Here are your cards.'),
-                        MyRegularText(
-                            'You can manage each card by tapping on it.'),
-                      ];
+                      return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          spacing: 20,
+                          children: <Widget>[
+                            MyLargeText('Here are your cards.'),
+                            MyRegularText(
+                                'You can manage each card by tapping on it.'),
+                            SizedBox(
+                                height: 100,
+                                child: CardsListView(
+                                    cardsList: snapshotCards.data!))
+                          ]);
                     }
-
-                    return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        spacing: 20,
-                        children: children);
                   } else {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
