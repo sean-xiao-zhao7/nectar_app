@@ -1,4 +1,6 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:nectar_app/components/layout/my_container.dart';
+
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 
@@ -11,15 +13,15 @@ class CardsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        separatorBuilder: (BuildContext context, int index) => const SizedBox(
-              height: 20,
-            ),
-        itemCount: cardsList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return MyRegularText(
-            'Card: ${cardsList[index].firstName}',
-          );
-        });
+    return SizedBox(
+      height: 450,
+      child: ListView.builder(
+          itemCount: cardsList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return MyContainer(
+              child: MyRegularText('Card: ${cardsList[index].firstName}'),
+            );
+          }),
+    );
   }
 }

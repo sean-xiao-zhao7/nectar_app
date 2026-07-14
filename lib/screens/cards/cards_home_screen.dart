@@ -4,6 +4,7 @@ import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/cards/cards_list_view.dart';
 
 import 'package:nectar_app/components/layout/my_app_bar.dart';
+import 'package:nectar_app/components/layout/my_container.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
@@ -25,9 +26,11 @@ class CardsHomeScreen extends StatefulWidget {
 class _CardsHomeScreenState extends State<CardsHomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // first streambuilder fetches user auth
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshotAuth) {
+          // widgetTree is the dynamic content on the screen based on state
           Widget widgetTree = Center(child: CircularProgressIndicator());
           if (snapshotAuth.connectionState == ConnectionState.done &&
               !snapshotAuth.hasData) {
@@ -38,18 +41,21 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
             );
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
+            // second futurebuilder fetches card list
             widgetTree = FutureBuilder<List<NectarCard>>(
                 future: fetchUserAllCards(snapshotAuth.data!.uid),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
+                  // switch display elements based on cards
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     if (snapshotCards.data!.isEmpty) {
-                      return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 20,
-                          children: [
+                      return MyContainer(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              spacing: 20,
+                              children: [
                             MyLargeText(
                               'You have no cards yet.',
                               textAlign: TextAlign.center,
@@ -60,29 +66,23 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                                 iconData: Icons.add,
                                 onPressed: () =>
                                     myNavigate(context, AddSingleCardScreen())),
-                          ]);
+                          ]));
                     } else {
-                      return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 20,
-                          children: <Widget>[
+                      return MyContainer(
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              spacing: 20,
+                              children: [
                             MyLargeText('Here are your cards.'),
                             MyRegularText(
                                 'You can manage each card by tapping on it.'),
-                            SizedBox(
-                                height: 100,
-                                child: CardsListView(
-                                    cardsList: snapshotCards.data!))
-                          ]);
+                            CardsListView(cardsList: snapshotCards.data!)
+                          ]));
                     }
                   } else {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                      ],
-                    );
+                    return MyContainer(
+                        child: Row(children: [CircularProgressIndicator()]));
                   }
                 });
           }
@@ -95,20 +95,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
               body: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.12),
-                                blurRadius: 3,
-                                offset: Offset(0, 3),
-                              ),
-                            ]),
-                        child: widgetTree),
+                    widgetTree,
                     Container(
                         padding: EdgeInsets.only(bottom: 50),
                         child: MyRegularText(
