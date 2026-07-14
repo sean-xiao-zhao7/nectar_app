@@ -19,7 +19,9 @@ class CardsListView extends StatelessWidget {
           itemCount: cardsList.length,
           itemBuilder: (BuildContext context, int index) {
             return MyContainer(
-              child: MyRegularText('Card: ${cardsList[index].firstName}'),
+              child: SizedBox(
+                  height: 160,
+                  child: MyRegularText('Card: ${cardsList[index].firstName}')),
             );
           }),
     );

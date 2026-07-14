@@ -68,21 +68,13 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                                     myNavigate(context, AddSingleCardScreen())),
                           ]));
                     } else {
-                      return MyContainer(
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              spacing: 20,
-                              children: [
-                            MyLargeText('Here are your cards.'),
-                            MyRegularText(
-                                'You can manage each card by tapping on it.'),
-                            CardsListView(cardsList: snapshotCards.data!)
-                          ]));
+                      return CardsListView(cardsList: snapshotCards.data!);
                     }
                   } else {
                     return MyContainer(
-                        child: Row(children: [CircularProgressIndicator()]));
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [CircularProgressIndicator()]));
                   }
                 });
           }
