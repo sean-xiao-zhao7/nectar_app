@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/layout/my_container.dart';
-
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/cards/single_card_list_preview.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 
 /// Display a scrollable list of Nectar Card previews.
@@ -18,11 +16,7 @@ class CardsListView extends StatelessWidget {
       child: ListView.builder(
           itemCount: cardsList.length,
           itemBuilder: (BuildContext context, int index) {
-            return MyContainer(
-              child: SizedBox(
-                  height: 160,
-                  child: MyRegularText('Card: ${cardsList[index].firstName}')),
-            );
+            return SingleCardListPreview(nectarCard: cardsList[index]);
           }),
     );
   }
