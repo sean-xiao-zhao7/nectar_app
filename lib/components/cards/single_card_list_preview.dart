@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/my_container.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 
 class SingleCardListPreview extends StatelessWidget {
@@ -16,8 +16,10 @@ class SingleCardListPreview extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 10,
             children: [
-              MyRegularText('First name: ${nectarCard.firstName}'),
-              MyRegularText('Last name: ${nectarCard.lastName}'),
+              MyLargeText('${nectarCard.firstName} ${nectarCard.lastName}'),
+              MyLargeText(nectarCard.company),
+              MyLargeText(nectarCard.phone),
+              MyLargeText(nectarCard.email),
             ],
           )),
     );

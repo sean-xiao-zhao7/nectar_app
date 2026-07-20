@@ -140,7 +140,7 @@ class MyDrawer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                         Text(
                           (user.displayName == null
@@ -149,16 +149,7 @@ class MyDrawer extends StatelessWidget {
                           style: profileTextStyle,
                         ),
                         SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          (user.displayName != null
-                              ? user.email!
-                              : 'Regular user'),
-                          style: profileSubTextStyle,
-                        ),
-                        SizedBox(
-                          height: 20,
+                          height: 30,
                         ),
                       ]),
                 ),
