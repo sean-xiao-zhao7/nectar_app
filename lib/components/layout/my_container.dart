@@ -10,7 +10,6 @@ class MyContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: alignment,
-      margin: EdgeInsets.all(20),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimary,

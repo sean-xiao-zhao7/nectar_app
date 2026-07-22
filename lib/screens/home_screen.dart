@@ -5,7 +5,6 @@ import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
-
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/models/nectar_user.dart';
 

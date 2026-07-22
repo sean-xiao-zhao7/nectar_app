@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
@@ -7,7 +8,6 @@ import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
-
 import 'package:nectar_app/screens/auth/login_screen.dart';
 
 /// Add a new Nectar card for current user

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/cards/cards_list_view.dart';
-import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_container.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
+import 'package:nectar_app/components/layout/my_scaffold_container.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
-
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 
@@ -77,12 +76,9 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
                 });
           }
 
-          return Scaffold(
-              drawer: MyDrawer(),
-              appBar: MyAppBar(
-                title: 'My Cards',
-              ),
-              body: Column(
+          return MyScaffoldContainer(
+              title: 'My Cards',
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     widgetTree,

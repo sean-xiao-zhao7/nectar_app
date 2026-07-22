@@ -21,8 +21,21 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         title: 'View Card',
         child: ListView(children: <Widget>[
           MyRegularText('Card details:'),
+          SizedBox(
+            height: 20,
+          ),
           MyContainer(
-            child: MyRegularText(widget.nectarCard.firstName),
+            child: Column(
+              spacing: 20,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MyRegularText('First name: ${widget.nectarCard.firstName}'),
+                MyRegularText('Last name: ${widget.nectarCard.lastName}'),
+                MyRegularText('Address: ${widget.nectarCard.address}'),
+                MyRegularText('Email: ${widget.nectarCard.email}'),
+                MyRegularText('Company: ${widget.nectarCard.company}'),
+              ],
+            ),
           ),
         ]));
   }
