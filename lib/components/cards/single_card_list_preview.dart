@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/my_container.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/models/nectar_card.dart';
+import 'package:nectar_app/screens/cards/single_card_screen.dart';
 
 class SingleCardListPreview extends StatelessWidget {
   final NectarCard nectarCard;
@@ -9,19 +10,29 @@ class SingleCardListPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyContainer(
-      child: SizedBox(
-          height: 160,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              MyLargeText('${nectarCard.firstName} ${nectarCard.lastName}'),
-              MyLargeText(nectarCard.company),
-              MyLargeText(nectarCard.phone),
-              MyLargeText(nectarCard.email),
-            ],
-          )),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => SingleCardScreen(nectarCard: nectarCard),
+          ),
+        );
+      },
+      child: MyContainer(
+        child: SizedBox(
+            height: 160,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 10,
+              children: [
+                MyLargeText('${nectarCard.firstName} ${nectarCard.lastName}'),
+                MyLargeText(nectarCard.company),
+                MyLargeText(nectarCard.phone),
+                MyLargeText(nectarCard.email),
+              ],
+            )),
+      ),
     );
   }
 }

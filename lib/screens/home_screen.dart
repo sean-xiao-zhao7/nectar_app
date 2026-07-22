@@ -56,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               'Welcome to Nectar ${snapshotUserInfo.data!.firstName}.'),
                           MyRegularText(
                               'Access your cards from the drawer menu on the left.'),
-                          MyRegularText(
-                              'For help, select the "Help" option from the drawer on the left.'),
+                          // MyRegularText(
+                          //     'For help, select the "Help" option from the drawer on the left.'),
                           MyRegularText(
                               'We hope you enjoy your experience with Nectar!'),
                         ]);

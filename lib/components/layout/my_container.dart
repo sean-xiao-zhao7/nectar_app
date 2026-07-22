@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class MyContainer extends StatelessWidget {
   final Widget child;
+  final AlignmentGeometry? alignment;
 
-  const MyContainer({super.key, required this.child});
+  const MyContainer({super.key, required this.child, this.alignment});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: alignment,
       margin: EdgeInsets.all(20),
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
