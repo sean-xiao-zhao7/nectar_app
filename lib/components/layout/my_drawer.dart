@@ -177,6 +177,24 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.collections,
+                  size: 34,
+                ),
+                title: Text(
+                  'Cards collection',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const CardsHomeScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.credit_card,
                   size: 34,
                 ),

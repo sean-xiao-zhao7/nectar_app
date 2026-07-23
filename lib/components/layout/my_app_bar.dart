@@ -22,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: appBarActions,
       title: MyLargeText(
-        color: Theme.of(context).appBarTheme.foregroundColor,
+        color: Theme.of(context).colorScheme.secondary,
         title,
       ),
     );
