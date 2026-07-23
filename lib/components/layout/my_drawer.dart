@@ -181,7 +181,7 @@ class MyDrawer extends StatelessWidget {
                   size: 34,
                 ),
                 title: Text(
-                  'Cards',
+                  'My Cards',
                   style: menuTextStyle,
                 ),
                 onTap: () {

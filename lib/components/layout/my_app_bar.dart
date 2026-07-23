@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/components/text/my_large_text.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -20,7 +21,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
       ),
       actions: appBarActions,
-      title: Text(
+      title: MyLargeText(
+        color: Theme.of(context).appBarTheme.foregroundColor,
         title,
       ),
     );
