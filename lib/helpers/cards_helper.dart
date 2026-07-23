@@ -118,8 +118,18 @@ Future<List<NectarCard>> fetchUserAllCards(String userId) async {
       for (String key in firebaseDataMap.keys) {
         NectarCard card = NectarCard(
             ownerUserId: userId,
+            cardId: key,
             firstName: firebaseDataMap[key]['firstName'],
-            lastName: firebaseDataMap[key]['lastName']);
+            lastName: firebaseDataMap[key]['lastName'],
+            email: firebaseDataMap[key]['email'],
+            address: firebaseDataMap[key]['address'],
+            company: firebaseDataMap[key]['company'],
+            city: firebaseDataMap[key]['city'],
+            country: firebaseDataMap[key]['country'],
+            job: firebaseDataMap[key]['job'],
+            phone: firebaseDataMap[key]['phone'],
+            website: firebaseDataMap[key]['website'],
+            postal: firebaseDataMap[key]['postal']);
         cardList.add(card);
       }
       return cardList;

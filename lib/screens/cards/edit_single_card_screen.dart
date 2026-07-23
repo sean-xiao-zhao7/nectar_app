@@ -231,6 +231,12 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.pop(context),
               ),
+              appBarActions: [
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
