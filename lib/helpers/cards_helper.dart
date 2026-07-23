@@ -55,6 +55,55 @@ Future<String> _addSingleCard(Map<String, String> fields) async {
   return resultMessage;
 }
 
+/// Screen form on-click callback for editing a new card.
+Future<void> editCardFormHelper(
+  BuildContext context,
+  GlobalKey<FormState> formKey,
+  Map<String, String> fields,
+  String successText,
+  String cardId,
+) async {
+  if (!formKey.currentState!.validate()) {
+    return;
+  }
+
+  final resultMessage = await _editSingleCard(fields, cardId);
+  if (!context.mounted) {
+    return;
+  }
+
+  if (resultMessage.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Edited card.')),
+    );
+
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const CardsHomeScreen(),
+      ),
+    );
+    return;
+  }
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(resultMessage)),
+  );
+}
+
+/// Edit a single card
+Future<String> _editSingleCard(
+    Map<String, String> fields, String cardId) async {
+  String resultMessage = '';
+  try {
+    final cardRef =
+        FirebaseDatabase.instance.ref('cards/${fields['uid']}/$cardId');
+    await cardRef.update(fields);
+  } on FirebaseException catch (_) {
+    resultMessage = 'Server error. Please try again later.';
+  }
+  return resultMessage;
+}
+
 /// Get current user's all cards from Firebase Realtime Database
 ///
 /// userId is the firebaseAuth id.

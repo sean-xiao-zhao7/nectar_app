@@ -257,7 +257,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                       child: MyRegularButton(
                           label: 'Complete editing card',
                           iconData: Icons.done,
-                          onPressed: () => addNewCardFormHelper(
+                          onPressed: () => editCardFormHelper(
                               context,
                               _formKey,
                               {
@@ -275,7 +275,8 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                                 'postal': _postalController.text,
                                 'uid': snapshotAuth.data!.uid,
                               },
-                              'Edit card successful')),
+                              'Edit card successful',
+                              widget.nectarCard.cardId)),
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),

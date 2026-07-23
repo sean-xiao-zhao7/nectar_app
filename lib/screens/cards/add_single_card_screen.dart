@@ -257,7 +257,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 'postal': _postalController.text,
                                 'uid': snapshotAuth.data!.uid,
                               },
-                              'Sign up successful')),
+                              'Adding new card successful')),
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),

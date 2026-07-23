@@ -21,7 +21,7 @@ class SingleCardListPreview extends StatelessWidget {
       },
       child: MyContainer(
         child: SizedBox(
-            height: 160,
+            height: 150,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
