@@ -6,10 +6,12 @@ class MyScaffoldContainer extends StatelessWidget {
   final Widget? child;
   final String title;
   final List<Widget>? appBarActions;
+  final Widget? appBarLead;
   const MyScaffoldContainer(
       {super.key,
       required this.child,
       required this.title,
+      this.appBarLead,
       this.appBarActions});
 
   @override
@@ -18,6 +20,7 @@ class MyScaffoldContainer extends StatelessWidget {
         drawer: MyDrawer(),
         appBar: MyAppBar(
           title: title,
+          appBarLead: appBarLead,
           appBarActions: appBarActions,
         ),
         body: Container(padding: EdgeInsets.all(20), child: child));

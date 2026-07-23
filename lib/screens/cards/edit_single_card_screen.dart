@@ -209,6 +209,10 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
 
           return MyScaffoldContainer(
               title: 'Edit card',
+              appBarLead: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
