@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final List<Widget>? appBarActions;
 
-  const MyAppBar({super.key, this.title = 'Nectar'});
+  const MyAppBar({super.key, this.title = 'Nectar', this.appBarActions});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
+      actions: appBarActions,
       title: Text(
         title,
       ),

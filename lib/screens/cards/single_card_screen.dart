@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/my_container.dart';
 import 'package:nectar_app/components/layout/my_scaffold_container.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
+import 'package:nectar_app/screens/cards/edit_single_card_screen.dart';
 
 /// Shows a single Nectar card
 class SingleCardScreen extends StatefulWidget {
@@ -19,6 +21,11 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
   Widget build(BuildContext context) {
     return MyScaffoldContainer(
         title: 'View Card',
+        appBarActions: [
+          IconButton(
+              onPressed: () => {myNavigate(context, EditSingleCardScreen())},
+              icon: Icon(Icons.edit))
+        ],
         child: ListView(children: <Widget>[
           MyRegularText('Card details:'),
           SizedBox(
