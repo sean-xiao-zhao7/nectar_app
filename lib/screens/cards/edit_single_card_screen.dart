@@ -27,7 +27,6 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
 
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _jobController = TextEditingController();
@@ -38,6 +37,23 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
   final _postalController = TextEditingController();
+
+  @override
+  void initState() {
+    _firstNameController.text = widget.nectarCard.firstName;
+    _lastNameController.text = widget.nectarCard.lastName;
+    _phoneController.text = widget.nectarCard.phone;
+    _emailController.text = widget.nectarCard.email;
+    _jobController.text = widget.nectarCard.job;
+    _companyController.text = widget.nectarCard.company;
+    _websiteController.text = widget.nectarCard.website;
+    _addressController.text = widget.nectarCard.address;
+    _cityController.text = widget.nectarCard.city;
+    _stateController.text = widget.nectarCard.state;
+    _countryController.text = widget.nectarCard.country;
+    _postalController.text = widget.nectarCard.postal;
+    super.initState();
+  }
 
   @override
   void dispose() {
