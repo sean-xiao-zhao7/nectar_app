@@ -14,7 +14,9 @@ import 'package:nectar_app/screens/auth/login_screen.dart';
 /// Only first and last names are required for a new card at the moment.
 /// The other fields are initially blank, and can be filled out later.
 class EditSingleCardScreen extends StatefulWidget {
-  const EditSingleCardScreen({super.key});
+  final NectarCard nectarCard;
+
+  const EditSingleCardScreen({super.key, required this.nectarCard});
 
   @override
   State<EditSingleCardScreen> createState() => _EditSingleCardScreenState();
@@ -85,7 +87,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
                       MyRegularText(
-                        'Please fill in some details for your new card. Other than first/last names, other fields can be filled out later if you need.',
+                        'Other than first/last names, other fields can be filled out later if you need.',
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
@@ -208,7 +210,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
           }
 
           return MyScaffoldContainer(
-              title: 'Edit card',
+              title: 'Edit Card',
               appBarLead: IconButton(
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Navigator.pop(context),

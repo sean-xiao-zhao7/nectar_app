@@ -9,7 +9,8 @@ Widget myTextFormField(
     List<FormFieldValidatorFn> validators = const <FormFieldValidatorFn>[],
     TextInputType? keyboardType,
     bool obscureText = false,
-    bool capitalize = false}) {
+    bool capitalize = false,
+    String? initialValue}) {
   return TextFormField(
     controller: controller,
     decoration: fieldDecoration(context, labelText),
@@ -20,6 +21,7 @@ Widget myTextFormField(
     textCapitalization:
         capitalize ? TextCapitalization.sentences : TextCapitalization.none,
     style: TextStyle(fontSize: 18),
+    initialValue: initialValue,
   );
 }
 

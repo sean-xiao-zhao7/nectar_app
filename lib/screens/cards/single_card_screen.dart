@@ -23,7 +23,13 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         title: 'View Card',
         appBarActions: [
           IconButton(
-              onPressed: () => {myNavigate(context, EditSingleCardScreen())},
+              onPressed: () => {
+                    myNavigate(
+                        context,
+                        EditSingleCardScreen(
+                          nectarCard: widget.nectarCard,
+                        ))
+                  },
               icon: Icon(Icons.edit))
         ],
         child: ListView(children: <Widget>[
