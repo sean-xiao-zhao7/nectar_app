@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:nectar_app/models/nectar_card.dart';
-import 'package:nectar_app/screens/cards/cards_home_screen.dart';
+import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 
 /// Screen form on-click callback for adding a new card.
 Future<void> addNewCardFormHelper(
@@ -29,7 +29,7 @@ Future<void> addNewCardFormHelper(
 
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => const CardsHomeScreen(),
+        builder: (_) => const MyCardsScreen(),
       ),
     );
     return;
@@ -79,7 +79,7 @@ Future<void> editCardFormHelper(
 
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => const CardsHomeScreen(),
+        builder: (_) => const MyCardsScreen(),
       ),
     );
     return;

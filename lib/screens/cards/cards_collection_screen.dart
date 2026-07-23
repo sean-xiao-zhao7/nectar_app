@@ -13,14 +13,14 @@ import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 
-class CardsHomeScreen extends StatefulWidget {
-  const CardsHomeScreen({super.key});
+class CardsCollectionScreen extends StatefulWidget {
+  const CardsCollectionScreen({super.key});
 
   @override
-  State<CardsHomeScreen> createState() => _CardsHomeScreenState();
+  State<CardsCollectionScreen> createState() => _CardsCollectionScreenState();
 }
 
-class _CardsHomeScreenState extends State<CardsHomeScreen> {
+class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
   @override
   Widget build(BuildContext context) {
     // first streambuilder fetches user auth
@@ -77,7 +77,7 @@ class _CardsHomeScreenState extends State<CardsHomeScreen> {
           }
 
           return MyScaffoldContainer(
-              title: 'My Cards',
+              title: 'Cards Collection',
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
