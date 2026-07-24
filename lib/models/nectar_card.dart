@@ -5,6 +5,36 @@ import 'package:nectar_app/helpers/id_generator.dart';
 /// A new card only needs first and last names, which should be inherited from user model.
 /// Must be owned by an user - ownerUserId.
 /// In database, all cards are under the user's firebaseAuth id.
+///
+/// Schema in firebase:
+///
+// {
+//   "person_name": "iri",
+//   "company": {
+//     "company_name": "Sony Music Artists Inc.",
+//     "business_type": "Music Production / Performing Arts",
+//     "role": "Singer-Songwriter / Recording Artist",
+//     "department": ""
+//   },
+//   "short_description": "Japanese singer-songwriter known for her soulful vocals and signature blend of hip-hop, R&B, and pop music.",
+//   "address": {
+//     "street": "",
+//     "city": "",
+//     "state": "Kanagawa Prefecture",
+//     "postal_code": "",
+//     "country": "Japan"
+//   },
+//   "phone": "",
+//   "email": "",
+//   "social_media": {
+//     "website": "https://www.iriofficial.com/",
+//     "linkedin": "",
+//     "twitter": "03iritaama",
+//     "instagram": "i.gram.iri",
+//     "facebook": "iri.official.japan"
+//   }
+// }
+
 class NectarCard {
   final String cardId;
   final String ownerUserId;
