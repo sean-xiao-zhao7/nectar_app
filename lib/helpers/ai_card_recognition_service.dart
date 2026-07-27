@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_ai/firebase_ai.dart';
 
 /// Generate NectarCard based on prompt schema.
@@ -56,11 +58,20 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
   }
 
   /// Extracts structured JSON schema for a given URL or entity context string
-  Future<String> extractSchema(String input) async {
+  Future<String> extractSchema(String input, {String? imageURL}) async {
     try {
-      final response = await _model.generateContent([
-        Content.text('Extract schema for: $input'),
-      ]);
+      List<Content> modelInputs = [];
+
+      if (imageURL != null) {
+        final image = await File(imageURL).readAsBytes();
+        final imagePart = InlineDataPart('image/jpeg', image);
+        modelInputs.add(
+            Content.multi([TextPart('Extract schema for: $input'), imagePart]));
+      } else {
+        modelInputs.add(Content.text('Extract schema for: $input'));
+      }
+
+      final response = await _model.generateContent(modelInputs);
 
       return response.text ?? '{}';
     } catch (e) {
