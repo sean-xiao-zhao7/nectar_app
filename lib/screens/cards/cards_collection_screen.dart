@@ -40,7 +40,8 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
               snapshotAuth.hasData) {
             // second futurebuilder fetches card list
             widgetTree = FutureBuilder<List<NectarCard>>(
-                future: fetchUserAllCards(snapshotAuth.data!.uid),
+                future: fetchUserAllCards(snapshotAuth.data!.uid,
+                    fetchOwnedCards: false),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   // switch display elements based on cards

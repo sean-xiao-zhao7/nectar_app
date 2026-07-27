@@ -46,8 +46,9 @@ Future<void> addNewCardFormHelper(
 Future<String> _addSingleCard(Map<String, String> fields) async {
   String resultMessage = '';
   try {
-    final newCardRef =
-        FirebaseDatabase.instance.ref('cards/${fields['uid']}').push();
+    final newCardRef = FirebaseDatabase.instance
+        .ref('user_owned_cards/${fields['uid']}')
+        .push();
     await newCardRef.set(fields);
   } on FirebaseException catch (_) {
     resultMessage = 'Server error. Please try again later.';
@@ -108,9 +109,17 @@ Future<String> _editSingleCard(
 ///
 /// userId is the firebaseAuth id.
 /// Return [] if the user does not have any cards.
-Future<List<NectarCard>> fetchUserAllCards(String userId) async {
+///
+/// fetchOwnedCards is true by default, if false,
+/// the function fetches card collection of an user instead of cards owned by the user.
+Future<List<NectarCard>> fetchUserAllCards(String userId,
+    {bool fetchOwnedCards = true}) async {
   try {
-    final event = await FirebaseDatabase.instance.ref('cards/$userId').once();
+    final event = await FirebaseDatabase.instance
+        .ref(fetchOwnedCards
+            ? 'user_owned_cards/$userId'
+            : 'cards_collection/$userId')
+        .once();
     if (event.snapshot.exists) {
       List<NectarCard> cardList = [];
       Map<dynamic, dynamic> firebaseDataMap =
