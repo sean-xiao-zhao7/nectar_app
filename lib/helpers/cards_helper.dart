@@ -8,16 +8,17 @@ import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 
 /// Screen form on-click callback for adding a new card.
 Future<void> addNewCardFormHelper(
-  BuildContext context,
-  GlobalKey<FormState> formKey,
-  Map<String, String> fields,
-  String successText,
-) async {
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    Map<String, String> fields,
+    String successText,
+    {bool fetchOwnedCards = true}) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
 
-  final resultMessage = await _addSingleCard(fields);
+  final resultMessage =
+      await _addSingleCard(fields, fetchOwnedCards: fetchOwnedCards);
   if (!context.mounted) {
     return;
   }
@@ -43,11 +44,13 @@ Future<void> addNewCardFormHelper(
 /// Add a single new card
 ///
 ///
-Future<String> _addSingleCard(Map<String, String> fields) async {
+Future<String> _addSingleCard(Map<String, String> fields,
+    {bool fetchOwnedCards = true}) async {
   String resultMessage = '';
   try {
     final newCardRef = FirebaseDatabase.instance
-        .ref('user_owned_cards/${fields['uid']}')
+        .ref(
+            "${fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}")
         .push();
     await newCardRef.set(fields);
   } on FirebaseException catch (_) {
@@ -58,17 +61,18 @@ Future<String> _addSingleCard(Map<String, String> fields) async {
 
 /// Screen form on-click callback for editing a new card.
 Future<void> editCardFormHelper(
-  BuildContext context,
-  GlobalKey<FormState> formKey,
-  Map<String, String> fields,
-  String successText,
-  String cardId,
-) async {
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    Map<String, String> fields,
+    String successText,
+    String cardId,
+    {bool fetchOwnedCards = true}) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
 
-  final resultMessage = await _editSingleCard(fields, cardId);
+  final resultMessage =
+      await _editSingleCard(fields, cardId, fetchOwnedCards: fetchOwnedCards);
   if (!context.mounted) {
     return;
   }
@@ -92,12 +96,12 @@ Future<void> editCardFormHelper(
 }
 
 /// Edit a single card
-Future<String> _editSingleCard(
-    Map<String, String> fields, String cardId) async {
+Future<String> _editSingleCard(Map<String, String> fields, String cardId,
+    {bool fetchOwnedCards = true}) async {
   String resultMessage = '';
   try {
-    final cardRef = FirebaseDatabase.instance
-        .ref('user_owned_cards/${fields['uid']}/$cardId');
+    final cardRef = FirebaseDatabase.instance.ref(
+        "${fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}/$cardId");
     await cardRef.update(fields);
   } on FirebaseException catch (_) {
     resultMessage = 'Server error. Please try again later.';
@@ -116,9 +120,8 @@ Future<List<NectarCard>> fetchUserAllCards(String userId,
     {bool fetchOwnedCards = true}) async {
   try {
     final event = await FirebaseDatabase.instance
-        .ref(fetchOwnedCards
-            ? 'user_owned_cards/$userId'
-            : 'cards_collection/$userId')
+        .ref((fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/') +
+            userId)
         .once();
     if (event.snapshot.exists) {
       List<NectarCard> cardList = [];

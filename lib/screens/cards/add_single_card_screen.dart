@@ -14,8 +14,11 @@ import 'package:nectar_app/screens/auth/login_screen.dart';
 ///
 /// Only first and last names are required for a new card at the moment.
 /// The other fields are initially blank, and can be filled out later.
+///
+/// This screen is used by both owned cards and cards collection, using forCardsCollection to switch.
 class AddSingleCardScreen extends StatefulWidget {
-  const AddSingleCardScreen({super.key});
+  final bool forCardsCollection;
+  const AddSingleCardScreen({super.key, this.forCardsCollection = false});
 
   @override
   State<AddSingleCardScreen> createState() => _AddSingleCardScreenState();
@@ -257,7 +260,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 'postal': _postalController.text,
                                 'uid': snapshotAuth.data!.uid,
                               },
-                              'Adding new card successful')),
+                              'Adding new card successful',
+                              fetchOwnedCards: !widget.forCardsCollection)),
                     ),
                     Container(
                         padding: EdgeInsets.only(bottom: 50),
