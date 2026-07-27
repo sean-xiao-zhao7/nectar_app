@@ -1,11 +1,11 @@
 import 'package:firebase_ai/firebase_ai.dart';
 
-/// Service class to handle metadata schema extraction using Firebase AI Logic
+/// Generate NectarCard based on prompt schema.
+///
 class AICardRecognitionService {
   late final GenerativeModel _model;
 
-  // System instructions defining the exact schema structure and rules
-  static const String _systemPrompt = '''
+  static const String _nectarCardSchemaPrompt = '''
 You are an entity metadata extractor. Given a URL, handle, or text about an individual, brand, musician, or business, extract and return a single valid JSON object following this exact schema.
 
 ### JSON Schema Output Structure:
@@ -45,13 +45,13 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
   AICardRecognitionService() {
     // Access Gemini via Firebase AI Logic
-    _model = FirebaseAI.instance.generativeModel(
-      model: 'gemini-2.5-flash',
+    _model = FirebaseAI.googleAI().generativeModel(
+      model: 'gemini-3.6-flash',
       generationConfig: GenerationConfig(
         responseMimeType: 'application/json', // Forces structured JSON output
         temperature: 0.1, // Low temperature for deterministic output
       ),
-      systemInstruction: Content.system(_systemPrompt),
+      systemInstruction: Content.system(_nectarCardSchemaPrompt),
     );
   }
 
