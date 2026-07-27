@@ -36,7 +36,7 @@ class SingleCardListPreview extends StatelessWidget {
                   height: 5,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                MyRegularText(nectarCard.company),
+                MyRegularText('${nectarCard.job} at ${nectarCard.company}'),
                 MyRegularText(nectarCard.phone),
                 MyRegularText(nectarCard.email),
               ],

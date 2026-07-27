@@ -44,8 +44,8 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
               children: [
                 MyRegularText('First name: ${widget.nectarCard.firstName}'),
                 MyRegularText('Last name: ${widget.nectarCard.lastName}'),
-                MyRegularText('Address: ${widget.nectarCard.address}'),
                 MyRegularText('Email: ${widget.nectarCard.email}'),
+                MyRegularText('Role: ${widget.nectarCard.job}'),
                 MyRegularText('Company: ${widget.nectarCard.company}'),
               ],
             ),

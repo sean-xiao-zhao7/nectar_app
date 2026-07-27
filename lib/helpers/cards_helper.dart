@@ -96,8 +96,8 @@ Future<String> _editSingleCard(
     Map<String, String> fields, String cardId) async {
   String resultMessage = '';
   try {
-    final cardRef =
-        FirebaseDatabase.instance.ref('cards/${fields['uid']}/$cardId');
+    final cardRef = FirebaseDatabase.instance
+        .ref('user_owned_cards/${fields['uid']}/$cardId');
     await cardRef.update(fields);
   } on FirebaseException catch (_) {
     resultMessage = 'Server error. Please try again later.';
