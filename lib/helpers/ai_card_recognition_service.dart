@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_ai/firebase_ai.dart';
+import 'package:nectar_app/models/nectar_card.dart';
 
 /// Generate NectarCard based on prompt schema.
 ///
@@ -48,22 +49,24 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
   AICardRecognitionService() {
     // Access Gemini via Firebase AI Logic
     _model = FirebaseAI.googleAI().generativeModel(
-      model: 'gemini-3.6-flash',
-      generationConfig: GenerationConfig(
-        responseMimeType: 'application/json', // Forces structured JSON output
-        temperature: 0.1, // Low temperature for deterministic output
-      ),
-      systemInstruction: Content.system(_nectarCardSchemaPrompt),
-    );
+        model: 'gemini-3.6-flash',
+        generationConfig: GenerationConfig(
+          responseMimeType: 'application/json', // Forces structured JSON output
+          temperature: 0.1, // Low temperature for deterministic output
+        ),
+        systemInstruction: Content.system(_nectarCardSchemaPrompt),
+        tools: [
+          Tool.urlContext(),
+        ]);
   }
 
   /// Extracts structured JSON schema for a given URL or entity context string
-  Future<String> extractSchema(String input, {String? imageURL}) async {
+  Future<String> extractSchema(String input, {String? imagePath}) async {
     try {
       List<Content> modelInputs = [];
 
-      if (imageURL != null) {
-        final image = await File(imageURL).readAsBytes();
+      if (imagePath != null) {
+        final image = await File(imagePath).readAsBytes();
         final imagePart = InlineDataPart('image/jpeg', image);
         modelInputs.add(
             Content.multi([TextPart('Extract schema for: $input'), imagePart]));
@@ -76,6 +79,23 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
       return response.text ?? '{}';
     } catch (e) {
       // Handle Firebase AI or network exceptions
+      rethrow;
+    }
+  }
+
+  // Generate a NectarCard class based on A.I. analysis.
+  // Prompt is either a text URL or an user-uploaded image.
+  Future<NectarCard> generateNectarCard(String sourceURL,
+      {String? imagePath}) async {
+    try {
+      String aiAnalysis = await extractSchema(sourceURL);
+      print(aiAnalysis);
+      NectarCard newCard = NectarCard(
+          ownerUserId: 'ownerUserId',
+          firstName: 'firstName',
+          lastName: 'lastName');
+      return newCard;
+    } catch (error) {
       rethrow;
     }
   }
