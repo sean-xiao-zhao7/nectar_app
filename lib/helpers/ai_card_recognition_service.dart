@@ -6,8 +6,6 @@ import 'package:nectar_app/models/nectar_card.dart';
 /// Generate NectarCard based on prompt schema.
 ///
 class AICardRecognitionService {
-  late final GenerativeModel _model;
-
   static const String _nectarCardSchemaPrompt = '''
 You are an entity metadata extractor. Given a URL, handle, or text about an individual, brand, musician, or business, extract and return a single valid JSON object following this exact schema.
 
@@ -46,24 +44,10 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 4. Return ONLY valid, parseable JSON with no conversational text or wrapping outside the JSON object.
 ''';
 
-  AICardRecognitionService() {
-    // Access Gemini via Firebase AI Logic
-    _model = FirebaseAI.googleAI().generativeModel(
-        model: 'gemini-3.6-flash',
-        generationConfig: GenerationConfig(
-          responseMimeType: 'application/json', // Forces structured JSON output
-          temperature: 0.1, // Low temperature for deterministic output
-        ),
-        systemInstruction: Content.system(_nectarCardSchemaPrompt),
-        tools: [
-          Tool.urlContext(),
-        ]);
-  }
-
   /// Extracts structured JSON schema for a given URL or entity context string
-  Future<String> extractSchema(String input, {String? imagePath}) async {
+  static Future<String> extractSchema(String input, {String? imagePath}) async {
     try {
-      List<Content> modelInputs = [];
+      final List<Content> modelInputs = [];
 
       if (imagePath != null) {
         final image = await File(imagePath).readAsBytes();
@@ -74,7 +58,12 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
         modelInputs.add(Content.text('Extract schema for: $input'));
       }
 
-      final response = await _model.generateContent(modelInputs);
+      final model = FirebaseAI.googleAI().generativeModel(
+        model: 'gemini-3.6-flash',
+        systemInstruction: Content.system(_nectarCardSchemaPrompt),
+      );
+      final prompt = [Content.text('Make a schema for $input.')];
+      final response = await model.generateContent(prompt);
 
       return response.text ?? '{}';
     } catch (e) {
@@ -85,7 +74,7 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
   // Generate a NectarCard class based on A.I. analysis.
   // Prompt is either a text URL or an user-uploaded image.
-  Future<NectarCard> generateNectarCard(String sourceURL,
+  static Future<NectarCard> generateNectarCard(String sourceURL,
       {String? imagePath}) async {
     try {
       String aiAnalysis = await extractSchema(sourceURL);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/logout_screen.dart';
@@ -178,6 +179,20 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.add_box,
+                  size: 34,
+                ),
+                title: Text(
+                  'Add A New Card',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  AICardRecognitionService.generateNectarCard(
+                      'Starbucks Coffee');
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.collections,
                   size: 34,
                 ),
@@ -200,7 +215,7 @@ class MyDrawer extends StatelessWidget {
                   size: 34,
                 ),
                 title: Text(
-                  'My Cards',
+                  'My Own Cards',
                   style: menuTextStyle,
                 ),
                 onTap: () {
@@ -218,7 +233,7 @@ class MyDrawer extends StatelessWidget {
                   size: 34,
                 ),
                 title: Text(
-                  'Log out',
+                  'Log Out',
                   style: menuTextStyle,
                 ),
                 onTap: () {
