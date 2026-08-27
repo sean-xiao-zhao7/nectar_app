@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/logout_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 import 'package:nectar_app/screens/home_screen.dart';
@@ -187,8 +187,12 @@ class MyDrawer extends StatelessWidget {
                   style: menuTextStyle,
                 ),
                 onTap: () {
-                  AICardRecognitionService.generateNectarCard(
-                      'Starbucks Coffee');
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AddSingleCardScreen(),
+                    ),
+                  );
                 },
               ),
               ListTile(

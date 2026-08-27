@@ -27,9 +27,9 @@ class AddSingleCardScreen extends StatefulWidget {
 class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  final _mainNameController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
-
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _jobController = TextEditingController();
@@ -43,6 +43,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
 
   @override
   void dispose() {
+    _mainNameController.dispose();
     _firstNameController.dispose();
     _lastNameController.dispose();
     _phoneController.dispose();
@@ -101,13 +102,23 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                           children: <Widget>[
                             myTextFormField(
                               context: context,
+                              controller: _mainNameController,
+                              labelText: 'Main Card Name',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                              validators: <FormFieldValidatorFn>[
+                                FormValidators.required('Main name'),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Optional info below'),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
                               controller: _firstNameController,
                               labelText: 'First name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.required('First name'),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
@@ -116,12 +127,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                               labelText: 'Last name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.required('Last name'),
-                              ],
                             ),
-                            const SizedBox(height: 24),
-                            MyRegularText('Optional info below'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -246,6 +252,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                               context,
                               _formKey,
                               {
+                                'mainName': _mainNameController.text,
                                 'firstName': _firstNameController.text,
                                 'lastName': _lastNameController.text,
                                 'email': _emailController.text,
