@@ -12,28 +12,28 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
 ### JSON Schema Output Structure:
 {  
-  "main_name": "A name that best represents this person or entity, besides the first and/or last names.",
-  "short_description": "1-2 concise sentences summarizing who or what this entity is.",
-  "personal_info" : {
-    "first_name": "First name of the individual (if applicable, else empty string)",
-    "last_name": "Last name of the individual (if applicable, else empty string)",    
+  "mainName": "A name that best represents this person or entity, besides the first and/or last names.",
+  "shortDescription": "1-2 concise sentences summarizing who or what this entity is.",
+  "personalInfo" : {
+    "firstName": "First name of the individual (if applicable, else empty string)",
+    "lastName": "Last name of the individual (if applicable, else empty string)",    
     "phone": "Phone number if known, else empty string",
     "email": "Email address if known, else empty string",    
   },
-  "company_info": {
-    "company_name": "Official company/group/brand name (else empty string)",
-    "business_type": "Primary industry or domain (e.g. 'Music Production / Performing Arts')",
+  "companyInfo": {
+    "companyName": "Official company/group/brand name (else empty string)",
+    "businessType": "Primary industry or domain (e.g. 'Music Production / Performing Arts')",
     "role": "Title or primary function (e.g. 'Singer-Songwriter', 'Founder')",
     "department": ""
   },
-  "address_info": {
+  "addressInfo": {
     "street": "",
     "city": "City name if known",
     "state": "State/Province if known",
-    "postal_code": "",
+    "postalCode": "",
     "country": "Country if known"
   },
-  "social_media": {
+  "socialMedia": {
     "website": "Official website or primary platform URL",
     "linkedin": "LinkedIn handle/username or path",
     "twitter": "X/Twitter handle (without @)",
@@ -84,10 +84,13 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
     try {
       String aiAnalysis = await extractSchema(sourceURL);
       Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
-      print(jsonResult['company']);
-
       NectarCard newCard = NectarCard(
-          ownerUserId: 'ownerUserId Test', mainName: 'Main Name Test');
+          ownerUserId: 'ownerUserId Test',
+          mainName: 'Main Name Test',
+          personalInfo: jsonResult['personalInfo'],
+          addressInfo: jsonResult['addressInfo'],
+          companyInfo: jsonResult['companyInfo'],
+          socialMedia: jsonResult['socialMedia']);
       return newCard;
     } catch (error) {
       rethrow;

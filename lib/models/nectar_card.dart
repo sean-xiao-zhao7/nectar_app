@@ -88,21 +88,21 @@ class NectarCard {
     this.personalInfo['phone'] = personalInfo['phone'];
     this.personalInfo['email'] = personalInfo['email'];
 
-    this.companyInfo['companyName'] = personalInfo['companyName'];
-    this.companyInfo['businessType'] = personalInfo['businessType'];
-    this.companyInfo['role'] = personalInfo['role'];
-    this.companyInfo['department'] = personalInfo['department'];
+    this.companyInfo['companyName'] = companyInfo['companyName'];
+    this.companyInfo['businessType'] = companyInfo['businessType'];
+    this.companyInfo['role'] = companyInfo['role'];
+    this.companyInfo['department'] = companyInfo['department'];
 
-    this.addressInfo['street'] = personalInfo['street'];
-    this.addressInfo['city'] = personalInfo['city'];
-    this.addressInfo['state'] = personalInfo['state'];
-    this.addressInfo['country'] = personalInfo['country'];
-    this.addressInfo['postalCode'] = personalInfo['postalCode'];
+    this.addressInfo['street'] = addressInfo['street'];
+    this.addressInfo['city'] = addressInfo['city'];
+    this.addressInfo['state'] = addressInfo['state'];
+    this.addressInfo['country'] = addressInfo['country'];
+    this.addressInfo['postalCode'] = addressInfo['postalCode'];
 
-    this.socialMedia['website'] = personalInfo['website'];
-    this.socialMedia['linkedin'] = personalInfo['linkedin'];
-    this.socialMedia['twitter'] = personalInfo['twitter'];
-    this.socialMedia['instagram'] = personalInfo['instagram'];
-    this.socialMedia['facebook'] = personalInfo['facebook'];
+    this.socialMedia['website'] = socialMedia['website'];
+    this.socialMedia['linkedin'] = socialMedia['linkedin'];
+    this.socialMedia['twitter'] = socialMedia['twitter'];
+    this.socialMedia['instagram'] = socialMedia['instagram'];
+    this.socialMedia['facebook'] = socialMedia['facebook'];
   }
 }
