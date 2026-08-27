@@ -11,7 +11,7 @@ import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 Future<void> addNewCardFormHelper(
     BuildContext context,
     GlobalKey<FormState> formKey,
-    Map<String, String> fields,
+    Map<String, dynamic> fields,
     String successText,
     {bool fetchOwnedCards = true}) async {
   if (!formKey.currentState!.validate()) {
@@ -47,7 +47,7 @@ Future<void> addNewCardFormHelper(
 /// Add a single new card
 ///
 ///
-Future<String> _addSingleCard(Map<String, String> fields,
+Future<String> _addSingleCard(Map<String, dynamic> fields,
     {bool fetchOwnedCards = true}) async {
   String resultMessage = '';
   try {
@@ -66,7 +66,7 @@ Future<String> _addSingleCard(Map<String, String> fields,
 Future<void> editCardFormHelper(
     BuildContext context,
     GlobalKey<FormState> formKey,
-    Map<String, String> fields,
+    Map<String, dynamic> fields,
     String successText,
     String cardId,
     {bool fetchOwnedCards = true}) async {
@@ -101,7 +101,7 @@ Future<void> editCardFormHelper(
 }
 
 /// Edit a single card
-Future<String> _editSingleCard(Map<String, String> fields, String cardId,
+Future<String> _editSingleCard(Map<String, dynamic> fields, String cardId,
     {bool fetchOwnedCards = true}) async {
   String resultMessage = '';
   try {
