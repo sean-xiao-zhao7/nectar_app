@@ -83,26 +83,26 @@ class NectarCard {
       addressInfo,
       socialMedia})
       : cardId = cardId ?? generatePrefixedId('card') {
-    this.personalInfo['firstName'] = personalInfo['firstName'];
-    this.personalInfo['lastName'] = personalInfo['lastName'];
-    this.personalInfo['phone'] = personalInfo['phone'];
-    this.personalInfo['email'] = personalInfo['email'];
+    this.personalInfo['firstName'] = personalInfo['firstName'] ?? '';
+    this.personalInfo['lastName'] = personalInfo['lastName'] ?? '';
+    this.personalInfo['phone'] = personalInfo['phone'] ?? '';
+    this.personalInfo['email'] = personalInfo['email'] ?? '';
 
-    this.companyInfo['companyName'] = companyInfo['companyName'];
-    this.companyInfo['businessType'] = companyInfo['businessType'];
-    this.companyInfo['role'] = companyInfo['role'];
-    this.companyInfo['department'] = companyInfo['department'];
+    this.companyInfo['companyName'] = companyInfo['companyName'] ?? '';
+    this.companyInfo['businessType'] = companyInfo['businessType'] ?? '';
+    this.companyInfo['role'] = companyInfo['role'] ?? '';
+    this.companyInfo['department'] = companyInfo['department'] ?? '';
 
-    this.addressInfo['street'] = addressInfo['street'];
-    this.addressInfo['city'] = addressInfo['city'];
-    this.addressInfo['state'] = addressInfo['state'];
-    this.addressInfo['country'] = addressInfo['country'];
-    this.addressInfo['postalCode'] = addressInfo['postalCode'];
+    this.addressInfo['street'] = addressInfo['street'] ?? '';
+    this.addressInfo['city'] = addressInfo['city'] ?? '';
+    this.addressInfo['state'] = addressInfo['state'] ?? '';
+    this.addressInfo['country'] = addressInfo['country'] ?? '';
+    this.addressInfo['postalCode'] = addressInfo['postalCode'] ?? '';
 
-    this.socialMedia['website'] = socialMedia['website'];
-    this.socialMedia['linkedin'] = socialMedia['linkedin'];
-    this.socialMedia['twitter'] = socialMedia['twitter'];
-    this.socialMedia['instagram'] = socialMedia['instagram'];
-    this.socialMedia['facebook'] = socialMedia['facebook'];
+    this.socialMedia['website'] = socialMedia['website'] ?? '';
+    this.socialMedia['linkedin'] = socialMedia['linkedin'] ?? '';
+    this.socialMedia['twitter'] = socialMedia['twitter'] ?? '';
+    this.socialMedia['instagram'] = socialMedia['instagram'] ?? '';
+    this.socialMedia['facebook'] = socialMedia['facebook'] ?? '';
   }
 }

@@ -266,7 +266,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                                 'socialMedia': {
                                   'website': _websiteController.text,
                                 },
-                                'adddressInfo': {
+                                'addressInfo': {
                                   'address': _addressController.text,
                                   'city': _cityController.text,
                                   'state': _stateController.text,
