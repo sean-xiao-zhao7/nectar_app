@@ -9,29 +9,33 @@ import 'package:nectar_app/helpers/id_generator.dart';
 /// Schema in firebase:
 ///
 // {
-//   "person_name": "iri",
-//   "company": {
-//     "company_name": "Sony Music Artists Inc.",
-//     "business_type": "Music Production / Performing Arts",
-//     "role": "Singer-Songwriter / Recording Artist",
-//     "department": ""
+//   'main_name:': 'iri',
+//   'short_description': 'Japanese singer-songwriter known for her soulful vocals and signature blend of hip-hop, R&B, and pop music.',
+//   'personal_info': {
+//     'first_name': '',
+//     'last_name': '',
+//     'phone': '',
+//     'email': '',
 //   },
-//   "short_description": "Japanese singer-songwriter known for her soulful vocals and signature blend of hip-hop, R&B, and pop music.",
-//   "address": {
-//     "street": "",
-//     "city": "",
-//     "state": "Kanagawa Prefecture",
-//     "postal_code": "",
-//     "country": "Japan"
+//   'company_info': {
+//     'company_name': 'Sony Music Artists Inc.',
+//     'business_type': 'Music Production / Performing Arts',
+//     'role': 'Singer-Songwriter / Recording Artist',
+//     'department': ''
 //   },
-//   "phone": "",
-//   "email": "",
-//   "social_media": {
-//     "website": "https://www.iriofficial.com/",
-//     "linkedin": "",
-//     "twitter": "03iritaama",
-//     "instagram": "i.gram.iri",
-//     "facebook": "iri.official.japan"
+//   'address_info': {
+//     'street': '',
+//     'city': '',
+//     'state': 'Kanagawa Prefecture',
+//     'postal_code': '',
+//     'country': 'Japan'
+//   },
+//   'social_media': {
+//     'website': 'https://www.iriofficial.com/',
+//     'linkedin': '',
+//     'twitter': '03iritaama',
+//     'instagram': 'i.gram.iri',
+//     'facebook': 'iri.official.japan'
 //   }
 // }
 
@@ -39,72 +43,39 @@ class NectarCard {
   final String cardId;
   final String ownerUserId;
 
-  // required params for a new card
-  final String firstName;
-  final String lastName;
+  final String mainName;
+  final String shortDescription;
+  final Map<String, String> personalInfo = {
+    'firstName': '',
+    'lastName': '',
+    'phone': '',
+    'email': ''
+  };
+  final Map<String, String> companyInfo = {
+    'companyName': '',
+    'businessType': '',
+    'role': '',
+    'department': ''
+  };
+  final Map<String, String> addressInfo = {
+    'street': '',
+    'city': '',
+    'state': '',
+    'postalCode': '',
+    'country': ''
+  };
+  final Map<String, String> socialMedia = {
+    'website': '',
+    'linkedin': '',
+    'twitter': '',
+    'instagram': '',
+    'facebook': ''
+  };
 
-  // optional params
-  final String phone;
-  final String email;
-  final String job;
-  final String company;
-  final String website;
-  final String address;
-  final String city;
-  final String country;
-  final String state;
-  final String postal;
-
-  /// Make a new business card for user ownerUserId.
-  /// No optional fields. The user's add business function copies fields from user's info if needed.
-  /// It's assumed only an user can add a business card.
   NectarCard({
     String? cardId,
     required this.ownerUserId,
-    required this.firstName,
-    required this.lastName,
-    this.phone = '',
-    this.email = '',
-    this.job = '',
-    this.company = '',
-    this.website = '',
-    this.address = '',
-    this.city = '',
-    this.state = '',
-    this.country = '',
-    this.postal = '',
+    required this.mainName,
+    this.shortDescription = '',
   }) : cardId = cardId ?? generatePrefixedId('card');
-
-  NectarCard copyWith({
-    String? firstName,
-    String? lastName,
-    String? phone,
-    String? email,
-    String? job,
-    String? company,
-    String? website,
-    String? address,
-    String? city,
-    String? state,
-    String? country,
-    String? postal,
-    String? cardId,
-    String? ownerUserId,
-  }) {
-    return NectarCard(
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
-        phone: phone ?? this.phone,
-        email: email ?? this.email,
-        job: job ?? this.job,
-        company: company ?? this.company,
-        website: website ?? this.website,
-        address: address ?? this.address,
-        city: city ?? this.city,
-        state: state ?? this.state,
-        country: country ?? this.country,
-        postal: postal ?? this.postal,
-        cardId: cardId ?? this.cardId,
-        ownerUserId: ownerUserId ?? this.ownerUserId);
-  }
 }

@@ -29,18 +29,18 @@ class SingleCardListPreview extends StatelessWidget {
               spacing: 10,
               children: [
                 MyLargeText(
-                  '${nectarCard.firstName} ${nectarCard.lastName}',
+                  '${nectarCard.personalInfo['firstName']} ${nectarCard.personalInfo['lastName']}',
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 Divider(
                   height: 5,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                MyRegularText((nectarCard.job != '')
-                    ? '${nectarCard.job} at ${nectarCard.company}'
+                MyRegularText((nectarCard.companyInfo['job'] != '')
+                    ? '${nectarCard.companyInfo['job']} at ${nectarCard.companyInfo['companyName']}'
                     : ''),
-                MyRegularText(nectarCard.phone),
-                MyRegularText(nectarCard.email),
+                MyRegularText(nectarCard.personalInfo['phone']!),
+                MyRegularText(nectarCard.personalInfo['email']!),
               ],
             )),
       ),

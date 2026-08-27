@@ -64,41 +64,58 @@ class NectarUser {
 
   /// Adds a new business card.
   /// Pull info from user info if any field is omitted from input here.
-  NectarUser addNectarCard({
-    String? firstName,
-    String? lastName,
-    String? phone,
-    String? email,
-    String? job,
-    String? company,
-    String? website,
-    String? address,
-    String? city,
-    String? state,
-    String? country,
-    String? postal,
-  }) {
+  NectarUser addNectarCard(
+      {required String mainName,
+      String? firstName,
+      String? lastName,
+      String? phone,
+      String? email,
+      String? job,
+      String? company,
+      String? role,
+      String? businessType,
+      String? department,
+      String? address,
+      String? city,
+      String? state,
+      String? country,
+      String? postal,
+      String? website,
+      String? linkedin,
+      String? instagram,
+      String? facebook,
+      String? twitter}) {
     if (nectarCards.length >= maxNectarCards) {
       throw StateError(
         'Cannot add more than $maxNectarCards business cards per user.',
       );
     }
 
-    final NectarCard cardToAdd = NectarCard(
-      firstName: firstName ?? this.firstName,
-      lastName: lastName ?? this.lastName,
-      phone: phone ?? this.phone,
-      email: email ?? this.email,
-      job: job ?? this.job,
-      company: company ?? this.company,
-      website: website ?? this.website,
-      address: address ?? this.address,
-      city: city ?? this.city,
-      state: state ?? this.state,
-      country: country ?? this.country,
-      postal: postal ?? this.postal,
-      ownerUserId: userId,
-    );
+    final NectarCard cardToAdd =
+        NectarCard(ownerUserId: userId, mainName: mainName, personalInfo: {
+      'firstName': firstName ?? this.firstName,
+      'lastName': lastName ?? this.lastName,
+      'phone': phone ?? this.phone,
+      'email': email ?? this.email
+    }, companyInfo: {
+      'job': job ?? this.job,
+      'company': company ?? this.company,
+      'businessType': businessType ?? '',
+      'role': role ?? '',
+      'department': department ?? ''
+    }, addressInfo: {
+      'address': address ?? this.address,
+      'city': city ?? this.city,
+      'state': state ?? this.state,
+      'country': country ?? this.country,
+      'postal': postal ?? this.postal,
+    }, socialMedia: {
+      'website': website ?? this.website,
+      'linkedin': linkedin ?? '',
+      'twitter': twitter ?? '',
+      'instagram': instagram ?? '',
+      'facebook': facebook ?? ''
+    });
     return copyWith(
       nectarCards: <NectarCard>[...nectarCards, cardToAdd],
     );

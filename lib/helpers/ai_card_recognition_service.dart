@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_ai/firebase_ai.dart';
@@ -10,24 +11,28 @@ class AICardRecognitionService {
 You are an entity metadata extractor. Given a URL, handle, or text about an individual, brand, musician, or business, extract and return a single valid JSON object following this exact schema.
 
 ### JSON Schema Output Structure:
-{
-  "person_name": "Full name of the individual (if applicable, else empty string)",
-  "company": {
+{  
+  "main_name": "A name that best represents this person or entity, besides the first and/or last names.",
+  "short_description": "1-2 concise sentences summarizing who or what this entity is.",
+  "personal_info" : {
+    "first_name": "First name of the individual (if applicable, else empty string)",
+    "last_name": "Last name of the individual (if applicable, else empty string)",    
+    "phone": "Phone number if known, else empty string",
+    "email": "Email address if known, else empty string",    
+  },
+  "company_info": {
     "company_name": "Official company/group/brand name (else empty string)",
     "business_type": "Primary industry or domain (e.g. 'Music Production / Performing Arts')",
     "role": "Title or primary function (e.g. 'Singer-Songwriter', 'Founder')",
     "department": ""
   },
-  "short_description": "1-2 concise sentences summarizing who or what this entity is.",
-  "address": {
+  "address_info": {
     "street": "",
     "city": "City name if known",
     "state": "State/Province if known",
     "postal_code": "",
     "country": "Country if known"
   },
-  "phone": "Phone number if known, else empty string",
-  "email": "Email address if known, else empty string",
   "social_media": {
     "website": "Official website or primary platform URL",
     "linkedin": "LinkedIn handle/username or path",
@@ -78,11 +83,11 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
       {String? imagePath}) async {
     try {
       String aiAnalysis = await extractSchema(sourceURL);
-      print(aiAnalysis);
+      Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
+      print(jsonResult['company']);
+
       NectarCard newCard = NectarCard(
-          ownerUserId: 'ownerUserId',
-          firstName: 'firstName',
-          lastName: 'lastName');
+          ownerUserId: 'ownerUserId Test', mainName: 'Main Name Test');
       return newCard;
     } catch (error) {
       rethrow;

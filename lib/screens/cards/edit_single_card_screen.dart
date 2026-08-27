@@ -40,18 +40,18 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
 
   @override
   void initState() {
-    _firstNameController.text = widget.nectarCard.firstName;
-    _lastNameController.text = widget.nectarCard.lastName;
-    _phoneController.text = widget.nectarCard.phone;
-    _emailController.text = widget.nectarCard.email;
-    _jobController.text = widget.nectarCard.job;
-    _companyController.text = widget.nectarCard.company;
-    _websiteController.text = widget.nectarCard.website;
-    _addressController.text = widget.nectarCard.address;
-    _cityController.text = widget.nectarCard.city;
-    _stateController.text = widget.nectarCard.state;
-    _countryController.text = widget.nectarCard.country;
-    _postalController.text = widget.nectarCard.postal;
+    _firstNameController.text = widget.nectarCard.personalInfo['firstName']!;
+    _lastNameController.text = widget.nectarCard.personalInfo['lastName']!;
+    _phoneController.text = widget.nectarCard.personalInfo['phone']!;
+    _emailController.text = widget.nectarCard.personalInfo['email']!;
+    _jobController.text = widget.nectarCard.companyInfo['job']!;
+    _companyController.text = widget.nectarCard.companyInfo['company']!;
+    _websiteController.text = widget.nectarCard.companyInfo['website']!;
+    _addressController.text = widget.nectarCard.companyInfo['address']!;
+    _cityController.text = widget.nectarCard.addressInfo['city']!;
+    _stateController.text = widget.nectarCard.addressInfo['state']!;
+    _countryController.text = widget.nectarCard.addressInfo['country']!;
+    _postalController.text = widget.nectarCard.addressInfo['postal']!;
     super.initState();
   }
 
