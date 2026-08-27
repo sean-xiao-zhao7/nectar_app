@@ -45,6 +45,7 @@ class NectarCard {
 
   final String mainName;
   final String shortDescription;
+
   final Map<String, String> personalInfo = {
     'firstName': '',
     'lastName': '',
