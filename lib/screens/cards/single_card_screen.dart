@@ -42,11 +42,15 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
               spacing: 20,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MyRegularText('First name: ${widget.nectarCard.firstName}'),
-                MyRegularText('Last name: ${widget.nectarCard.lastName}'),
-                MyRegularText('Email: ${widget.nectarCard.email}'),
-                MyRegularText('Role: ${widget.nectarCard.job}'),
-                MyRegularText('Company: ${widget.nectarCard.company}'),
+                MyRegularText(
+                    'First name: ${widget.nectarCard.personalInfo['firstName']}'),
+                MyRegularText(
+                    'Last name: ${widget.nectarCard.personalInfo['lastName']}'),
+                MyRegularText(
+                    'Email: ${widget.nectarCard.personalInfo['email']}'),
+                MyRegularText('Role: ${widget.nectarCard.companyInfo['job']}'),
+                MyRegularText(
+                    'Company: ${widget.nectarCard.companyInfo['company']}'),
               ],
             ),
           ),

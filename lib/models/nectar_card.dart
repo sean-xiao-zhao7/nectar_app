@@ -72,10 +72,36 @@ class NectarCard {
     'facebook': ''
   };
 
-  NectarCard({
-    String? cardId,
-    required this.ownerUserId,
-    required this.mainName,
-    this.shortDescription = '',
-  }) : cardId = cardId ?? generatePrefixedId('card');
+  NectarCard(
+      {String? cardId,
+      required this.ownerUserId,
+      required this.mainName,
+      this.shortDescription = '',
+      personalInfo,
+      companyInfo,
+      addressInfo,
+      socialMedia})
+      : cardId = cardId ?? generatePrefixedId('card') {
+    this.personalInfo['firstName'] = personalInfo['firstName'];
+    this.personalInfo['lastName'] = personalInfo['lastName'];
+    this.personalInfo['phone'] = personalInfo['phone'];
+    this.personalInfo['email'] = personalInfo['email'];
+
+    this.companyInfo['companyName'] = personalInfo['companyName'];
+    this.companyInfo['businessType'] = personalInfo['businessType'];
+    this.companyInfo['role'] = personalInfo['role'];
+    this.companyInfo['department'] = personalInfo['department'];
+
+    this.addressInfo['street'] = personalInfo['street'];
+    this.addressInfo['city'] = personalInfo['city'];
+    this.addressInfo['state'] = personalInfo['state'];
+    this.addressInfo['country'] = personalInfo['country'];
+    this.addressInfo['postalCode'] = personalInfo['postalCode'];
+
+    this.socialMedia['website'] = personalInfo['website'];
+    this.socialMedia['linkedin'] = personalInfo['linkedin'];
+    this.socialMedia['twitter'] = personalInfo['twitter'];
+    this.socialMedia['instagram'] = personalInfo['instagram'];
+    this.socialMedia['facebook'] = personalInfo['facebook'];
+  }
 }
