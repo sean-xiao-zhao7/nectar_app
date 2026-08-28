@@ -90,8 +90,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
                       MyRegularText(
-                        'Please fill in some details for your new card. Other than first/last names, other fields can be filled out later if you need.',
-                        textAlign: TextAlign.center,
+                        'Please fill in some details for your new card. Other than the main name, other fields can be filled out later if you need.',
                       ),
                       SizedBox(
                         height: 20,
