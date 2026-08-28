@@ -43,6 +43,7 @@ ThemeData initTheme(Brightness brightness) {
 
   // define static colors for the entire apps
   const nectarLightYellow = Color.fromARGB(255, 255, 209, 72);
+  const nectarRegularYellow = Color.fromARGB(255, 215, 176, 59);
   const nectarMediumYellow = Color.fromARGB(255, 136, 102, 0);
   const nectarDarkYellow = Color.fromARGB(255, 169, 127, 0);
   const nectarDarkerYellow = Color.fromARGB(255, 95, 68, 0);
@@ -88,7 +89,10 @@ ThemeData initTheme(Brightness brightness) {
       ),
       drawerTheme: const DrawerThemeData(),
       tabBarTheme: TabBarThemeData(
-          labelColor: nectarDarkerYellow,
-          indicatorColor: nectarLightYellow,
-          labelStyle: TextStyle(fontWeight: FontWeight.bold)));
+        labelColor: nectarRegularYellow,
+        labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        dividerColor: nectarWhite,
+        unselectedLabelStyle:
+            TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+      ));
 }

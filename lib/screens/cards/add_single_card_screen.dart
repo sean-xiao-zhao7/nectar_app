@@ -232,7 +232,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
               body: Column(children: <Widget>[
                 Expanded(
                     child: TabBarView(controller: _tabController, children: [
-                  Center(child: Text("It's rainy here")),
+                  Center(child: MyRegularText('Scan to add a Nectar card.')),
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -257,7 +257,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                              EdgeInsets.only(left: 15, right: 15, bottom: 5),
                           padding:
                               EdgeInsets.only(left: 15, right: 15, bottom: 15),
                           child: MyRegularButton(
@@ -293,23 +293,24 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                                   'Adding new card successful',
                                   fetchOwnedCards: !widget.forCardsCollection)),
                         ),
-                        Container(
-                            padding: EdgeInsets.only(bottom: 50),
-                            child: MyRegularText('\u00a9 2026 Nectar Inc.'))
                       ]),
                 ])),
-                TabBar(
-                  controller: _tabController,
-                  tabs: <Widget>[
-                    Tab(
-                      icon: Icon(Icons.image),
-                      text: 'Scan',
-                    ),
-                    Tab(
-                      icon: Icon(Icons.add),
-                      text: 'Add manually',
-                    ),
-                  ],
+                Container(
+                  decoration: BoxDecoration(color: Colors.white),
+                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  child: TabBar(
+                    controller: _tabController,
+                    tabs: <Widget>[
+                      Tab(
+                        icon: Icon(Icons.image),
+                        text: 'Scan',
+                      ),
+                      Tab(
+                        icon: Icon(Icons.add),
+                        text: 'Add manually',
+                      ),
+                    ],
+                  ),
                 ),
               ]));
         });
