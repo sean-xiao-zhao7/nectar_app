@@ -4,10 +4,15 @@ import 'package:nectar_app/components/text/my_large_text.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? appBarLead;
+  final PreferredSizeWidget? appBarBottom;
   final List<Widget>? appBarActions;
 
   const MyAppBar(
-      {super.key, this.title = 'Nectar', this.appBarActions, this.appBarLead});
+      {super.key,
+      this.title = 'Nectar',
+      this.appBarActions,
+      this.appBarBottom,
+      this.appBarLead});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +30,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         color: Theme.of(context).colorScheme.secondary,
         title,
       ),
+      bottom: appBarBottom,
     );
   }
 
