@@ -50,42 +50,45 @@ ThemeData initTheme(Brightness brightness) {
   const nectarRed = Colors.red;
 
   return baseTheme.copyWith(
-    scaffoldBackgroundColor: nectarLightYellow,
-    colorScheme: ColorScheme(
-      primary: nectarLightYellow,
-      onPrimary: nectarWhite,
-      secondary: nectarDarkYellow,
-      onSecondary: nectarWhite,
-      tertiary: nectarDarkerYellow,
-      onTertiary: nectarWhite,
-      error: nectarRed,
-      onError: nectarWhite,
-      surface: nectarLightYellow,
-      onSurface: nectarMediumYellow,
-      primaryContainer: nectarWhite,
-      onPrimaryContainer: nectarMediumYellow,
-      brightness: Brightness.light,
-    ),
-    appBarTheme: AppBarTheme(
-      iconTheme: const IconThemeData(color: nectarDarkYellow),
-      backgroundColor: nectarWhite,
-      titleTextStyle: GoogleFonts.inter(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-        color: nectarDarkYellow,
+      scaffoldBackgroundColor: nectarLightYellow,
+      colorScheme: ColorScheme(
+        primary: nectarLightYellow,
+        onPrimary: nectarWhite,
+        secondary: nectarDarkYellow,
+        onSecondary: nectarWhite,
+        tertiary: nectarDarkerYellow,
+        onTertiary: nectarWhite,
+        error: nectarRed,
+        onError: nectarWhite,
+        surface: nectarLightYellow,
+        onSurface: nectarMediumYellow,
+        primaryContainer: nectarWhite,
+        onPrimaryContainer: nectarMediumYellow,
+        brightness: Brightness.light,
       ),
-    ),
-    textTheme: GoogleFonts.interTextTheme().copyWith(
-      headlineLarge: GoogleFonts.lora(),
-      headlineMedium: GoogleFonts.lora(),
-      headlineSmall: GoogleFonts.lora(),
-    ),
-    pageTransitionsTheme: const PageTransitionsTheme(
-      builders: <TargetPlatform, PageTransitionsBuilder>{
-        TargetPlatform.android: _FadeSlideFromTopTransitionsBuilder(),
-        TargetPlatform.iOS: _FadeSlideFromTopTransitionsBuilder(),
-      },
-    ),
-    drawerTheme: const DrawerThemeData(),
-  );
+      appBarTheme: AppBarTheme(
+        iconTheme: const IconThemeData(color: nectarDarkYellow),
+        backgroundColor: nectarWhite,
+        titleTextStyle: GoogleFonts.inter(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: nectarDarkYellow,
+        ),
+      ),
+      textTheme: GoogleFonts.interTextTheme().copyWith(
+        headlineLarge: GoogleFonts.lora(),
+        headlineMedium: GoogleFonts.lora(),
+        headlineSmall: GoogleFonts.lora(),
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: <TargetPlatform, PageTransitionsBuilder>{
+          TargetPlatform.android: _FadeSlideFromTopTransitionsBuilder(),
+          TargetPlatform.iOS: _FadeSlideFromTopTransitionsBuilder(),
+        },
+      ),
+      drawerTheme: const DrawerThemeData(),
+      tabBarTheme: TabBarThemeData(
+          labelColor: nectarDarkerYellow,
+          indicatorColor: nectarLightYellow,
+          labelStyle: TextStyle(fontWeight: FontWeight.bold)));
 }
