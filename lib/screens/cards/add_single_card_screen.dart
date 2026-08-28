@@ -230,19 +230,6 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                 title: 'Add a new card',
               ),
               body: Column(children: <Widget>[
-                TabBar(
-                  controller: _tabController,
-                  tabs: <Widget>[
-                    Tab(
-                      icon: Icon(Icons.image),
-                      text: 'Scan',
-                    ),
-                    Tab(
-                      icon: Icon(Icons.add),
-                      text: 'Add manually',
-                    ),
-                  ],
-                ),
                 Expanded(
                     child: TabBarView(controller: _tabController, children: [
                   Center(child: Text("It's rainy here")),
@@ -310,7 +297,20 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             padding: EdgeInsets.only(bottom: 50),
                             child: MyRegularText('\u00a9 2026 Nectar Inc.'))
                       ]),
-                ]))
+                ])),
+                TabBar(
+                  controller: _tabController,
+                  tabs: <Widget>[
+                    Tab(
+                      icon: Icon(Icons.image),
+                      text: 'Scan',
+                    ),
+                    Tab(
+                      icon: Icon(Icons.add),
+                      text: 'Add manually',
+                    ),
+                  ],
+                ),
               ]));
         });
   }
