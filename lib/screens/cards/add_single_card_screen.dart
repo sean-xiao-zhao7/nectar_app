@@ -216,71 +216,94 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen> {
                 });
           }
 
-          return Scaffold(
-              drawer: MyDrawer(),
-              appBar: MyAppBar(
-                title: 'Add a new card',
-              ),
-              body: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.all(20),
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.12),
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),
-                                ),
-                              ]),
-                          child: widgetTree),
+          return DefaultTabController(
+              initialIndex: 0,
+              length: 2,
+              child: Scaffold(
+                  drawer: MyDrawer(),
+                  appBar: MyAppBar(
+                    title: 'Add a new card',
+                    appBarBottom: const TabBar(
+                      tabs: <Widget>[
+                        Tab(
+                          icon: Icon(Icons.image),
+                          text: 'Scan',
+                        ),
+                        Tab(
+                          icon: Icon(Icons.add),
+                          text: 'Add manually',
+                        ),
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                      child: MyRegularButton(
-                          label: 'Complete adding a new card',
-                          iconData: Icons.done,
-                          onPressed: () => addNewCardFormHelper(
-                              context,
-                              _formKey,
-                              {
-                                'mainName': _mainNameController.text,
-                                'personalInfo': {
-                                  'firstName': _firstNameController.text,
-                                  'lastName': _lastNameController.text,
-                                  'email': _emailController.text,
-                                  'phone': _phoneController.text,
-                                },
-                                'companyInfo': {
-                                  'job': _jobController.text,
-                                  'company': _companyController.text,
-                                },
-                                'socialMedia': {
-                                  'website': _websiteController.text,
-                                },
-                                'addressInfo': {
-                                  'address': _addressController.text,
-                                  'city': _cityController.text,
-                                  'state': _stateController.text,
-                                  'country': _countryController.text,
-                                  'postal': _postalController.text,
-                                },
-                                'uid': snapshotAuth.data!.uid,
-                              },
-                              'Adding new card successful',
-                              fetchOwnedCards: !widget.forCardsCollection)),
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(bottom: 50),
-                        child: MyRegularText('\u00a9 2026 Nectar Inc.'))
-                  ]));
+                  ),
+                  body: TabBarView(children: [
+                    Center(child: Text("It's rainy here")),
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.all(20),
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black
+                                            .withValues(alpha: 0.12),
+                                        blurRadius: 3,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ]),
+                                child: widgetTree),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: 15, right: 15, bottom: 15),
+                            padding: EdgeInsets.only(
+                                left: 15, right: 15, bottom: 15),
+                            child: MyRegularButton(
+                                label: 'Complete adding a new card',
+                                iconData: Icons.done,
+                                onPressed: () => addNewCardFormHelper(
+                                    context,
+                                    _formKey,
+                                    {
+                                      'mainName': _mainNameController.text,
+                                      'personalInfo': {
+                                        'firstName': _firstNameController.text,
+                                        'lastName': _lastNameController.text,
+                                        'email': _emailController.text,
+                                        'phone': _phoneController.text,
+                                      },
+                                      'companyInfo': {
+                                        'job': _jobController.text,
+                                        'company': _companyController.text,
+                                      },
+                                      'socialMedia': {
+                                        'website': _websiteController.text,
+                                      },
+                                      'addressInfo': {
+                                        'address': _addressController.text,
+                                        'city': _cityController.text,
+                                        'state': _stateController.text,
+                                        'country': _countryController.text,
+                                        'postal': _postalController.text,
+                                      },
+                                      'uid': snapshotAuth.data!.uid,
+                                    },
+                                    'Adding new card successful',
+                                    fetchOwnedCards:
+                                        !widget.forCardsCollection)),
+                          ),
+                          Container(
+                              padding: EdgeInsets.only(bottom: 50),
+                              child: MyRegularText('\u00a9 2026 Nectar Inc.'))
+                        ]),
+                  ])));
         });
   }
 }
