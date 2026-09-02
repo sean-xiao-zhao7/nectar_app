@@ -5,6 +5,7 @@ import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
 import 'package:nectar_app/components/layout/my_drawer.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
@@ -65,6 +66,12 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     _postalController.dispose();
     _tabController.dispose();
     super.dispose();
+  }
+
+  Future<void> scanCard() async {
+    NectarCard resultCard =
+        await AICardRecognitionService.generateNectarCard('Starbucks');
+    print(resultCard);
   }
 
   @override
@@ -231,8 +238,29 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
               ),
               body: Column(children: <Widget>[
                 Expanded(
+                    // the tabBar is at the bottom
                     child: TabBarView(controller: _tabController, children: [
-                  Center(child: MyRegularText('Scan to add a Nectar card.')),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 20,
+                      children: [
+                        MyRegularButton(
+                            iconData: Icons.image,
+                            label: 'Generate from an image',
+                            onPressed: () {
+                              scanCard();
+                            }),
+                        MyRegularButton(
+                            iconData: Icons.camera_alt,
+                            label: 'Generate by camera',
+                            onPressed: () {
+                              scanCard();
+                            }),
+                      ],
+                    ),
+                  ),
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -303,7 +331,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                     tabs: <Widget>[
                       Tab(
                         icon: Icon(Icons.image),
-                        text: 'Scan',
+                        text: 'Generate',
                       ),
                       Tab(
                         icon: Icon(Icons.add),
