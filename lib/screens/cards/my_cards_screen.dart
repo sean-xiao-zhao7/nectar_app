@@ -54,7 +54,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                               spacing: 20,
                               children: [
                             MyLargeText(
-                              'You have no cards yet.',
+                              'You don\'t have any card yet.',
                               textAlign: TextAlign.center,
                             ),
                             MyRegularButton(

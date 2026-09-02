@@ -55,7 +55,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                               spacing: 20,
                               children: [
                             MyLargeText(
-                              'You have no cards yet.',
+                              'No cards in collection yet.',
                               textAlign: TextAlign.center,
                             ),
                             MyRegularButton(
