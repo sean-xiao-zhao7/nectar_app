@@ -14,7 +14,7 @@ class MyRegularButton extends StatefulWidget {
   final EdgeInsetsGeometry? padding;
   final IconData? iconData;
   final bool? hasDelay;
-  final bool? isLoading;
+  final bool parentIsLoading;
 
   const MyRegularButton(
       {super.key,
@@ -24,42 +24,35 @@ class MyRegularButton extends StatefulWidget {
       this.padding,
       this.iconData = Icons.login_rounded,
       this.hasDelay = true,
-      this.isLoading = false});
+      this.parentIsLoading = false});
 
   @override
   State<MyRegularButton> createState() => _MyRegularButtonState();
 }
 
 class _MyRegularButtonState extends State<MyRegularButton> {
-  bool? _isLoading;
-
-  @override
-  void initState() {
-    _isLoading = widget.isLoading ?? false;
-    super.initState();
-  }
+  // _isLoading is only used for a 1 second delay, this overrides parent's isLoading
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     final button = ElevatedButton.icon(
-      onPressed: _isLoading!
+      // disable button and show loading spinning if either parent passes an isLoading, or 1 second delay is activated
+      onPressed: _isLoading || widget.parentIsLoading
           ? null
           : () {
-              setState(() {
-                _isLoading = true;
-              });
               if (widget.hasDelay!) {
+                setState(() {
+                  _isLoading = true;
+                });
                 Future.delayed(const Duration(seconds: 1), () {
                   widget.onPressed!();
-                  setState(() {
-                    _isLoading = false;
-                  });
                 });
-              } else {
-                widget.onPressed!();
                 setState(() {
                   _isLoading = false;
                 });
+              } else {
+                widget.onPressed!();
               }
             },
       style: ElevatedButton.styleFrom(
@@ -71,7 +64,7 @@ class _MyRegularButtonState extends State<MyRegularButton> {
         color: Theme.of(context).colorScheme.onPrimaryContainer,
         fontWeight: FontWeight.w600,
       ),
-      icon: _isLoading!
+      icon: _isLoading || widget.parentIsLoading
           ? SizedBox(
               height: 20,
               width: 20,

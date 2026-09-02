@@ -47,6 +47,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   // controller for TabBar and TabView
   late final TabController _tabController;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -77,6 +79,9 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     NectarCard resultCard =
         await AICardRecognitionService.generateNectarCard('Starbucks');
     print(resultCard);
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -252,20 +257,32 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 20,
+                      spacing: 30,
                       children: [
                         MyRegularButton(
-                            iconData: Icons.image,
-                            label: 'Generate from an image',
-                            onPressed: () {
-                              scanCard();
-                            }),
+                          parentIsLoading: isLoading,
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            scanCard();
+                          },
+                          padding: EdgeInsets.symmetric(vertical: 30),
+                          iconData: Icons.image,
+                          label: 'Generate from an image',
+                        ),
                         MyRegularButton(
-                            iconData: Icons.camera_alt,
-                            label: 'Generate by camera',
-                            onPressed: () {
-                              scanCard();
-                            }),
+                          parentIsLoading: isLoading,
+                          onPressed: () {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            scanCard();
+                          },
+                          padding: EdgeInsets.symmetric(vertical: 30),
+                          iconData: Icons.camera_alt,
+                          label: 'Generate by camera',
+                        ),
                       ],
                     ),
                   ),
