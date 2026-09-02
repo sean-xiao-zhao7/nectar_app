@@ -350,19 +350,24 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                 ])),
                 Container(
                   decoration: BoxDecoration(color: Colors.white),
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: TabBar(
                     labelStyle: TextStyle(fontSize: 18),
                     unselectedLabelStyle: TextStyle(fontSize: 18),
                     controller: _tabController,
                     tabs: <Widget>[
-                      Tab(
-                        icon: Icon(Icons.image),
-                        text: 'Generate',
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Tab(
+                          icon: Icon(Icons.image),
+                          text: 'Generate',
+                        ),
                       ),
-                      Tab(
-                        icon: Icon(Icons.add),
-                        text: 'Add manually',
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: Tab(
+                          icon: Icon(Icons.add),
+                          text: 'Add manually',
+                        ),
                       ),
                     ],
                   ),
