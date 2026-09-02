@@ -350,8 +350,10 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                 ])),
                 Container(
                   decoration: BoxDecoration(color: Colors.white),
-                  padding: EdgeInsets.only(top: 5, bottom: 5),
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: TabBar(
+                    labelStyle: TextStyle(fontSize: 18),
+                    unselectedLabelStyle: TextStyle(fontSize: 18),
                     controller: _tabController,
                     tabs: <Widget>[
                       Tab(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/components/text/my_large_text.dart';
 
 import 'package:nectar_app/components/text/my_regular_text.dart';
 
@@ -59,10 +60,9 @@ class _MyRegularButtonState extends State<MyRegularButton> {
           padding: widget.padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           backgroundColor: Theme.of(context).colorScheme.primaryContainer),
-      label: MyRegularText(
+      label: MyLargeText(
         widget.label,
         color: Theme.of(context).colorScheme.onPrimaryContainer,
-        fontWeight: FontWeight.w600,
       ),
       icon: _isLoading || widget.parentIsLoading
           ? SizedBox(

@@ -22,7 +22,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
         color: Theme.of(context).colorScheme.secondary,
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: FontWeight.w600);
     final TextStyle profileSubTextStyle =
         TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
@@ -139,7 +139,7 @@ class MyDrawer extends StatelessWidget {
                   ),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
                           height: 30,
