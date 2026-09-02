@@ -19,6 +19,7 @@ import 'package:nectar_app/screens/auth/login_screen.dart';
 /// This screen is used by both owned cards and cards collection, using forCardsCollection to switch.
 class AddSingleCardScreen extends StatefulWidget {
   final bool forCardsCollection;
+
   const AddSingleCardScreen({super.key, this.forCardsCollection = false});
 
   @override
@@ -27,6 +28,7 @@ class AddSingleCardScreen extends StatefulWidget {
 
 class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     with TickerProviderStateMixin {
+  // vars for main form
   final _formKey = GlobalKey<FormState>();
   final _mainNameController = TextEditingController();
   final _firstNameController = TextEditingController();
@@ -41,6 +43,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
   final _postalController = TextEditingController();
+
+  // controller for TabBar and TabView
   late final TabController _tabController;
 
   @override
@@ -68,6 +72,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     super.dispose();
   }
 
+  // Call AI service to get schema for an image user provides
   Future<void> scanCard() async {
     NectarCard resultCard =
         await AICardRecognitionService.generateNectarCard('Starbucks');
@@ -76,6 +81,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
 
   @override
   Widget build(BuildContext context) {
+    // check for auth, redirect to login if not authed
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshotAuth) {
@@ -89,6 +95,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
             );
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
+            // User is authed.
             // Split displayName into first/last names.
             if (snapshotAuth.data!.displayName != null) {
               String fullName = snapshotAuth.data!.displayName!;
@@ -97,6 +104,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
               _lastNameController.text = fullName.substring(lastSpaceIndex + 1);
             }
 
+            // fetch all cards for current user (TODO remove if not needed)
             widgetTree = FutureBuilder<List<NectarCard>>(
                 future: fetchUserAllCards(snapshotAuth.data!.uid),
                 builder: (BuildContext context,
@@ -238,7 +246,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
               ),
               body: Column(children: <Widget>[
                 Expanded(
-                    // the tabBar is at the bottom
+                    // the tabBar is at the bottom of the switchable tab views
                     child: TabBarView(controller: _tabController, children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),

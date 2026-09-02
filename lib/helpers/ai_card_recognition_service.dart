@@ -50,24 +50,25 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 ''';
 
   /// Extracts structured JSON schema for a given URL or entity context string
-  static Future<String> extractSchema(String input, {String? imagePath}) async {
+  static Future<String> extractSchema(String userPrompt,
+      {String? imagePath}) async {
     try {
       final List<Content> modelInputs = [];
 
       if (imagePath != null) {
         final image = await File(imagePath).readAsBytes();
         final imagePart = InlineDataPart('image/jpeg', image);
-        modelInputs.add(
-            Content.multi([TextPart('Extract schema for: $input'), imagePart]));
+        modelInputs.add(Content.multi(
+            [TextPart('Extract schema for: $userPrompt'), imagePart]));
       } else {
-        modelInputs.add(Content.text('Extract schema for: $input'));
+        modelInputs.add(Content.text('Extract schema for: $userPrompt'));
       }
 
       final model = FirebaseAI.googleAI().generativeModel(
         model: 'gemini-3.6-flash',
         systemInstruction: Content.system(_nectarCardSchemaPrompt),
       );
-      final prompt = [Content.text('Make a schema for $input.')];
+      final prompt = [Content.text('Make a schema for $userPrompt.')];
       final response = await model.generateContent(prompt);
 
       return response.text ?? '{}';
@@ -79,10 +80,10 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
   // Generate a NectarCard class based on A.I. analysis.
   // Prompt is either a text URL or an user-uploaded image.
-  static Future<NectarCard> generateNectarCard(String sourceURL,
+  static Future<NectarCard> generateNectarCard(String userPrompt,
       {String? imagePath}) async {
     try {
-      String aiAnalysis = await extractSchema(sourceURL);
+      String aiAnalysis = await extractSchema(userPrompt);
       Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
       NectarCard newCard = NectarCard(
           ownerUserId: 'ownerUserId Test',
