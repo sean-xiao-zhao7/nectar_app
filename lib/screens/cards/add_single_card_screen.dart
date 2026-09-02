@@ -78,7 +78,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   Future<void> scanCard() async {
     NectarCard resultCard =
         await AICardRecognitionService.generateNectarCard('Starbucks');
-    print(resultCard);
+    // print(resultCard);
     setState(() {
       isLoading = false;
     });

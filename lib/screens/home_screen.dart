@@ -49,10 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        spacing: 20,
+                        spacing: 30,
                         children: [
                           MyLargeText(
-                              'Welcome to Nectar ${snapshotUserInfo.data!.firstName}.'),
+                            'Welcome to Nectar!',
+                            textAlign: TextAlign.center,
+                          ),
                           MyRegularText(
                               'Access your cards from the drawer menu on the left.'),
                           // MyRegularText(
@@ -74,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                         margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(30),
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.onPrimary,
                             borderRadius: BorderRadius.all(Radius.circular(10)),
