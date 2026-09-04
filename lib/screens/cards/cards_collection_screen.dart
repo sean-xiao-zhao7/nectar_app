@@ -79,6 +79,17 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
 
           return MyScaffoldContainer(
               title: 'Cards Collection',
+              appBarActions: [
+                IconButton(
+                    onPressed: () => {
+                          myNavigate(
+                              context,
+                              AddSingleCardScreen(
+                                isOwnCard: false,
+                              ))
+                        },
+                    icon: Icon(Icons.add_to_photos))
+              ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

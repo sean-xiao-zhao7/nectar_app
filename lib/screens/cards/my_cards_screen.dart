@@ -23,6 +23,17 @@ class MyCardsScreen extends StatefulWidget {
 class _MyCardsScreenState extends State<MyCardsScreen> {
   @override
   Widget build(BuildContext context) {
+    // Add card button is added to ListView of cards or empty screen.
+    Widget addCardButton = MyRegularButton(
+        label: 'Add a card',
+        hasDelay: false,
+        iconData: Icons.add,
+        onPressed: () => myNavigate(
+            context,
+            AddSingleCardScreen(
+              isOwnCard: true,
+            )));
+
     // first streambuilder fetches user auth
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -57,15 +68,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                               'You don\'t have any card yet.',
                               textAlign: TextAlign.center,
                             ),
-                            MyRegularButton(
-                                label: 'Add a card',
-                                hasDelay: false,
-                                iconData: Icons.add,
-                                onPressed: () => myNavigate(
-                                    context,
-                                    AddSingleCardScreen(
-                                      isOwnCard: true,
-                                    ))),
+                            addCardButton
                           ]));
                     } else {
                       return CardsListView(cardsList: snapshotCards.data!);
@@ -81,6 +84,17 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
 
           return MyScaffoldContainer(
               title: 'My Cards',
+              appBarActions: [
+                IconButton(
+                    onPressed: () => {
+                          myNavigate(
+                              context,
+                              AddSingleCardScreen(
+                                isOwnCard: true,
+                              ))
+                        },
+                    icon: Icon(Icons.add_to_photos))
+              ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
