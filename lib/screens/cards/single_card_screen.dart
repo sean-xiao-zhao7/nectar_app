@@ -30,7 +30,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                           nectarCard: widget.nectarCard,
                         ))
                   },
-              icon: Icon(Icons.edit))
+              icon: Icon(Icons.edit_sharp))
         ],
         child: ListView(children: <Widget>[
           MyRegularText('Card details:'),

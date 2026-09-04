@@ -61,7 +61,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                             MyRegularButton(
                                 label: 'Add a card',
                                 hasDelay: false,
-                                iconData: Icons.add,
+                                iconData: Icons.add_sharp,
                                 onPressed: () =>
                                     myNavigate(context, AddSingleCardScreen())),
                           ]));
@@ -88,7 +88,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                                 isOwnCard: false,
                               ))
                         },
-                    icon: Icon(Icons.add_to_photos))
+                    icon: Icon(Icons.add_to_photos_sharp))
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -291,7 +291,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             scanCard(snapshotAuth.data!.uid);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
-                          iconData: Icons.image,
+                          iconData: Icons.image_sharp,
                           label: 'Generate from an image',
                         ),
                         MyRegularButton(
@@ -303,7 +303,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             scanCard(snapshotAuth.data!.uid);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
-                          iconData: Icons.camera_alt,
+                          iconData: Icons.camera_alt_sharp,
                           label: 'Generate by camera',
                         ),
                       ],
@@ -338,7 +338,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                               EdgeInsets.only(left: 15, right: 15, bottom: 15),
                           child: MyRegularButton(
                               label: 'Complete adding a new card',
-                              iconData: Icons.done,
+                              iconData: Icons.done_sharp,
                               onPressed: () => addNewCardFormHelper(
                                   context,
                                   _formKey,
@@ -381,14 +381,14 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Tab(
-                          icon: Icon(Icons.image),
+                          icon: Icon(Icons.image_sharp),
                           text: 'Generate',
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 10),
                         child: Tab(
-                          icon: Icon(Icons.add),
+                          icon: Icon(Icons.add_sharp),
                           text: 'Add manually',
                         ),
                       ),

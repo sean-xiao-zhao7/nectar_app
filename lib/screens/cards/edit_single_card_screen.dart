@@ -228,12 +228,12 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
           return MyScaffoldContainer(
               title: 'Edit Card',
               appBarLead: IconButton(
-                icon: const Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back_sharp),
                 onPressed: () => Navigator.pop(context),
               ),
               appBarActions: [
                 IconButton(
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Icons.delete_sharp),
                   onPressed: () => Navigator.pop(context),
                 ),
               ],
@@ -262,7 +262,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                       padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
                       child: MyRegularButton(
                           label: 'Complete editing card',
-                          iconData: Icons.done,
+                          iconData: Icons.done_sharp,
                           onPressed: () => editCardFormHelper(
                               context,
                               _formKey,

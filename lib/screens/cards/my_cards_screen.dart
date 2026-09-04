@@ -27,7 +27,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
     Widget addCardButton = MyRegularButton(
         label: 'Add a card',
         hasDelay: false,
-        iconData: Icons.add,
+        iconData: Icons.add_sharp,
         onPressed: () => myNavigate(
             context,
             AddSingleCardScreen(
@@ -93,7 +93,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                                 isOwnCard: true,
                               ))
                         },
-                    icon: Icon(Icons.add_to_photos))
+                    icon: Icon(Icons.add_to_photos_sharp))
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

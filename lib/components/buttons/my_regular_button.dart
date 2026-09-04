@@ -23,7 +23,7 @@ class MyRegularButton extends StatefulWidget {
       required this.onPressed,
       this.isFullWidth = true,
       this.padding,
-      this.iconData = Icons.login_rounded,
+      this.iconData = Icons.login_sharp,
       this.hasDelay = true,
       this.parentIsLoading = false});
 

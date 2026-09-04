@@ -74,7 +74,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.home,
+                  Icons.home_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -92,7 +92,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.login,
+                  Icons.login_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -161,7 +161,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.home,
+                  Icons.home_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -179,7 +179,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.add_box,
+                  Icons.add_to_photos_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -197,7 +197,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.collections,
+                  Icons.collections_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -215,7 +215,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.credit_card,
+                  Icons.credit_card_sharp,
                   size: 34,
                 ),
                 title: Text(
@@ -233,7 +233,7 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.logout,
+                  Icons.logout_sharp,
                   size: 34,
                 ),
                 title: Text(

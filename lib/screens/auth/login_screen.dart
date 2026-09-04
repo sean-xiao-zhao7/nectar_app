@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 MyRegularButton(
                   label: 'Log in with Google',
                   onPressed: () => authFormSubmitGoogleHelper(context),
-                  iconData: Icons.g_mobiledata,
+                  iconData: Icons.g_mobiledata_sharp,
                 ),
                 const SizedBox(height: 24),
                 const MyRegularText('OR'),
