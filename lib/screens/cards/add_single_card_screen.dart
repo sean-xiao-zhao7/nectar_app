@@ -17,11 +17,11 @@ import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 /// Only first and last names are required for a new card at the moment.
 /// The other fields are initially blank, and can be filled out later.
 ///
-/// This screen is used by both owned cards and cards collection, using forCardsCollection to switch.
+/// This screen is used by both owned cards and cards collection, using [isOwnCard] to switch.
 class AddSingleCardScreen extends StatefulWidget {
-  final bool forCardsCollection;
+  final bool isOwnCard;
 
-  const AddSingleCardScreen({super.key, this.forCardsCollection = false});
+  const AddSingleCardScreen({super.key, this.isOwnCard = false});
 
   @override
   State<AddSingleCardScreen> createState() => _AddSingleCardScreenState();
@@ -78,7 +78,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   // Call AI service to get schema for an image user provides
   void scanCard(String uid) {
     AICardRecognitionService.generateNectarCard('Starbucks', uid,
-            isOwnCard: !widget.forCardsCollection)
+            isOwnCard: widget.isOwnCard)
         .then((value) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -367,7 +367,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                                     'uid': snapshotAuth.data!.uid,
                                   },
                                   'Adding new card successful',
-                                  fetchOwnedCards: !widget.forCardsCollection)),
+                                  fetchOwnedCards: widget.isOwnCard)),
                         ),
                       ]),
                 ])),

@@ -64,7 +64,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                                 onPressed: () => myNavigate(
                                     context,
                                     AddSingleCardScreen(
-                                      forCardsCollection: false,
+                                      isOwnCard: true,
                                     ))),
                           ]));
                     } else {
