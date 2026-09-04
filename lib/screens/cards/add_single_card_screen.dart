@@ -10,6 +10,7 @@ import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
+import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 
 /// Add a new Nectar card for current user
 ///
@@ -75,11 +76,35 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   }
 
   // Call AI service to get schema for an image user provides
-  Future<void> scanCard(String uid) async {
-    await AICardRecognitionService.generateNectarCard('Starbucks', uid);
-    setState(() {
-      isLoading = false;
-    });
+  void scanCard(String uid) {
+    AICardRecognitionService.generateNectarCard('Starbucks', uid,
+            isOwnCard: !widget.forCardsCollection)
+        .then((value) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: MyRegularText('Added a new card to your collection.')),
+        );
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => const CardsCollectionScreen(),
+          ),
+        );
+      }
+    }).onError(
+      (error, stackTrace) {
+        setState(() {
+          isLoading = false;
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: MyRegularText(
+                    'Error adding card. Please try again later.')),
+          );
+        }
+      },
+    );
   }
 
   @override

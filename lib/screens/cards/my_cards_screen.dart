@@ -61,8 +61,11 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                                 label: 'Add a card',
                                 hasDelay: false,
                                 iconData: Icons.add,
-                                onPressed: () =>
-                                    myNavigate(context, AddSingleCardScreen())),
+                                onPressed: () => myNavigate(
+                                    context,
+                                    AddSingleCardScreen(
+                                      forCardsCollection: false,
+                                    ))),
                           ]));
                     } else {
                       return CardsListView(cardsList: snapshotCards.data!);
