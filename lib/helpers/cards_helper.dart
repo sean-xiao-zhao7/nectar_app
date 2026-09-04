@@ -7,7 +7,7 @@ import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 
-/// Screen form on-click callback for adding a new card.
+/// Handles adding a new card from the "Manually add" tab using a form.
 Future<void> addNewCardFormHelper(
     BuildContext context,
     GlobalKey<FormState> formKey,
@@ -19,7 +19,7 @@ Future<void> addNewCardFormHelper(
   }
 
   final resultMessage =
-      await _addSingleCard(fields, fetchOwnedCards: fetchOwnedCards);
+      await addSingleCardDB(fields, fetchOwnedCards: fetchOwnedCards);
   if (!context.mounted) {
     return;
   }
@@ -47,7 +47,7 @@ Future<void> addNewCardFormHelper(
 /// Add a single new card
 ///
 ///
-Future<String> _addSingleCard(Map<String, dynamic> fields,
+Future<String> addSingleCardDB(Map<String, dynamic> fields,
     {bool fetchOwnedCards = true}) async {
   String resultMessage = '';
   try {

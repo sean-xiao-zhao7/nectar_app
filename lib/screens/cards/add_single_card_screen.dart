@@ -75,10 +75,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   }
 
   // Call AI service to get schema for an image user provides
-  Future<void> scanCard() async {
-    NectarCard resultCard =
-        await AICardRecognitionService.generateNectarCard('Starbucks');
-    // print(resultCard);
+  Future<void> scanCard(String uid) async {
+    await AICardRecognitionService.generateNectarCard('Starbucks', uid);
     setState(() {
       isLoading = false;
     });
@@ -265,7 +263,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             setState(() {
                               isLoading = true;
                             });
-                            scanCard();
+                            scanCard(snapshotAuth.data!.uid);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
                           iconData: Icons.image,
@@ -277,7 +275,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             setState(() {
                               isLoading = true;
                             });
-                            scanCard();
+                            scanCard(snapshotAuth.data!.uid);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
                           iconData: Icons.camera_alt,

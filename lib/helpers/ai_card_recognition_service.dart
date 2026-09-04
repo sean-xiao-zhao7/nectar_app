@@ -80,13 +80,13 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
   // Generate a NectarCard class based on A.I. analysis.
   // Prompt is either a text URL or an user-uploaded image.
-  static Future<NectarCard> generateNectarCard(String userPrompt,
+  static Future<NectarCard> generateNectarCard(String userPrompt, String uid,
       {String? imagePath}) async {
     try {
       String aiAnalysis = await extractSchema(userPrompt);
       Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
       NectarCard newCard = NectarCard(
-          ownerUserId: 'ownerUserId Test',
+          ownerUserId: uid,
           mainName: 'Main Name Test',
           personalInfo: jsonResult['personalInfo'],
           addressInfo: jsonResult['addressInfo'],
