@@ -71,7 +71,10 @@ class _MyRegularButtonState extends State<MyRegularButton> {
               child: const CircularProgressIndicator(
                 strokeWidth: 3,
               ))
-          : Icon(widget.iconData),
+          : Icon(
+              widget.iconData,
+              size: 24,
+            ),
     );
 
     if (widget.isFullWidth) {
