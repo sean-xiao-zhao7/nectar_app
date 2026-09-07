@@ -5,8 +5,8 @@ import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/cards/cards_list_view.dart';
 import 'package:nectar_app/components/layout/my_container.dart';
 import 'package:nectar_app/components/layout/my_scaffold_container.dart';
+import 'package:nectar_app/components/layout/my_screen_bottom.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
@@ -97,14 +97,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    widgetTree,
-                    Container(
-                        padding: EdgeInsets.only(bottom: 50),
-                        child: MyRegularText(
-                          '\u00a9 2026 Nectar Inc.',
-                        ))
-                  ]));
+                  children: [widgetTree, MyScreenBottom()]));
         });
   }
 }

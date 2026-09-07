@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:nectar_app/components/layout/my_app_bar.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
+import 'package:nectar_app/components/layout/my_scaffold_container.dart';
+import 'package:nectar_app/components/layout/my_screen_bottom.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
@@ -68,14 +68,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
           }
 
-          return Scaffold(
-              drawer: MyDrawer(),
-              appBar: MyAppBar(),
-              body: Column(
+          return MyScaffoldContainer(
+              title: 'Nectar Home',
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                        margin: EdgeInsets.all(20),
                         padding: EdgeInsets.all(30),
                         decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.onPrimary,
@@ -88,9 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ]),
                         child: widgetTree),
-                    Container(
-                        padding: EdgeInsets.only(bottom: 50),
-                        child: MyRegularText('\u00a9 2026 Nectar Inc.'))
+                    MyScreenBottom()
                   ]));
         });
   }
