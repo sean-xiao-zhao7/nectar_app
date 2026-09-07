@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 class MyContainer extends StatelessWidget {
   final Widget child;
   final AlignmentGeometry? alignment;
+  final EdgeInsetsGeometry? margin;
 
-  const MyContainer({super.key, required this.child, this.alignment});
+  const MyContainer(
+      {super.key, required this.child, this.alignment, this.margin});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: alignment,
       padding: EdgeInsets.all(20),
+      margin: margin,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.all(Radius.circular(10)),

@@ -21,6 +21,7 @@ class SingleCardListPreview extends StatelessWidget {
         );
       },
       child: MyContainer(
+        margin: EdgeInsets.only(bottom: 20),
         child: SizedBox(
             height: 150,
             child: Column(

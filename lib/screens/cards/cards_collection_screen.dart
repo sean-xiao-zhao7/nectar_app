@@ -95,7 +95,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                   children: [
                     widgetTree,
                     Container(
-                        padding: EdgeInsets.only(bottom: 50),
+                        padding: EdgeInsets.only(top: 20, bottom: 10),
                         child: MyRegularText(
                           '\u00a9 2026 Nectar Inc.',
                         ))

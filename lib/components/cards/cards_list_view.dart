@@ -11,15 +11,13 @@ class CardsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 600,
-      child: ListView.builder(
-          itemCount: cardsList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-                margin: EdgeInsets.only(bottom: 20),
-                child: SingleCardListPreview(nectarCard: cardsList[index]));
-          }),
+    return Expanded(
+      child: ListView(
+        children: [
+          for (NectarCard card in cardsList)
+            SingleCardListPreview(nectarCard: card)
+        ],
+      ),
     );
   }
 }
