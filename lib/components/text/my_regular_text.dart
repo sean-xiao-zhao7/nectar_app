@@ -16,7 +16,7 @@ class MyRegularText extends StatelessWidget {
     super.key,
     this.textAlign,
     this.maxLines,
-    this.overflow,
+    this.overflow = TextOverflow.fade,
     this.color,
     this.fontSize = 16,
     this.fontWeight,

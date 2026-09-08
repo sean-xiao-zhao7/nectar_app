@@ -92,7 +92,7 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
       await addSingleCardDB(jsonResult, fetchOwnedCards: isOwnCard);
       NectarCard newCard = NectarCard(
           ownerUserId: uid,
-          mainName: 'Main Name Test',
+          mainName: jsonResult['mainName'],
           personalInfo: jsonResult['personalInfo'],
           addressInfo: jsonResult['addressInfo'],
           companyInfo: jsonResult['companyInfo'],

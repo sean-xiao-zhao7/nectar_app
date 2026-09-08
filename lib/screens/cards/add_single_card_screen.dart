@@ -77,7 +77,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
 
   // Call AI service to get schema for an image user provides
   void scanCard(String uid) {
-    AICardRecognitionService.generateNectarCard('Starbucks', uid,
+    AICardRecognitionService.generateNectarCard('Justin Shaw', uid,
             isOwnCard: widget.isOwnCard)
         .then((value) {
       if (mounted) {

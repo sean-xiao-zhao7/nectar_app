@@ -19,14 +19,29 @@ class SingleCardListPreview extends StatelessWidget {
     // Decide which important info to show on preview
     // Some info might be empty - if a person or a company
     Widget infoBlock = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 10,
       children: [
         if (nectarCard.companyInfo['companyName'] != '')
-          MyRegularText(nectarCard.companyInfo['companyName']!),
+          Row(spacing: 10, children: [
+            Icon(Icons.business_sharp),
+            Expanded(
+                child: MyRegularText(nectarCard.companyInfo['companyName']!))
+          ]),
         if (nectarCard.companyInfo['businessType'] != '')
-          MyRegularText(nectarCard.companyInfo['businessType']!),
+          Row(spacing: 10, children: [
+            Icon(Icons.category_sharp),
+            Expanded(
+                child: MyRegularText(nectarCard.companyInfo['businessType']!))
+          ]),
         if (nectarCard.personalInfo['firstName'] != '')
-          MyRegularText(
-              "${nectarCard.personalInfo['firstName']!} ${nectarCard.personalInfo['lastName']!}"),
+          Row(spacing: 10, children: [
+            Icon(Icons.person_sharp),
+            Expanded(
+              child: MyRegularText(
+                  "${nectarCard.personalInfo['firstName']!} ${nectarCard.personalInfo['lastName']!}"),
+            )
+          ]),
       ],
     );
 
@@ -42,10 +57,8 @@ class SingleCardListPreview extends StatelessWidget {
       child: MyContainer(
         margin: EdgeInsets.only(bottom: 20),
         child: SizedBox(
-            height: 150,
+            height: 170,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
               spacing: 10,
               children: [
                 MyLargeText(
@@ -56,7 +69,7 @@ class SingleCardListPreview extends StatelessWidget {
                   height: 5,
                   color: Theme.of(context).colorScheme.primary,
                 ),
-                Expanded(child: infoBlock)
+                infoBlock
               ],
             )),
       ),
