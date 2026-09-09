@@ -24,19 +24,28 @@ class SingleCardListPreview extends StatelessWidget {
       children: [
         if (nectarCard.companyInfo['companyName'] != '')
           Row(spacing: 10, children: [
-            Icon(Icons.business_sharp),
+            Icon(
+              Icons.business_sharp,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
             Expanded(
                 child: MyRegularText(nectarCard.companyInfo['companyName']!))
           ]),
         if (nectarCard.companyInfo['businessType'] != '')
           Row(spacing: 10, children: [
-            Icon(Icons.category_sharp),
+            Icon(
+              Icons.category_sharp,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
             Expanded(
                 child: MyRegularText(nectarCard.companyInfo['businessType']!))
           ]),
         if (nectarCard.personalInfo['firstName'] != '')
           Row(spacing: 10, children: [
-            Icon(Icons.person_sharp),
+            Icon(
+              Icons.person_sharp,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
             Expanded(
               child: MyRegularText(
                   "${nectarCard.personalInfo['firstName']!} ${nectarCard.personalInfo['lastName']!}"),
