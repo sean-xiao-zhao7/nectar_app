@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_app_bar.dart';
@@ -48,6 +49,11 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   // controller for TabBar and TabView
   late final TabController _tabController;
 
+  // image picker for A.I. service
+  // https://pub.dev/packages/image_picker/example
+  final ImagePicker _picker = ImagePicker();
+  XFile? imageFile;
+
   bool isLoading = false;
 
   @override
@@ -78,37 +84,53 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   // Call AI service to get schema for an image user provides
   void scanCard(String uid) {
     // ask user for image
-    
+    _launchImagePicker(ImageSource.gallery).then((_) {
+      print(imageFile);
+      // // send image into A.I. service
+      // AICardRecognitionService.generateNectarCard('Justin Shaw', uid,
+      //         isOwnCard: widget.isOwnCard)
+      //     .then((value) {
+      //   if (mounted) {
+      //     ScaffoldMessenger.of(context).showSnackBar(
+      //       SnackBar(
+      //           content: MyRegularText('Added a new card to your collection.')),
+      //     );
+      //     Navigator.of(context).push(
+      //       MaterialPageRoute<void>(
+      //         builder: (_) => const CardsCollectionScreen(),
+      //       ),
+      //     );
+      //   }
+      // }).onError(
+      //   (error, stackTrace) {
+      //     setState(() {
+      //       isLoading = false;
+      //     });
+      //     if (mounted) {
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(
+      //             content: MyRegularText(
+      //                 'Error adding card. Please try again later.')),
+      //       );
+      //     }
+      //   },
+      // );
+    });
+  }
 
-    // send image into A.I. service
-    AICardRecognitionService.generateNectarCard('Justin Shaw', uid,
-            isOwnCard: widget.isOwnCard)
-        .then((value) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: MyRegularText('Added a new card to your collection.')),
-        );
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (_) => const CardsCollectionScreen(),
-          ),
-        );
-      }
-    }).onError(
-      (error, stackTrace) {
-        setState(() {
-          isLoading = false;
-        });
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: MyRegularText(
-                    'Error adding card. Please try again later.')),
-          );
-        }
-      },
-    );
+  // handle image picking
+  Future<void> _launchImagePicker(ImageSource source) async {
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: source,
+        imageQuality: 1,
+      );
+      setState(() {
+        imageFile = pickedFile;
+      });
+    } catch (e) {
+      // show snack with error
+    }
   }
 
   @override
