@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nectar_app/components/layout/my_container.dart';
 import 'package:nectar_app/components/layout/my_scaffold_container.dart';
+import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
@@ -20,7 +21,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
   @override
   Widget build(BuildContext context) {
     return MyScaffoldContainer(
-        title: 'View Card',
+        title: 'Card Details',
         appBarActions: [
           IconButton(
               onPressed: () => {
@@ -33,15 +34,16 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
               icon: Icon(Icons.edit_sharp))
         ],
         child: ListView(children: <Widget>[
-          MyRegularText('Card details:'),
-          SizedBox(
-            height: 20,
-          ),
           MyContainer(
             child: Column(
               spacing: 20,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                MyLargeText(widget.nectarCard.mainName),
+                Divider(
+                  height: 5,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
                 MyRegularText(
                     'First name: ${widget.nectarCard.personalInfo['firstName']}'),
                 MyRegularText(
