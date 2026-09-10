@@ -47,20 +47,21 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 1. For missing or unknown details, return an empty string (""). Do NOT use "N/A", "Unknown", or null.
 2. For social media platforms (instagram, twitter, facebook), output ONLY the handle/username (e.g., 'i.gram.iri'), NOT full URLs.
 3. For 'website', provide the official domain URL or main platform landing link.
-4. Return ONLY valid, parseable JSON with no conversational text or wrapping outside the JSON object.
+4. Return ONLY valid, parseable JSON with no conversational text or wrapping outside the JSON object. Do not include the string ```json.
 ''';
 
-  /// Extracts structured JSON schema for a given URL or entity context string
+  /// Extracts structured JSON schema for either [userPrompt] or [imagePath] but not both.
   static Future<String> extractSchema(String userPrompt,
       {String? imagePath}) async {
     try {
       final List<Content> modelInputs = [];
 
+      // if imagePath is provided, userPrompt is ignored.
       if (imagePath != null) {
         final image = await File(imagePath).readAsBytes();
         final imagePart = InlineDataPart('image/jpeg', image);
-        modelInputs.add(Content.multi(
-            [TextPart('Extract schema for: $userPrompt'), imagePart]));
+        modelInputs.add(Content.multi([imagePart]));
+        modelInputs.add(Content.text('Extract schema for this image'));
       } else {
         modelInputs.add(Content.text('Extract schema for: $userPrompt'));
       }
@@ -69,9 +70,8 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
         model: 'gemini-3.6-flash',
         systemInstruction: Content.system(_nectarCardSchemaPrompt),
       );
-      final prompt = [Content.text('Make a schema for $userPrompt.')];
-      final response = await model.generateContent(prompt);
 
+      final response = await model.generateContent(modelInputs);
       return response.text ?? '{}';
     } catch (e) {
       // Handle Firebase AI or network exceptions
@@ -84,12 +84,15 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
   static Future<NectarCard> generateNectarCard(String userPrompt, String uid,
       {String? imagePath, bool isOwnCard = false}) async {
     try {
-      String aiAnalysis = await extractSchema(userPrompt);
+      // use Gemini to extract JSON from an image/text.
+      String aiAnalysis = await extractSchema(userPrompt, imagePath: imagePath);
       Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
 
       // add AI generated info into firebase DB
       jsonResult['uid'] = uid;
       await addSingleCardDB(jsonResult, fetchOwnedCards: isOwnCard);
+
+      // return a NectarCard class
       NectarCard newCard = NectarCard(
           ownerUserId: uid,
           mainName: jsonResult['mainName'],
@@ -99,6 +102,7 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
           socialMedia: jsonResult['socialMedia']);
       return newCard;
     } catch (error) {
+      // print(error);
       rethrow;
     }
   }

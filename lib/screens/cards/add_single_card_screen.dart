@@ -85,36 +85,44 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   void scanCard(String uid) {
     // ask user for image
     _launchImagePicker(ImageSource.gallery).then((_) {
-      print(imageFile);
-      // // send image into A.I. service
-      // AICardRecognitionService.generateNectarCard('Justin Shaw', uid,
-      //         isOwnCard: widget.isOwnCard)
-      //     .then((value) {
-      //   if (mounted) {
-      //     ScaffoldMessenger.of(context).showSnackBar(
-      //       SnackBar(
-      //           content: MyRegularText('Added a new card to your collection.')),
-      //     );
-      //     Navigator.of(context).push(
-      //       MaterialPageRoute<void>(
-      //         builder: (_) => const CardsCollectionScreen(),
-      //       ),
-      //     );
-      //   }
-      // }).onError(
-      //   (error, stackTrace) {
-      //     setState(() {
-      //       isLoading = false;
-      //     });
-      //     if (mounted) {
-      //       ScaffoldMessenger.of(context).showSnackBar(
-      //         SnackBar(
-      //             content: MyRegularText(
-      //                 'Error adding card. Please try again later.')),
-      //       );
-      //     }
-      //   },
-      // );
+      if (imageFile == null) {
+        setState(() {
+          isLoading = false;
+        });
+        return;
+      }
+      // send image into A.I. service
+      AICardRecognitionService.generateNectarCard(
+        '',
+        uid,
+        isOwnCard: widget.isOwnCard,
+        imagePath: imageFile!.path,
+      ).then((value) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: MyRegularText('Added a new card to your collection.')),
+          );
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) => const CardsCollectionScreen(),
+            ),
+          );
+        }
+      }).onError(
+        (error, stackTrace) {
+          setState(() {
+            isLoading = false;
+          });
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                  content: MyRegularText(
+                      'Error adding card. Please try again later.')),
+            );
+          }
+        },
+      );
     });
   }
 
