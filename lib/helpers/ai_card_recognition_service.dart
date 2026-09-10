@@ -85,8 +85,11 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
       {String? imagePath, bool isOwnCard = false}) async {
     try {
       // use Gemini to extract JSON from an image/text.
-      String aiAnalysis = await extractSchema(userPrompt, imagePath: imagePath);
-      Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
+      // String aiAnalysis = await extractSchema(userPrompt, imagePath: imagePath);
+      // Map<String, dynamic> jsonResult = jsonDecode(aiAnalysis);
+      String testResponse =
+          '{"mainName": "R9Entertainment","shortDescription": "Professional DJ and MC services specializing in weddings and special events.","personalInfo" : {"firstName": "Ryan","lastName": "Hutchinson","phone": "(289) 338-1562","email": "Info@R9Entertainment.com"},"companyInfo": {"companyName": "R9Entertainment","businessType": "DJ / MC Services","role": "DJ / MC","department": ""},"addressInfo": {"street": "","city": "Mississauga (est.)","state": "Ontario (est.)","postalCode": "","country": "Canada (est.)"},"socialMedia": {"website": "","linkedin": "","twitter": "","instagram": "R9Entertainment","facebook": ""}}      ';
+      Map<String, dynamic> jsonResult = jsonDecode(testResponse);
 
       // add AI generated info into firebase DB
       jsonResult['uid'] = uid;

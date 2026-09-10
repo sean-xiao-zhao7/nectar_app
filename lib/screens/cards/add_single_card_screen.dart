@@ -101,7 +101,10 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: MyRegularText('Added a new card to your collection.')),
+                content: MyRegularText(
+              'Added a new card to your collection.',
+              color: Theme.of(context).colorScheme.onSecondary,
+            )),
           );
           Navigator.of(context).push(
             MaterialPageRoute<void>(
