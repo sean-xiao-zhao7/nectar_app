@@ -73,10 +73,12 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                 MyLargeText(
                   'Company',
                 ),
-                MyRegularText(
-                    '${widget.nectarCard.companyInfo['companyName']}'),
-                MyRegularText(
-                    '${widget.nectarCard.companyInfo['businessType']}'),
+                if (widget.nectarCard.companyInfo['companyName'] != '')
+                  MyRegularText(
+                      '${widget.nectarCard.companyInfo['companyName']}'),
+                if (widget.nectarCard.companyInfo['businessType'] != '')
+                  MyRegularText(
+                      '${widget.nectarCard.companyInfo['businessType']}'),
                 if (widget.nectarCard.companyInfo['role'] != '')
                   MyRegularText(
                       'Role: ${widget.nectarCard.companyInfo['role']}'),
