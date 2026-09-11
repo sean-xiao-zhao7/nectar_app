@@ -25,50 +25,87 @@ class EditSingleCardScreen extends StatefulWidget {
 class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  final _mainNameController = TextEditingController();
+  final _shortDescriptionController = TextEditingController();
+
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
-  final _jobController = TextEditingController();
-  final _companyController = TextEditingController();
+
+  final _companyNameController = TextEditingController();
+  final _businessTypeController = TextEditingController();
+  final _roleController = TextEditingController();
+  final _departmentController = TextEditingController();
+
   final _websiteController = TextEditingController();
-  final _addressController = TextEditingController();
+  final _linkedInController = TextEditingController();
+  final _twitterController = TextEditingController();
+  final _instagramController = TextEditingController();
+  final _facebookController = TextEditingController();
+
+  final _streetController = TextEditingController();
   final _cityController = TextEditingController();
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
-  final _postalController = TextEditingController();
+  final _postalCodeController = TextEditingController();
 
   @override
   void initState() {
+    _mainNameController.text = widget.nectarCard.mainName;
+    _shortDescriptionController.text = widget.nectarCard.shortDescription;
+
     _firstNameController.text = widget.nectarCard.personalInfo['firstName']!;
     _lastNameController.text = widget.nectarCard.personalInfo['lastName']!;
     _phoneController.text = widget.nectarCard.personalInfo['phone']!;
     _emailController.text = widget.nectarCard.personalInfo['email']!;
-    _jobController.text = widget.nectarCard.companyInfo['job']!;
-    _companyController.text = widget.nectarCard.companyInfo['company']!;
-    _websiteController.text = widget.nectarCard.companyInfo['website']!;
-    _addressController.text = widget.nectarCard.companyInfo['address']!;
+
+    _companyNameController.text = widget.nectarCard.companyInfo['companyName']!;
+    _businessTypeController.text =
+        widget.nectarCard.companyInfo['businessType']!;
+    _roleController.text = widget.nectarCard.companyInfo['role']!;
+    _departmentController.text = widget.nectarCard.companyInfo['department']!;
+
+    _websiteController.text = widget.nectarCard.socialMedia['website']!;
+    _linkedInController.text = widget.nectarCard.socialMedia['linkedin']!;
+    _twitterController.text = widget.nectarCard.socialMedia['twitter']!;
+    _instagramController.text = widget.nectarCard.socialMedia['instagram']!;
+    _facebookController.text = widget.nectarCard.socialMedia['facebook']!;
+
+    _streetController.text = widget.nectarCard.addressInfo['street']!;
     _cityController.text = widget.nectarCard.addressInfo['city']!;
     _stateController.text = widget.nectarCard.addressInfo['state']!;
     _countryController.text = widget.nectarCard.addressInfo['country']!;
-    _postalController.text = widget.nectarCard.addressInfo['postal']!;
+    _postalCodeController.text = widget.nectarCard.addressInfo['postalCode']!;
     super.initState();
   }
 
   @override
   void dispose() {
+    _mainNameController.dispose();
+    _shortDescriptionController.dispose();
+
     _firstNameController.dispose();
     _lastNameController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
-    _jobController.dispose();
-    _companyController.dispose();
+
+    _companyNameController.dispose();
+    _roleController.dispose();
+    _businessTypeController.dispose();
+    _departmentController.dispose();
+
     _websiteController.dispose();
-    _addressController.dispose();
+    _linkedInController.dispose();
+    _twitterController.dispose();
+    _instagramController.dispose();
+    _facebookController.dispose();
+
+    _streetController.dispose();
     _cityController.dispose();
     _stateController.dispose();
     _countryController.dispose();
-    _postalController.dispose();
+    _postalCodeController.dispose();
     super.dispose();
   }
 
@@ -103,7 +140,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
                       MyRegularText(
-                        'Other than first/last names, other fields can be filled out later if you need.',
+                        'Other than the main name, other fields can be filled out later if you need.',
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(
@@ -113,6 +150,32 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                         key: _formKey,
                         child: Column(
                           children: <Widget>[
+                            myTextFormField(
+                              context: context,
+                              controller: _mainNameController,
+                              labelText: 'Main name',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                              validators: <FormFieldValidatorFn>[
+                                FormValidators.required('Main name'),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Optional info below'),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _shortDescriptionController,
+                              labelText: 'Short description',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                              validators: <FormFieldValidatorFn>[
+                                FormValidators.required('Short description'),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Personal'),
+                            const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
                               controller: _firstNameController,
@@ -135,8 +198,6 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               ],
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Optional info below'),
-                            const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
                               controller: _emailController,
@@ -153,21 +214,41 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
+                            MyRegularText('Company'),
+                            const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _jobController,
-                              labelText: 'Job',
+                              controller: _companyNameController,
+                              labelText: 'Company name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _companyController,
-                              labelText: 'Company',
+                              controller: _businessTypeController,
+                              labelText: 'Business type',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _roleController,
+                              labelText: 'Role',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _departmentController,
+                              labelText: 'Department',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Social Media'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -179,8 +260,42 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _addressController,
-                              labelText: 'Address',
+                              controller: _linkedInController,
+                              labelText: 'LinkedIn',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _twitterController,
+                              labelText: 'X',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _instagramController,
+                              labelText: 'Instagram',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _facebookController,
+                              labelText: 'Facebook',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            MyRegularText('Address'),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _streetController,
+                              labelText: 'Street',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
@@ -211,7 +326,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _postalController,
+                              controller: _postalCodeController,
                               labelText: 'Postal code',
                               textInputAction: TextInputAction.done,
                             ),
@@ -267,18 +382,35 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               context,
                               _formKey,
                               {
-                                'firstName': _firstNameController.text,
-                                'lastName': _lastNameController.text,
-                                'email': _emailController.text,
-                                'phone': _phoneController.text,
-                                'job': _jobController.text,
-                                'company': _companyController.text,
-                                'website': _websiteController.text,
-                                'address': _addressController.text,
-                                'city': _cityController.text,
-                                'state': _stateController.text,
-                                'country': _countryController.text,
-                                'postal': _postalController.text,
+                                'mainName': _mainNameController.text,
+                                'shortDescription':
+                                    _shortDescriptionController.text,
+                                'personalInfo': {
+                                  'firstName': _firstNameController.text,
+                                  'lastName': _lastNameController.text,
+                                  'email': _emailController.text,
+                                  'phone': _phoneController.text,
+                                },
+                                'companyInfo': {
+                                  'companyName': _companyNameController.text,
+                                  'businessType': _businessTypeController.text,
+                                  'role': _roleController.text,
+                                  'department': _departmentController.text,
+                                },
+                                'socialMedia': {
+                                  'website': _websiteController.text,
+                                  'linkedIn': _linkedInController.text,
+                                  'twitter': _twitterController.text,
+                                  'instagram': _instagramController.text,
+                                  'facebook': _facebookController.text,
+                                },
+                                'addressInfo': {
+                                  'address': _streetController.text,
+                                  'city': _cityController.text,
+                                  'state': _stateController.text,
+                                  'country': _countryController.text,
+                                  'postal': _postalCodeController.text,
+                                },
                                 'uid': snapshotAuth.data!.uid,
                               },
                               'Edit card successful',
