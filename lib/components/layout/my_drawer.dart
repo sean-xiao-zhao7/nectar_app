@@ -161,42 +161,6 @@ class MyDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.home_sharp,
-                  size: 34,
-                ),
-                title: Text(
-                  'Home',
-                  style: menuTextStyle,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const HomeScreen(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.add_to_photos_sharp,
-                  size: 34,
-                ),
-                title: Text(
-                  'Add A New Card',
-                  style: menuTextStyle,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const AddSingleCardScreen(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(
                   Icons.collections_sharp,
                   size: 34,
                 ),
@@ -219,7 +183,7 @@ class MyDrawer extends StatelessWidget {
                   size: 34,
                 ),
                 title: Text(
-                  'My Own Cards',
+                  'My Cards',
                   style: menuTextStyle,
                 ),
                 onTap: () {
@@ -227,6 +191,24 @@ class MyDrawer extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) => const MyCardsScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.add_to_photos_sharp,
+                  size: 34,
+                ),
+                title: Text(
+                  'Add A New Card',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const AddSingleCardScreen(),
                     ),
                   );
                 },

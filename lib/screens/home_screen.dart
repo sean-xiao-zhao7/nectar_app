@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:nectar_app/components/layout/my_scaffold_container.dart';
 import 'package:nectar_app/components/layout/my_screen_bottom.dart';
+import 'package:nectar_app/components/layout/nectar_divider.dart';
 import 'package:nectar_app/components/text/my_large_text.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
@@ -56,11 +57,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             textAlign: TextAlign.center,
                           ),
                           MyRegularText(
-                              'Access your cards from the drawer menu on the left.'),
-                          // MyRegularText(
-                          //     'For help, select the "Help" option from the drawer on the left.'),
-                          MyRegularText(
-                              'We hope you enjoy your experience with Nectar!'),
+                              'Please use the menu to the top left to access the various features of Nectar.'),
+                          NectarDivider(),
+                          Text.rich(TextSpan(children: [
+                            TextSpan(
+                                text: 'Cards Collection',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text: ' contains all cards you have saved.'),
+                          ])),
+                          Text.rich(TextSpan(children: [
+                            TextSpan(
+                                text: 'My Cards',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text: ' contains cards representing yourself.'),
+                          ])),
                         ]);
                   } else {
                     return Center(child: CircularProgressIndicator());
@@ -69,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return MyScaffoldContainer(
-              title: 'Nectar Home',
+              title: 'Nectar',
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
