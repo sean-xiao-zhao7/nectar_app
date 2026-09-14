@@ -20,7 +20,7 @@ class SingleCardScreen extends StatefulWidget {
 class _SingleCardScreenState extends State<SingleCardScreen> {
   @override
   Widget build(BuildContext context) {
-    return MyScaffoldContainer(
+    return NectarScaffoldContainer(
         title: 'Card Details',
         appBarActions: [
           IconButton(

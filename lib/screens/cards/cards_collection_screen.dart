@@ -77,7 +77,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                 });
           }
 
-          return MyScaffoldContainer(
+          return NectarScaffoldContainer(
               title: 'Cards Collection',
               appBarActions: [
                 IconButton(

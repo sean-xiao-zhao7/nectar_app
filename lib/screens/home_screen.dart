@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
           }
 
-          return MyScaffoldContainer(
+          return NectarScaffoldContainer(
               title: 'Nectar',
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

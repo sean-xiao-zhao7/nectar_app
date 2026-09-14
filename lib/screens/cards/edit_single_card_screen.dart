@@ -340,7 +340,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                 });
           }
 
-          return MyScaffoldContainer(
+          return NectarScaffoldContainer(
               title: 'Edit Card',
               appBarLead: IconButton(
                 icon: const Icon(Icons.arrow_back_sharp),
