@@ -71,8 +71,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                 text: 'My Cards',
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             TextSpan(
-                                text: ' contains cards representing yourself.'),
+                                text:
+                                    ' contains cards representing yourself that you want to share with others.'),
                           ])),
+                          Text.rich(TextSpan(children: [
+                            TextSpan(
+                                text: 'Add A New Card',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            TextSpan(
+                                text:
+                                    ' allows you to scan and save a new card.'),
+                          ])),
+                          NectarDivider(),
+                          Text('Enjoy using Nectar!')
                         ]);
                   } else {
                     return Center(child: CircularProgressIndicator());
