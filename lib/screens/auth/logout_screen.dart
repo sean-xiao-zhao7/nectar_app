@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:nectar_app/components/layout/my_app_bar.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
+import 'package:nectar_app/components/layout/nectar_app_bar.dart';
+import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
 
 /// Log in an existing user
@@ -22,14 +22,14 @@ class _LogoutScreenState extends State<LogoutScreen> {
   Widget build(BuildContext context) {
     _doLogout();
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: MyAppBar(
+      drawer: NectarDrawer(),
+      appBar: NectarAppBar(
         title: 'Log out',
       ),
       body: SafeArea(
         child: Padding(
             padding: const EdgeInsets.all(32),
-            child: MyLargeText('You have logged out of Nectar.')),
+            child: NectarLargeText('You have logged out of Nectar.')),
       ),
     );
   }

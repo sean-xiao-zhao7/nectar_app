@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:nectar_app/components/layout/my_scaffold_container.dart';
-import 'package:nectar_app/components/layout/my_screen_bottom.dart';
+import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
+import 'package:nectar_app/components/layout/nectar_footer.dart';
 import 'package:nectar_app/components/layout/nectar_divider.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/models/nectar_user.dart';
 
@@ -30,12 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 spacing: 20,
                 children: [
-                  MyLargeText(
+                  NectarLargeText(
                     'Welcome to Nectar!',
                   ),
-                  MyRegularText(
+                  NectarRegularText(
                       'Sign in to your account by tapping the top left drawer, then "Log in".'),
-                  MyRegularText(
+                  NectarRegularText(
                       'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
                 ]);
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
@@ -53,11 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           spacing: 30,
                           children: [
-                            MyLargeText(
+                            NectarLargeText(
                               'Welcome to Nectar!',
                               textAlign: TextAlign.center,
                             ),
-                            MyRegularText(
+                            NectarRegularText(
                                 'Please use the menu to the top left to access the various features of Nectar.'),
                             NectarDivider(),
                             Text.rich(TextSpan(children: [

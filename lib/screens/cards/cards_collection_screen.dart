@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:nectar_app/components/buttons/my_regular_button.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 import 'package:nectar_app/components/cards/cards_list_view.dart';
-import 'package:nectar_app/components/layout/my_container.dart';
-import 'package:nectar_app/components/layout/my_scaffold_container.dart';
-import 'package:nectar_app/components/layout/my_screen_bottom.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
+import 'package:nectar_app/components/layout/nectar_container.dart';
+import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
+import 'package:nectar_app/components/layout/nectar_footer.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
@@ -48,17 +48,17 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     if (snapshotCards.data!.isEmpty) {
-                      return MyContainer(
+                      return NectarContainer(
                           child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               spacing: 20,
                               children: [
-                            MyLargeText(
+                            NectarLargeText(
                               'No cards in collection yet.',
                               textAlign: TextAlign.center,
                             ),
-                            MyRegularButton(
+                            NectarRegularButton(
                                 label: 'Add a card',
                                 hasDelay: false,
                                 iconData: Icons.add_sharp,
@@ -69,7 +69,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                       return CardsListView(cardsList: snapshotCards.data!);
                     }
                   } else {
-                    return MyContainer(
+                    return NectarContainer(
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [CircularProgressIndicator()]));

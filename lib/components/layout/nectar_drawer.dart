@@ -15,8 +15,8 @@ import 'package:nectar_app/screens/home_screen.dart';
 /// Then a column of menu items.
 ///
 /// The drawer opening hamburger icon is controlled in appBar.
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({super.key});
+class NectarDrawer extends StatelessWidget {
+  const NectarDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {

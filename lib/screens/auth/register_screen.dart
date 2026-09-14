@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:nectar_app/components/buttons/my_regular_button.dart';
-import 'package:nectar_app/components/layout/my_app_bar.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
+import 'package:nectar_app/components/layout/nectar_app_bar.dart';
+import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
@@ -36,8 +36,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: MyAppBar(
+      drawer: NectarDrawer(),
+      appBar: NectarAppBar(
         title: 'Sign up',
       ),
       body: SafeArea(
@@ -47,15 +47,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                MyRegularButton(
+                NectarRegularButton(
                   label: 'Log in with Google',
                   onPressed: () => authFormSubmitGoogleHelper(context),
                   iconData: Icons.g_mobiledata_sharp,
                 ),
                 const SizedBox(height: 24),
-                const MyRegularText('OR'),
+                const NectarRegularText('OR'),
                 const SizedBox(height: 24),
-                const MyRegularText(
+                const NectarRegularText(
                     'A few details to get started with Nectar.'),
                 const SizedBox(height: 24),
                 myTextFormField(
@@ -114,14 +114,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                     ),
                     const Expanded(
-                      child: MyRegularText(
+                      child: NectarRegularText(
                         'I agree to Nectar\'s Terms of Service and Privacy Policy.',
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                MyRegularButton(
+                NectarRegularButton(
                   label: 'Sign up to Nectar',
                   onPressed: _isAgreementChecked
                       ? () => authFormSubmitHelper(

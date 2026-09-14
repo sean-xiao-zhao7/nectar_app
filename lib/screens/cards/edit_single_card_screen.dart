@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:nectar_app/components/buttons/my_regular_button.dart';
-import 'package:nectar_app/components/layout/my_scaffold_container.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
+import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/components/util/nectar_loading_indicator.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
@@ -168,7 +168,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
-                      MyRegularText(
+                      NectarRegularText(
                         'Other than the main name, other fields can be filled out later if you need.',
                         textAlign: TextAlign.center,
                       ),
@@ -202,7 +202,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               ],
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Personal'),
+                            NectarRegularText('Personal'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -242,7 +242,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Company'),
+                            NectarRegularText('Company'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -276,7 +276,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Social Media'),
+                            NectarRegularText('Social Media'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -318,7 +318,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Address'),
+                            NectarRegularText('Address'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -412,7 +412,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                                 EdgeInsets.only(left: 10, right: 10, bottom: 0),
                             padding: EdgeInsets.only(
                                 left: 10, right: 10, bottom: 10),
-                            child: MyRegularButton(
+                            child: NectarRegularButton(
                                 label: 'Complete editing card',
                                 iconData: Icons.done_sharp,
                                 onPressed: () => editCardFormHelper(

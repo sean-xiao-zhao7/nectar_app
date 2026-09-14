@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:nectar_app/components/buttons/my_regular_button.dart';
-import 'package:nectar_app/components/layout/my_app_bar.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
+import 'package:nectar_app/components/layout/nectar_app_bar.dart';
+import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
@@ -33,8 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
-      appBar: MyAppBar(
+      drawer: NectarDrawer(),
+      appBar: NectarAppBar(
         title: 'Log in',
       ),
       body: SafeArea(
@@ -44,15 +44,15 @@ class _LoginScreenState extends State<LoginScreen> {
             key: formKey,
             child: Column(
               children: <Widget>[
-                const MyRegularText('Access your Nectar account.'),
+                const NectarRegularText('Access your Nectar account.'),
                 const SizedBox(height: 24),
-                MyRegularButton(
+                NectarRegularButton(
                   label: 'Log in with Google',
                   onPressed: () => authFormSubmitGoogleHelper(context),
                   iconData: Icons.g_mobiledata_sharp,
                 ),
                 const SizedBox(height: 24),
-                const MyRegularText('OR'),
+                const NectarRegularText('OR'),
                 const SizedBox(height: 24),
                 myTextFormField(
                   context: context,
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
                 const SizedBox(height: 24),
-                MyRegularButton(
+                NectarRegularButton(
                   label: 'Log in to Nectar',
                   onPressed: () => authFormSubmitHelper(
                       context,
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           )
                         },
-                    child: MyRegularText('Sign up here instead.'))
+                    child: NectarRegularText('Sign up here instead.'))
               ],
             ),
           ),

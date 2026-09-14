@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:nectar_app/components/buttons/my_regular_button.dart';
-import 'package:nectar_app/components/layout/my_app_bar.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
+import 'package:nectar_app/components/layout/nectar_app_bar.dart';
+import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
@@ -101,7 +101,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: MyRegularText(
+                content: NectarRegularText(
               'Added a new card to your collection.',
               color: Theme.of(context).colorScheme.onSecondary,
             )),
@@ -120,7 +120,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                  content: MyRegularText(
+                  content: NectarRegularText(
                       'Error adding card. Please try again later.')),
             );
           }
@@ -177,7 +177,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
                     return ListView(shrinkWrap: true, children: [
-                      MyRegularText(
+                      NectarRegularText(
                         'Please fill in some details for your new card. Other than the main name, other fields can be filled out later if you need.',
                       ),
                       SizedBox(
@@ -198,7 +198,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                               ],
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Optional info below'),
+                            NectarRegularText('Optional info below'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -305,8 +305,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
           }
 
           return Scaffold(
-              drawer: MyDrawer(),
-              appBar: MyAppBar(
+              drawer: NectarDrawer(),
+              appBar: NectarAppBar(
                 title: 'Add a new card',
               ),
               body: Column(children: <Widget>[
@@ -319,7 +319,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                       mainAxisAlignment: MainAxisAlignment.center,
                       spacing: 30,
                       children: [
-                        MyRegularButton(
+                        NectarRegularButton(
                           parentIsLoading: isLoading,
                           onPressed: () {
                             setState(() {
@@ -331,7 +331,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                           iconData: Icons.image_sharp,
                           label: 'Generate from an image',
                         ),
-                        MyRegularButton(
+                        NectarRegularButton(
                           parentIsLoading: isLoading,
                           onPressed: () {
                             setState(() {
@@ -373,7 +373,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                               EdgeInsets.only(left: 15, right: 15, bottom: 5),
                           padding:
                               EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                          child: MyRegularButton(
+                          child: NectarRegularButton(
                               label: 'Complete adding a new card',
                               iconData: Icons.done_sharp,
                               onPressed: () => addNewCardFormHelper(

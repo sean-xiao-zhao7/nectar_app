@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/layout/my_drawer.dart';
-import 'package:nectar_app/components/layout/my_app_bar.dart';
+import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/layout/nectar_app_bar.dart';
 
 // Custom scaffold
 //
@@ -21,8 +21,8 @@ class NectarScaffoldContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: MyDrawer(),
-        appBar: MyAppBar(
+        drawer: NectarDrawer(),
+        appBar: NectarAppBar(
           title: title,
           appBarLead: appBarLead,
           appBarActions: appBarActions,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyContainer extends StatelessWidget {
+class NectarContainer extends StatelessWidget {
   final Widget child;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? margin;
 
-  const MyContainer(
+  const NectarContainer(
       {super.key, required this.child, this.alignment, this.margin});
 
   @override

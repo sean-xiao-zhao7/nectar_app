@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 /// Default button for Nectar
 ///
 /// Based on ElevatedButton.
 /// If [isFullWidth] is true, SizedBox wraps the ElevatedButton.
-/// [MyRegularText] is the label.
-class MyRegularButton extends StatefulWidget {
+/// [NectarRegularText] is the label.
+class NectarRegularButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isFullWidth;
@@ -17,7 +17,7 @@ class MyRegularButton extends StatefulWidget {
   final bool? hasDelay;
   final bool parentIsLoading;
 
-  const MyRegularButton(
+  const NectarRegularButton(
       {super.key,
       required this.label,
       required this.onPressed,
@@ -28,10 +28,10 @@ class MyRegularButton extends StatefulWidget {
       this.parentIsLoading = false});
 
   @override
-  State<MyRegularButton> createState() => _MyRegularButtonState();
+  State<NectarRegularButton> createState() => _NectarRegularButtonState();
 }
 
-class _MyRegularButtonState extends State<MyRegularButton> {
+class _NectarRegularButtonState extends State<NectarRegularButton> {
   // _isLoading is only used for a 1 second delay, this overrides parent's isLoading
   bool _isLoading = false;
 
@@ -60,7 +60,7 @@ class _MyRegularButtonState extends State<MyRegularButton> {
           padding: widget.padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
           backgroundColor: Theme.of(context).colorScheme.primaryContainer),
-      label: MyLargeText(
+      label: NectarLargeText(
         widget.label,
         color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),

@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 import 'package:nectar_app/models/nectar_user.dart';
 import 'package:nectar_app/screens/home_screen.dart';
@@ -32,7 +32,7 @@ void authFormSubmitHelper(
   if (resultMessage.isEmpty) {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: MyRegularText(successText)),
+        SnackBar(content: NectarRegularText(successText)),
       );
 
       Navigator.of(context).push(

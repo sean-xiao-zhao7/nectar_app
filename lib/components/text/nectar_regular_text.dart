@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Text in basic areas.
 /// 18 font size as default.
-class MyLargeText extends StatelessWidget {
+class NectarRegularText extends StatelessWidget {
   final String text;
   final TextAlign? textAlign;
   final int? maxLines;
@@ -11,15 +11,15 @@ class MyLargeText extends StatelessWidget {
   final double? fontSize;
   final FontWeight? fontWeight;
 
-  const MyLargeText(
+  const NectarRegularText(
     this.text, {
     super.key,
     this.textAlign,
     this.maxLines,
-    this.overflow,
+    this.overflow = TextOverflow.fade,
     this.color,
-    this.fontSize = 18,
-    this.fontWeight = FontWeight.w600,
+    this.fontSize = 16,
+    this.fontWeight,
   });
 
   @override

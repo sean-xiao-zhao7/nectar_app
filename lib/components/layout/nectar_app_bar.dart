@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? appBarLead;
   final PreferredSizeWidget? appBarBottom;
   final List<Widget>? appBarActions;
 
-  const MyAppBar(
+  const NectarAppBar(
       {super.key,
       this.title = 'Nectar',
       this.appBarActions,
@@ -26,7 +26,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
       ),
       actions: appBarActions,
-      title: MyLargeText(
+      title: NectarLargeText(
         color: Theme.of(context).colorScheme.secondary,
         title,
       ),

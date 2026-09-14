@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/layout/my_container.dart';
-import 'package:nectar_app/components/text/my_large_text.dart';
-import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/layout/nectar_container.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/cards/single_card_screen.dart';
 
@@ -29,7 +29,7 @@ class SingleCardListPreview extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
-                child: MyRegularText(nectarCard.companyInfo['companyName']!))
+                child: NectarRegularText(nectarCard.companyInfo['companyName']!))
           ]),
         if (nectarCard.companyInfo['businessType'] != '')
           Row(spacing: 10, children: [
@@ -38,7 +38,7 @@ class SingleCardListPreview extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
-                child: MyRegularText(nectarCard.companyInfo['businessType']!))
+                child: NectarRegularText(nectarCard.companyInfo['businessType']!))
           ]),
         if (nectarCard.personalInfo['firstName'] != '')
           Row(spacing: 10, children: [
@@ -47,7 +47,7 @@ class SingleCardListPreview extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
-              child: MyRegularText(
+              child: NectarRegularText(
                   "${nectarCard.personalInfo['firstName']!} ${nectarCard.personalInfo['lastName']!}"),
             )
           ]),
@@ -63,14 +63,14 @@ class SingleCardListPreview extends StatelessWidget {
           ),
         );
       },
-      child: MyContainer(
+      child: NectarContainer(
         margin: EdgeInsets.only(bottom: 20),
         child: SizedBox(
             height: 170,
             child: Column(
               spacing: 10,
               children: [
-                MyLargeText(
+                NectarLargeText(
                   nectarCard.mainName,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
