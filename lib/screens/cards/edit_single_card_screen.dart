@@ -4,10 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nectar_app/components/buttons/my_regular_button.dart';
 import 'package:nectar_app/components/layout/my_scaffold_container.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
+import 'package:nectar_app/components/util/nectar_loading_indicator.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
+import 'package:nectar_app/helpers/ui_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
+import 'package:nectar_app/screens/home_screen.dart';
 
 /// Edit an exiting Nectar card for current user
 ///
@@ -23,6 +27,7 @@ class EditSingleCardScreen extends StatefulWidget {
 }
 
 class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
+  // form vars
   final _formKey = GlobalKey<FormState>();
 
   final _mainNameController = TextEditingController();
@@ -49,6 +54,9 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
   final _postalCodeController = TextEditingController();
+
+  // isLoading trigger
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -109,6 +117,27 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
     super.dispose();
   }
 
+  // Delete nectar card from database
+  void deleteCard() {
+    setState(() {
+      _isLoading = true;
+    });
+    deleteSingleCard(widget.nectarCard.cardId, widget.nectarCard.ownerUserId)
+        .then((message) {
+      setState(() {
+        _isLoading = false;
+      });
+      if (mounted) {
+        nectarSnackBar(context, 'Card deleted.');
+        myNavigate(context, HomeScreen());
+      }
+    }).catchError((message) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
@@ -161,13 +190,12 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               ],
                             ),
                             const SizedBox(height: 24),
-                            MyRegularText('Optional info below'),
-                            const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
                               controller: _shortDescriptionController,
                               labelText: 'Short description',
                               capitalize: true,
+                              maxLines: 3,
                               textInputAction: TextInputAction.next,
                               validators: <FormFieldValidatorFn>[
                                 FormValidators.required('Short description'),
@@ -348,78 +376,87 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
               ),
               appBarActions: [
                 IconButton(
-                  icon: const Icon(Icons.delete_sharp),
-                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.delete_forever_sharp,
+                    color: Colors.red,
+                  ),
+                  onPressed: () => deleteCard(),
                 ),
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Container(
-                          margin: EdgeInsets.only(bottom: 20),
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.12),
-                                  blurRadius: 3,
-                                  offset: Offset(0, 3),
-                                ),
-                              ]),
-                          child: widgetTree),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                      padding: EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                      child: MyRegularButton(
-                          label: 'Complete editing card',
-                          iconData: Icons.done_sharp,
-                          onPressed: () => editCardFormHelper(
-                              context,
-                              _formKey,
-                              {
-                                'mainName': _mainNameController.text,
-                                'shortDescription':
-                                    _shortDescriptionController.text,
-                                'personalInfo': {
-                                  'firstName': _firstNameController.text,
-                                  'lastName': _lastNameController.text,
-                                  'email': _emailController.text,
-                                  'phone': _phoneController.text,
-                                },
-                                'companyInfo': {
-                                  'companyName': _companyNameController.text,
-                                  'businessType': _businessTypeController.text,
-                                  'role': _roleController.text,
-                                  'department': _departmentController.text,
-                                },
-                                'socialMedia': {
-                                  'website': _websiteController.text,
-                                  'linkedIn': _linkedInController.text,
-                                  'twitter': _twitterController.text,
-                                  'instagram': _instagramController.text,
-                                  'facebook': _facebookController.text,
-                                },
-                                'addressInfo': {
-                                  'address': _streetController.text,
-                                  'city': _cityController.text,
-                                  'state': _stateController.text,
-                                  'country': _countryController.text,
-                                  'postal': _postalCodeController.text,
-                                },
-                                'uid': snapshotAuth.data!.uid,
-                              },
-                              'Edit card successful',
-                              widget.nectarCard.cardId)),
-                    ),
-                    Container(
-                        padding: EdgeInsets.only(bottom: 50),
-                        child: MyRegularText('\u00a9 2026 Nectar Inc.'))
-                  ]));
+                  children: _isLoading
+                      ? [Expanded(child: Nectarloadingindicator())]
+                      : [
+                          Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(bottom: 20),
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black
+                                            .withValues(alpha: 0.12),
+                                        blurRadius: 3,
+                                        offset: Offset(0, 3),
+                                      ),
+                                    ]),
+                                child: widgetTree),
+                          ),
+                          Container(
+                            margin:
+                                EdgeInsets.only(left: 10, right: 10, bottom: 0),
+                            padding: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 10),
+                            child: MyRegularButton(
+                                label: 'Complete editing card',
+                                iconData: Icons.done_sharp,
+                                onPressed: () => editCardFormHelper(
+                                    context,
+                                    _formKey,
+                                    {
+                                      'mainName': _mainNameController.text,
+                                      'shortDescription':
+                                          _shortDescriptionController.text,
+                                      'personalInfo': {
+                                        'firstName': _firstNameController.text,
+                                        'lastName': _lastNameController.text,
+                                        'email': _emailController.text,
+                                        'phone': _phoneController.text,
+                                      },
+                                      'companyInfo': {
+                                        'companyName':
+                                            _companyNameController.text,
+                                        'businessType':
+                                            _businessTypeController.text,
+                                        'role': _roleController.text,
+                                        'department':
+                                            _departmentController.text,
+                                      },
+                                      'socialMedia': {
+                                        'website': _websiteController.text,
+                                        'linkedIn': _linkedInController.text,
+                                        'twitter': _twitterController.text,
+                                        'instagram': _instagramController.text,
+                                        'facebook': _facebookController.text,
+                                      },
+                                      'addressInfo': {
+                                        'address': _streetController.text,
+                                        'city': _cityController.text,
+                                        'state': _stateController.text,
+                                        'country': _countryController.text,
+                                        'postal': _postalCodeController.text,
+                                      },
+                                      'uid': snapshotAuth.data!.uid,
+                                    },
+                                    'Edit card successful',
+                                    widget.nectarCard.cardId)),
+                          ),
+                        ]));
         });
   }
 }

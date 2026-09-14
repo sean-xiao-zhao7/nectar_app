@@ -154,3 +154,15 @@ Future<List<NectarCard>> fetchUserAllCards(String userId,
         'Unable to fetch cards for user $userId from Firebase Realtime Database.\n${e.message}');
   }
 }
+
+/// Delete a single card
+Future<void> deleteSingleCard(String cardId, String uid,
+    {bool isOwnCard = false}) async {
+  try {
+    final cardRef = FirebaseDatabase.instance.ref(
+        '${isOwnCard ? 'user_owned_cards/' : 'cards_collection/'}$uid/$cardId');
+    await cardRef.remove();
+  } on FirebaseException catch (_) {
+    rethrow;
+  }
+}

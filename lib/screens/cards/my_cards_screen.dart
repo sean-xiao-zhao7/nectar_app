@@ -97,7 +97,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [widgetTree, MyScreenBottom()]));
+                  children: [widgetTree, NectarFooter()]));
         });
   }
 }

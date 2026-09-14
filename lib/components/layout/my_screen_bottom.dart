@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/components/text/my_regular_text.dart';
 
-class MyScreenBottom extends StatelessWidget {
-  const MyScreenBottom({super.key});
+class NectarFooter extends StatelessWidget {
+  const NectarFooter({super.key});
 
   @override
   Widget build(BuildContext context) {

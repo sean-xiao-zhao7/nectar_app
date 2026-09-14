@@ -47,44 +47,49 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (snapshotUserInfo.connectionState ==
                           ConnectionState.done &&
                       snapshotUserInfo.hasData) {
-                    return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        spacing: 30,
-                        children: [
-                          MyLargeText(
-                            'Welcome to Nectar!',
-                            textAlign: TextAlign.center,
-                          ),
-                          MyRegularText(
-                              'Please use the menu to the top left to access the various features of Nectar.'),
-                          NectarDivider(),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                                text: 'Cards Collection',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text: ' contains all cards you have saved.'),
-                          ])),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                                text: 'My Cards',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text:
-                                    ' contains cards representing yourself that you want to share with others.'),
-                          ])),
-                          Text.rich(TextSpan(children: [
-                            TextSpan(
-                                text: 'Add A New Card',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text:
-                                    ' allows you to scan and save a new card.'),
-                          ])),
-                          NectarDivider(),
-                          Text('Enjoy using Nectar!')
-                        ]);
+                    return ListView(children: [
+                      Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          spacing: 30,
+                          children: [
+                            MyLargeText(
+                              'Welcome to Nectar!',
+                              textAlign: TextAlign.center,
+                            ),
+                            MyRegularText(
+                                'Please use the menu to the top left to access the various features of Nectar.'),
+                            NectarDivider(),
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                  text: 'Cards Collection',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: ' contains all cards you have saved.'),
+                            ])),
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                  text: 'My Cards',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text:
+                                      ' contains cards representing yourself that you want to share with others.'),
+                            ])),
+                            Text.rich(TextSpan(children: [
+                              TextSpan(
+                                  text: 'Add A New Card',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text:
+                                      ' allows you to scan and save a new card.'),
+                            ])),
+                            NectarDivider(),
+                            Text('We hope you enjoy using Nectar!')
+                          ])
+                    ]);
                   } else {
                     return Center(child: CircularProgressIndicator());
                   }
@@ -96,20 +101,23 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                        padding: EdgeInsets.all(30),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.12),
-                                blurRadius: 3,
-                                offset: Offset(0, 3),
-                              ),
-                            ]),
-                        child: widgetTree),
-                    MyScreenBottom()
+                    Expanded(
+                      child: Container(
+                          padding: EdgeInsets.all(30),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.12),
+                                  blurRadius: 3,
+                                  offset: Offset(0, 3),
+                                ),
+                              ]),
+                          child: widgetTree),
+                    ),
+                    NectarFooter()
                   ]));
         });
   }

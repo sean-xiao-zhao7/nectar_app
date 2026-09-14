@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-/// Base wrapper around Material TextFormField
+/// Custom text form field
+///
 Widget myTextFormField(
     {required BuildContext context,
     required TextEditingController controller,
@@ -10,7 +11,8 @@ Widget myTextFormField(
     TextInputType? keyboardType,
     bool obscureText = false,
     bool capitalize = false,
-    String? initialValue}) {
+    String? initialValue,
+    int? maxLines}) {
   return TextFormField(
     controller: controller,
     decoration: fieldDecoration(context, labelText),
@@ -22,6 +24,7 @@ Widget myTextFormField(
         capitalize ? TextCapitalization.sentences : TextCapitalization.none,
     style: TextStyle(fontSize: 18),
     initialValue: initialValue,
+    maxLines: maxLines,
   );
 }
 
