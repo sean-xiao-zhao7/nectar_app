@@ -19,6 +19,7 @@ dependencies:
   firebase_ai: ^3.14.1
   image_picker: ^1.2.3
   open_mail: ^1.2.1
+  flutter_contacts: ^2.5.0
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/helpers/ui_helper.dart';
 import 'package:open_mail/open_mail.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
@@ -10,9 +11,9 @@ import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/cards/edit_single_card_screen.dart';
 
-/// Shows a single Nectar card
+/// Show a single Nectar card
 ///
-/// Separates info by personal, company, social, and address.
+/// Separate info by personal, company, social, and address.
 /// If one category of info is empty, omit showing that block.
 /// Links on tap will launch external apps.
 /// Edit screen access is on top right.
@@ -27,6 +28,70 @@ class SingleCardScreen extends StatefulWidget {
 }
 
 class _SingleCardScreenState extends State<SingleCardScreen> {
+  // Use open_mail to launch mail app
+  // Set "to" as email from the DB, don't set other fields
+  Future<bool> _launchEmailApp() async {
+    try {
+      OpenMailAppResult result = await OpenMail.composeNewEmailInMailApp(
+          nativePickerTitle:
+              'Send mail to ${widget.nectarCard.personalInfo['email']!}',
+          emailContent: EmailContent(
+            to: [widget.nectarCard.personalInfo['email']!],
+          ));
+      if (mounted && !result.didOpen && !result.canOpen) {
+        nectarSnackBar(context, 'Unable to launch mail app.');
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      if (mounted) nectarSnackBar(context, e.toString());
+    }
+    return false;
+  }
+
+  // Call phone contacts to add this card
+  Future<void> _addToContacts() async {
+    try {
+      bool permit = await _permitContacts();
+      if (permit) {
+        await FlutterContacts.create(Contact(
+            name: Name(
+                first: widget.nectarCard.personalInfo['firstName'],
+                last: widget.nectarCard.personalInfo['lastName']),
+            emails: [
+              if (widget.nectarCard.personalInfo['email']!.isNotEmpty)
+                Email(address: widget.nectarCard.personalInfo['email']!)
+            ],
+            phones: [
+              if (widget.nectarCard.personalInfo['phone']!.isNotEmpty)
+                Phone(number: widget.nectarCard.personalInfo['phone']!)
+            ]));
+      }
+    } catch (error) {
+      if (mounted) nectarSnackBar(context, error.toString());
+    }
+  }
+
+  // Get permission to add to contacts
+  Future<bool> _permitContacts() async {
+    try {
+      final permit = await FlutterContacts.permissions.request(
+        PermissionType.write,
+      );
+      if (permit != PermissionStatus.granted &&
+          permit != PermissionStatus.limited) {
+        if (mounted) nectarSnackBar(context, 'Contacts access not permitted.');
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      if (mounted) nectarSnackBar(context, error.toString());
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     bool hasName = (widget.nectarCard.personalInfo['firstName'] != '' &&
@@ -37,24 +102,6 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         .any((property) => property.isNotEmpty);
     bool hasAddressInfo = widget.nectarCard.addressInfo.values
         .any((property) => property.isNotEmpty);
-
-    // Use open_mail to launch mail app
-    // Set "to" as email from the DB, don't set other fields
-    Future<void> launchEmailApp() async {
-      try {
-        OpenMailAppResult result = await OpenMail.composeNewEmailInMailApp(
-            nativePickerTitle:
-                'Send mail to ${widget.nectarCard.personalInfo['email']!}',
-            emailContent: EmailContent(
-              to: [widget.nectarCard.personalInfo['email']!],
-            ));
-        if (context.mounted && !result.didOpen && !result.canOpen) {
-          nectarSnackBar(context, 'Unable to launch mail app.');
-        }
-      } catch (e) {
-        if (context.mounted) nectarSnackBar(context, e.toString());
-      }
-    }
 
     return NectarScaffoldContainer(
         title: 'Card Details',
@@ -88,8 +135,21 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                 if (hasName)
-                  NectarLargeText(
-                    'Personal',
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      NectarLargeText(
+                        'Personal',
+                      ),
+                      GestureDetector(
+                        onTap: _addToContacts,
+                        child: Icon(
+                          Icons.contacts_sharp,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 24,
+                        ),
+                      ),
+                    ],
                   ),
                 if (hasName)
                   Row(spacing: 5, children: [
@@ -114,7 +174,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                         size: 24,
                       ),
                       GestureDetector(
-                        onTap: launchEmailApp,
+                        onTap: _launchEmailApp,
                         child: NectarRegularText(
                             widget.nectarCard.personalInfo['email']!),
                       ),
