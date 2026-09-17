@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// An icon and a text side by side
+///
+/// Can use either Flutter or FontAwesome icons
 class NectarIconRow extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -11,8 +13,8 @@ class NectarIconRow extends StatelessWidget {
 
   const NectarIconRow(
       {super.key,
-      this.icon = Icons.abc,
-      this.iconFirst = true,
+      this.icon = Icons.abc, // placeholder icon is ABC
+      this.iconFirst = true, // change icon priority
       this.faIconData,
       required this.label});
 
@@ -26,12 +28,13 @@ class NectarIconRow extends StatelessWidget {
           )
         : FaIcon(
             faIconData,
-            size: 24,
+            size: 22,
             color: Theme.of(context).colorScheme.secondary,
           );
 
     return Row(
-      spacing: 5,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: faIconData == null ? 5 : 10,
       children: [
         if (iconFirst) iconWidget,
         Text(label),

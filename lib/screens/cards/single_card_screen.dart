@@ -268,6 +268,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                           'https://x.com/${widget.nectarCard.socialMedia['twitter']}');
                     },
                     child: NectarIconRow(
+                        faIconData: FontAwesomeIcons.twitter,
                         label:
                             'x.com/${widget.nectarCard.socialMedia['twitter']}'),
                   ),
@@ -277,8 +278,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                       _launchSocialLink(
                           'https://instagram.com/${widget.nectarCard.socialMedia['instagram']}');
                     },
-                    child: NectarRegularText(
-                        'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
+                    child: NectarIconRow(
+                        faIconData: FontAwesomeIcons.instagram,
+                        label:
+                            'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
                   ),
                 if (widget.nectarCard.socialMedia['facebook'] != '')
                   GestureDetector(
@@ -286,8 +289,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                       _launchSocialLink(
                           'https://facebook.com/${widget.nectarCard.socialMedia['facebook']}');
                     },
-                    child: NectarRegularText(
-                        'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
+                    child: NectarIconRow(
+                        faIconData: FontAwesomeIcons.facebook,
+                        label:
+                            'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
                   ),
                 if (hasAddressInfo)
                   Divider(
