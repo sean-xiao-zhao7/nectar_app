@@ -137,9 +137,9 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                   },
               icon: Icon(Icons.edit_sharp))
         ],
-        child: ListView(children: <Widget>[
-          NectarContainer(
-            child: Column(
+        child: NectarContainer(
+            child: ListView(children: <Widget>[
+          Column(
               spacing: 20,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -287,9 +287,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                 // if (widget.nectarCard.companyInfo['department'] != '')
                 //   NectarRegularText(
                 //       'Department: ${widget.nectarCard.companyInfo['department']}'),
-              ],
-            ),
-          ),
-        ]));
+              ])
+        ])));
   }
 }
