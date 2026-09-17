@@ -245,8 +245,18 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                       _launchSocialLink(
                           widget.nectarCard.socialMedia['website']!);
                     },
-                    child: NectarRegularText(
-                        '${widget.nectarCard.socialMedia['website']}'),
+                    child: Row(
+                      spacing: 5,
+                      children: [
+                        Icon(
+                          Icons.link_sharp,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 24,
+                        ),
+                        NectarRegularText(
+                            '${widget.nectarCard.socialMedia['website']}'),
+                      ],
+                    ),
                   ),
                 if (widget.nectarCard.socialMedia['linkedin'] != '')
                   GestureDetector(
