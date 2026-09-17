@@ -1,8 +1,8 @@
 name: nectar_app
-description: Nectar - a virtual business card.
+description: Nectar - Virtual Cards.
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -10,16 +10,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_contacts: ^2.5.0
   cupertino_icons: ^1.0.8
-  google_fonts: ^8.1.0 # GoogleFonts downloads fonts on-demand, reducing app bundle size.
+  google_fonts: ^8.1.0
+  google_sign_in: ^7.2.0
   firebase_core: ^4.11.0
   firebase_auth: ^6.1.0
   firebase_database: ^12.1.1
-  google_sign_in: ^7.2.0
   firebase_ai: ^3.14.1
   image_picker: ^1.2.3
   open_mail: ^1.2.1
-  flutter_contacts: ^2.5.0
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

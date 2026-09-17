@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/helpers/ui_helper.dart';
-import 'package:open_mail/open_mail.dart';
+
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:open_mail/open_mail.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
+import 'package:nectar_app/helpers/ui_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/cards/edit_single_card_screen.dart';
 
@@ -40,6 +42,23 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
           ));
       if (mounted && !result.didOpen && !result.canOpen) {
         nectarSnackBar(context, 'Unable to launch mail app.');
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      if (mounted) nectarSnackBar(context, e.toString());
+    }
+    return false;
+  }
+
+  // Use url_launcher to launch phone app
+  Future<bool> _launchPhoneApp() async {
+    try {
+      bool result = await launchUrl(
+          Uri(scheme: 'tel', path: widget.nectarCard.personalInfo['phone']!));
+      if (mounted && !result) {
+        nectarSnackBar(context, 'Unable to launch phone app.');
         return false;
       }
 
@@ -93,12 +112,12 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         widget.nectarCard.personalInfo['lastName'] != '');
     bool hasPersonalInfo = widget.nectarCard.personalInfo.values
         .any((property) => property.isNotEmpty);
-    bool hasCompanyInfo = widget.nectarCard.companyInfo.values
-        .any((property) => property.isNotEmpty);
     bool hasSocialInfo = widget.nectarCard.socialMedia.values
         .any((property) => property.isNotEmpty);
     bool hasAddressInfo = widget.nectarCard.addressInfo.values
         .any((property) => property.isNotEmpty);
+    // bool hasCompanyInfo = widget.nectarCard.companyInfo.values
+    //     .any((property) => property.isNotEmpty);
 
     return NectarScaffoldContainer(
         title: 'Card Details',
@@ -146,7 +165,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                         GestureDetector(
                           onTap: _addToContacts,
                           child: Icon(
-                            Icons.contacts_sharp,
+                            Icons.bookmark_add_sharp,
                             color: Theme.of(context).colorScheme.secondary,
                             size: 24,
                           ),
@@ -183,35 +202,18 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                     ],
                   ),
                 if (widget.nectarCard.personalInfo['phone'] != '')
-                  Row(spacing: 5, children: [
-                    Icon(
-                      Icons.phone_sharp,
-                      color: Theme.of(context).colorScheme.secondary,
-                      size: 24,
-                    ),
-                    NectarRegularText(widget.nectarCard.personalInfo['phone']!),
-                  ]),
-                if (hasCompanyInfo)
-                  Divider(
-                    height: 5,
-                    color: Theme.of(context).colorScheme.primary,
+                  GestureDetector(
+                    onTap: _launchPhoneApp,
+                    child: Row(spacing: 5, children: [
+                      Icon(
+                        Icons.phone_sharp,
+                        color: Theme.of(context).colorScheme.secondary,
+                        size: 24,
+                      ),
+                      NectarRegularText(
+                          widget.nectarCard.personalInfo['phone']!),
+                    ]),
                   ),
-                if (hasCompanyInfo)
-                  NectarLargeText(
-                    'Company',
-                  ),
-                if (widget.nectarCard.companyInfo['companyName'] != '')
-                  NectarRegularText(
-                      '${widget.nectarCard.companyInfo['companyName']}'),
-                if (widget.nectarCard.companyInfo['businessType'] != '')
-                  NectarRegularText(
-                      '${widget.nectarCard.companyInfo['businessType']}'),
-                if (widget.nectarCard.companyInfo['role'] != '')
-                  NectarRegularText(
-                      'Role: ${widget.nectarCard.companyInfo['role']}'),
-                if (widget.nectarCard.companyInfo['department'] != '')
-                  NectarRegularText(
-                      'Department: ${widget.nectarCard.companyInfo['department']}'),
                 if (hasSocialInfo)
                   Divider(
                     height: 5,
@@ -260,6 +262,31 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                 if (widget.nectarCard.addressInfo['postalCode'] != '')
                   NectarRegularText(
                       'Postal: ${widget.nectarCard.addressInfo['postalCode']}'),
+                // if (hasCompanyInfo)
+                //   Divider(
+                //     height: 5,
+                //     color: Theme.of(context).colorScheme.primary,
+                //   ),
+                // if (hasCompanyInfo)
+                //   NectarLargeText(
+                //     'Details',
+                //   ),
+                // if (widget.nectarCard.companyInfo['companyName'] != '')
+                //   NectarRegularText(
+                //       '${widget.nectarCard.companyInfo['companyName']}'),
+                // if (widget.nectarCard.companyInfo['businessType'] != '')
+                //   NectarRegularText(
+                //       '${widget.nectarCard.companyInfo['businessType']}'),
+                // if (widget.nectarCard.companyInfo['role'] != '')
+                //   Text.rich(TextSpan(children: [
+                //     TextSpan(
+                //         text: 'Role: ',
+                //         style: TextStyle(fontWeight: FontWeight.bold)),
+                //     TextSpan(text: widget.nectarCard.companyInfo['role']!),
+                //   ])),
+                // if (widget.nectarCard.companyInfo['department'] != '')
+                //   NectarRegularText(
+                //       'Department: ${widget.nectarCard.companyInfo['department']}'),
               ],
             ),
           ),
