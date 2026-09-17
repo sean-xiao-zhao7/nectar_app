@@ -13,13 +13,13 @@ Future<void> addNewCardFormHelper(
     GlobalKey<FormState> formKey,
     Map<String, dynamic> fields,
     String successText,
-    {bool fetchOwnedCards = true}) async {
+    {bool isOwnCard = true}) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
 
   final resultMessage =
-      await addSingleCardDB(fields, fetchOwnedCards: fetchOwnedCards);
+      await addSingleCardDB(fields, isOwnCard: isOwnCard);
   if (!context.mounted) {
     return;
   }
@@ -31,7 +31,7 @@ Future<void> addNewCardFormHelper(
 
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => fetchOwnedCards
+        builder: (_) => isOwnCard
             ? const MyCardsScreen()
             : const CardsCollectionScreen(),
       ),
@@ -48,12 +48,12 @@ Future<void> addNewCardFormHelper(
 ///
 ///
 Future<String> addSingleCardDB(Map<String, dynamic> fields,
-    {bool fetchOwnedCards = true}) async {
+    {bool isOwnCard = true}) async {
   String resultMessage = '';
   try {
     final newCardRef = FirebaseDatabase.instance
         .ref(
-            "${fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}")
+            "${isOwnCard ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}")
         .push();
     await newCardRef.set(fields);
   } on FirebaseException catch (_) {
@@ -69,13 +69,13 @@ Future<void> editCardFormHelper(
     Map<String, dynamic> fields,
     String successText,
     String cardId,
-    {bool fetchOwnedCards = true}) async {
+    {bool isOwnCard = true}) async {
   if (!formKey.currentState!.validate()) {
     return;
   }
 
   final resultMessage =
-      await _editSingleCard(fields, cardId, fetchOwnedCards: fetchOwnedCards);
+      await _editSingleCard(fields, cardId, isOwnCard: isOwnCard);
   if (!context.mounted) {
     return;
   }
@@ -87,7 +87,7 @@ Future<void> editCardFormHelper(
 
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        builder: (_) => fetchOwnedCards
+        builder: (_) => isOwnCard
             ? const MyCardsScreen()
             : const CardsCollectionScreen(),
       ),
@@ -102,11 +102,11 @@ Future<void> editCardFormHelper(
 
 /// Edit a single card
 Future<String> _editSingleCard(Map<String, dynamic> fields, String cardId,
-    {bool fetchOwnedCards = true}) async {
+    {bool isOwnCard = true}) async {
   String resultMessage = '';
   try {
     final cardRef = FirebaseDatabase.instance.ref(
-        "${fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}/$cardId");
+        "${isOwnCard ? 'user_owned_cards/' : 'cards_collection/'}${fields['uid']}/$cardId");
     await cardRef.update(fields);
   } on FirebaseException catch (_) {
     resultMessage = 'Server error. Please try again later.';
@@ -119,13 +119,13 @@ Future<String> _editSingleCard(Map<String, dynamic> fields, String cardId,
 /// userId is the firebaseAuth id.
 /// Return [] if the user does not have any cards.
 ///
-/// fetchOwnedCards is true by default, if false,
+/// isOwnCard is true by default, if false,
 /// the function fetches card collection of an user instead of cards owned by the user.
 Future<List<NectarCard>> fetchUserAllCards(String userId,
-    {bool fetchOwnedCards = true}) async {
+    {bool isOwnCard = true}) async {
   try {
     final event = await FirebaseDatabase.instance
-        .ref((fetchOwnedCards ? 'user_owned_cards/' : 'cards_collection/') +
+        .ref((isOwnCard ? 'user_owned_cards/' : 'cards_collection/') +
             userId)
         .once();
     if (event.snapshot.exists) {

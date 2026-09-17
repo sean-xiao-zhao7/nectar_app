@@ -71,7 +71,10 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                             addCardButton
                           ]));
                     } else {
-                      return CardsListView(cardsList: snapshotCards.data!);
+                      return CardsListView(
+                        cardsList: snapshotCards.data!,
+                        isOwnCard: true,
+                      );
                     }
                   } else {
                     return NectarContainer(

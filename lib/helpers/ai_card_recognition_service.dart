@@ -95,7 +95,7 @@ You are an entity metadata extractor. Given a URL, handle, or text about an indi
 
       // add AI generated info into firebase DB
       jsonResult['uid'] = uid;
-      await addSingleCardDB(jsonResult, fetchOwnedCards: isOwnCard);
+      await addSingleCardDB(jsonResult, isOwnCard: isOwnCard);
 
       // return a NectarCard class
       NectarCard newCard = NectarCard(

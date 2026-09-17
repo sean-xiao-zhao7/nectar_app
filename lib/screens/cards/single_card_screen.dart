@@ -11,7 +11,9 @@ import 'package:nectar_app/screens/cards/edit_single_card_screen.dart';
 /// Shows a single Nectar card
 class SingleCardScreen extends StatefulWidget {
   final NectarCard nectarCard;
-  const SingleCardScreen({super.key, required this.nectarCard});
+  final bool isOwnCard;
+  const SingleCardScreen(
+      {super.key, this.isOwnCard = false, required this.nectarCard});
 
   @override
   State<StatefulWidget> createState() => _SingleCardScreenState();
@@ -29,6 +31,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                         context,
                         EditSingleCardScreen(
                           nectarCard: widget.nectarCard,
+                          isOwnCard: widget.isOwnCard,
                         ))
                   },
               icon: Icon(Icons.edit_sharp))
@@ -93,7 +96,8 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                   'Social Media',
                 ),
                 if (widget.nectarCard.socialMedia['website'] != '')
-                  NectarRegularText('${widget.nectarCard.socialMedia['website']}'),
+                  NectarRegularText(
+                      '${widget.nectarCard.socialMedia['website']}'),
                 if (widget.nectarCard.socialMedia['linkedin'] != '')
                   NectarRegularText(
                       'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),

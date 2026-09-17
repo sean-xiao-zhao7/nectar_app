@@ -19,8 +19,10 @@ import 'package:nectar_app/screens/home_screen.dart';
 /// The other fields are initially blank, and can be filled out later.
 class EditSingleCardScreen extends StatefulWidget {
   final NectarCard nectarCard;
+  final bool isOwnCard;
 
-  const EditSingleCardScreen({super.key, required this.nectarCard});
+  const EditSingleCardScreen(
+      {super.key, this.isOwnCard = false, required this.nectarCard});
 
   @override
   State<EditSingleCardScreen> createState() => _EditSingleCardScreenState();
@@ -122,7 +124,8 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
     setState(() {
       _isLoading = true;
     });
-    deleteSingleCard(widget.nectarCard.cardId, widget.nectarCard.ownerUserId)
+    deleteSingleCard(widget.nectarCard.cardId, widget.nectarCard.ownerUserId,
+            isOwnCard: widget.isOwnCard)
         .then((message) {
       setState(() {
         _isLoading = false;
@@ -454,7 +457,8 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                                       'uid': snapshotAuth.data!.uid,
                                     },
                                     'Edit card successful',
-                                    widget.nectarCard.cardId)),
+                                    widget.nectarCard.cardId,
+                                    isOwnCard: widget.isOwnCard)),
                           ),
                         ]));
         });

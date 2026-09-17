@@ -404,7 +404,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                                     'uid': snapshotAuth.data!.uid,
                                   },
                                   'Adding new card successful',
-                                  fetchOwnedCards: widget.isOwnCard)),
+                                  isOwnCard: widget.isOwnCard)),
                         ),
                       ]),
                 ])),

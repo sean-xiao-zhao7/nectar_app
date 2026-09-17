@@ -12,7 +12,9 @@ import 'package:nectar_app/screens/cards/single_card_screen.dart';
 // other properties could be empty.
 class SingleCardListPreview extends StatelessWidget {
   final NectarCard nectarCard;
-  const SingleCardListPreview({super.key, required this.nectarCard});
+  final bool isOwnCard;
+  const SingleCardListPreview(
+      {super.key, this.isOwnCard = false, required this.nectarCard});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,8 @@ class SingleCardListPreview extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
-                child: NectarRegularText(nectarCard.companyInfo['companyName']!))
+                child:
+                    NectarRegularText(nectarCard.companyInfo['companyName']!))
           ]),
         if (nectarCard.companyInfo['businessType'] != '')
           Row(spacing: 10, children: [
@@ -38,7 +41,8 @@ class SingleCardListPreview extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             ),
             Expanded(
-                child: NectarRegularText(nectarCard.companyInfo['businessType']!))
+                child:
+                    NectarRegularText(nectarCard.companyInfo['businessType']!))
           ]),
         if (nectarCard.personalInfo['firstName'] != '')
           Row(spacing: 10, children: [
@@ -59,7 +63,10 @@ class SingleCardListPreview extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (context) => SingleCardScreen(nectarCard: nectarCard),
+            builder: (context) => SingleCardScreen(
+              nectarCard: nectarCard,
+              isOwnCard: isOwnCard,
+            ),
           ),
         );
       },
