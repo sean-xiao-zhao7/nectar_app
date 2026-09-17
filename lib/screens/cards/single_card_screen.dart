@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nectar_app/helpers/ui_helper.dart';
+import 'package:open_mail/open_mail.dart';
 
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
@@ -35,6 +37,24 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         .any((property) => property.isNotEmpty);
     bool hasAddressInfo = widget.nectarCard.addressInfo.values
         .any((property) => property.isNotEmpty);
+
+    // Use open_mail to launch mail app
+    // Set "to" as email from the DB, don't set other fields
+    Future<void> launchEmailApp() async {
+      try {
+        OpenMailAppResult result = await OpenMail.composeNewEmailInMailApp(
+            nativePickerTitle:
+                'Send mail to ${widget.nectarCard.personalInfo['email']!}',
+            emailContent: EmailContent(
+              to: [widget.nectarCard.personalInfo['email']!],
+            ));
+        if (context.mounted && !result.didOpen && !result.canOpen) {
+          nectarSnackBar(context, 'Unable to launch mail app.');
+        }
+      } catch (e) {
+        if (context.mounted) nectarSnackBar(context, e.toString());
+      }
+    }
 
     return NectarScaffoldContainer(
         title: 'Card Details',
@@ -93,8 +113,11 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                         color: Theme.of(context).colorScheme.secondary,
                         size: 24,
                       ),
-                      NectarRegularText(
-                          widget.nectarCard.personalInfo['email']!),
+                      GestureDetector(
+                        onTap: launchEmailApp,
+                        child: NectarRegularText(
+                            widget.nectarCard.personalInfo['email']!),
+                      ),
                     ],
                   ),
                 if (widget.nectarCard.personalInfo['phone'] != '')
