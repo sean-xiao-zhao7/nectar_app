@@ -50,7 +50,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
     return false;
   }
 
-  // Call phone contacts to add this card
+  // Launch contacts app to add this card
   Future<void> _addToContacts() async {
     try {
       bool permit = await _permitContacts();
@@ -59,14 +59,9 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
             name: Name(
                 first: widget.nectarCard.personalInfo['firstName'],
                 last: widget.nectarCard.personalInfo['lastName']),
-            emails: [
-              if (widget.nectarCard.personalInfo['email']!.isNotEmpty)
-                Email(address: widget.nectarCard.personalInfo['email']!)
-            ],
-            phones: [
-              if (widget.nectarCard.personalInfo['phone']!.isNotEmpty)
-                Phone(number: widget.nectarCard.personalInfo['phone']!)
-            ]));
+            emails: [Email(address: widget.nectarCard.personalInfo['email']!)],
+            phones: [Phone(number: widget.nectarCard.personalInfo['phone']!)]));
+        if (mounted) nectarSnackBar(context, 'Added to your contacts.');
       }
     } catch (error) {
       if (mounted) nectarSnackBar(context, error.toString());
@@ -94,8 +89,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool hasName = (widget.nectarCard.personalInfo['firstName'] != '' &&
+    bool hasName = (widget.nectarCard.personalInfo['firstName'] != '' ||
         widget.nectarCard.personalInfo['lastName'] != '');
+    bool hasPersonalInfo = widget.nectarCard.personalInfo.values
+        .any((property) => property.isNotEmpty);
     bool hasCompanyInfo = widget.nectarCard.companyInfo.values
         .any((property) => property.isNotEmpty);
     bool hasSocialInfo = widget.nectarCard.socialMedia.values
@@ -129,26 +126,27 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                 ),
                 if (widget.nectarCard.shortDescription != '')
                   NectarRegularText(widget.nectarCard.shortDescription),
-                if (hasName)
+                if (hasPersonalInfo)
                   Divider(
                     height: 5,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                if (hasName)
+                if (hasPersonalInfo)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       NectarLargeText(
                         'Personal',
                       ),
-                      GestureDetector(
-                        onTap: _addToContacts,
-                        child: Icon(
-                          Icons.contacts_sharp,
-                          color: Theme.of(context).colorScheme.secondary,
-                          size: 24,
+                      if (hasName)
+                        GestureDetector(
+                          onTap: _addToContacts,
+                          child: Icon(
+                            Icons.contacts_sharp,
+                            color: Theme.of(context).colorScheme.secondary,
+                            size: 24,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 if (hasName)
