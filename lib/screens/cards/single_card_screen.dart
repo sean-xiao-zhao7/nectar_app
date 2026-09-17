@@ -102,6 +102,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
 
     return NectarScaffoldContainer(
         title: 'Card Details',
+        appBarLead: IconButton(
+          icon: const Icon(Icons.arrow_back_sharp),
+          onPressed: () => Navigator.pop(context),
+        ),
         appBarActions: [
           IconButton(
               onPressed: () => {
