@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:nectar_app/components/text/nectar_icon_row.dart';
 import 'package:open_mail/open_mail.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
@@ -241,31 +243,23 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                   ),
                 if (widget.nectarCard.socialMedia['website'] != '')
                   GestureDetector(
-                    onTap: () {
-                      _launchSocialLink(
-                          widget.nectarCard.socialMedia['website']!);
-                    },
-                    child: Row(
-                      spacing: 5,
-                      children: [
-                        Icon(
-                          Icons.link_sharp,
-                          color: Theme.of(context).colorScheme.secondary,
-                          size: 24,
-                        ),
-                        NectarRegularText(
-                            '${widget.nectarCard.socialMedia['website']}'),
-                      ],
-                    ),
-                  ),
+                      onTap: () {
+                        _launchSocialLink(
+                            widget.nectarCard.socialMedia['website']!);
+                      },
+                      child: NectarIconRow(
+                          label: '${widget.nectarCard.socialMedia['website']}',
+                          icon: Icons.link_sharp)),
                 if (widget.nectarCard.socialMedia['linkedin'] != '')
                   GestureDetector(
                     onTap: () {
                       _launchSocialLink(
                           'https://linkedin.com/${widget.nectarCard.socialMedia['linkedin']}');
                     },
-                    child: NectarRegularText(
-                        'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
+                    child: NectarIconRow(
+                        faIconData: FontAwesomeIcons.linkedin,
+                        label:
+                            'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
                   ),
                 if (widget.nectarCard.socialMedia['twitter'] != '')
                   GestureDetector(
@@ -273,8 +267,9 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                       _launchSocialLink(
                           'https://x.com/${widget.nectarCard.socialMedia['twitter']}');
                     },
-                    child: NectarRegularText(
-                        'x.com/${widget.nectarCard.socialMedia['twitter']}'),
+                    child: NectarIconRow(
+                        label:
+                            'x.com/${widget.nectarCard.socialMedia['twitter']}'),
                   ),
                 if (widget.nectarCard.socialMedia['instagram'] != '')
                   GestureDetector(
