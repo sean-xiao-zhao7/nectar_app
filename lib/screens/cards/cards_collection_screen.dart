@@ -5,7 +5,6 @@ import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 import 'package:nectar_app/components/cards/cards_list_view.dart';
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
-import 'package:nectar_app/components/layout/nectar_footer.dart';
 import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/nav_helper.dart';
@@ -40,8 +39,8 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
               snapshotAuth.hasData) {
             // second futurebuilder fetches card list
             widgetTree = FutureBuilder<List<NectarCard>>(
-                future: fetchUserAllCards(snapshotAuth.data!.uid,
-                    isOwnCard: false),
+                future:
+                    fetchUserAllCards(snapshotAuth.data!.uid, isOwnCard: false),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
                   // switch display elements based on cards
@@ -92,7 +91,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [widgetTree, NectarFooter()]));
+                  children: [widgetTree]));
         });
   }
 }
