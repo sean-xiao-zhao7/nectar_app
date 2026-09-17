@@ -69,6 +69,22 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
     return false;
   }
 
+  // Use url_launcher to launch social media link
+  Future<bool> _launchSocialLink(String link) async {
+    try {
+      bool result = await launchUrl(Uri.parse(link));
+      if (mounted && !result) {
+        nectarSnackBar(context, 'Unable to launch social media.');
+        return false;
+      }
+
+      return true;
+    } catch (e) {
+      if (mounted) nectarSnackBar(context, e.toString());
+    }
+    return false;
+  }
+
   // Launch contacts app to add this card
   Future<void> _addToContacts() async {
     try {
@@ -224,20 +240,50 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                     'Social Media',
                   ),
                 if (widget.nectarCard.socialMedia['website'] != '')
-                  NectarRegularText(
-                      '${widget.nectarCard.socialMedia['website']}'),
+                  GestureDetector(
+                    onTap: () {
+                      _launchSocialLink(
+                          widget.nectarCard.socialMedia['website']!);
+                    },
+                    child: NectarRegularText(
+                        '${widget.nectarCard.socialMedia['website']}'),
+                  ),
                 if (widget.nectarCard.socialMedia['linkedin'] != '')
-                  NectarRegularText(
-                      'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
+                  GestureDetector(
+                    onTap: () {
+                      _launchSocialLink(
+                          'https://linkedin.com/${widget.nectarCard.socialMedia['linkedin']}');
+                    },
+                    child: NectarRegularText(
+                        'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
+                  ),
                 if (widget.nectarCard.socialMedia['twitter'] != '')
-                  NectarRegularText(
-                      'x.com/${widget.nectarCard.socialMedia['twitter']}'),
+                  GestureDetector(
+                    onTap: () {
+                      _launchSocialLink(
+                          'https://x.com/${widget.nectarCard.socialMedia['twitter']}');
+                    },
+                    child: NectarRegularText(
+                        'x.com/${widget.nectarCard.socialMedia['twitter']}'),
+                  ),
                 if (widget.nectarCard.socialMedia['instagram'] != '')
-                  NectarRegularText(
-                      'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
+                  GestureDetector(
+                    onTap: () {
+                      _launchSocialLink(
+                          'https://instagram.com/${widget.nectarCard.socialMedia['instagram']}');
+                    },
+                    child: NectarRegularText(
+                        'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
+                  ),
                 if (widget.nectarCard.socialMedia['facebook'] != '')
-                  NectarRegularText(
-                      'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
+                  GestureDetector(
+                    onTap: () {
+                      _launchSocialLink(
+                          'https://facebook.com/${widget.nectarCard.socialMedia['facebook']}');
+                    },
+                    child: NectarRegularText(
+                        'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
+                  ),
                 if (hasAddressInfo)
                   Divider(
                     height: 5,
