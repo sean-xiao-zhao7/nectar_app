@@ -71,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Password',
                   obscureText: true,
                   textInputAction: TextInputAction.done,
+                  maxLines: 1,
                   validators: <FormFieldValidatorFn>[
                     FormValidators.minLength(6, 'Password'),
                   ],

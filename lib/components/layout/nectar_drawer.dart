@@ -60,7 +60,7 @@ class NectarDrawer extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'Virtual Business Card',
+                          'Virtual Cards Collection',
                           style: profileSubTextStyle,
                         ),
                         SizedBox(

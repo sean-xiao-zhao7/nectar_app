@@ -97,6 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   labelText: 'Password',
                   obscureText: true,
                   textInputAction: TextInputAction.done,
+                  maxLines: 1,
                   validators: <FormFieldValidatorFn>[
                     FormValidators.minLength(6, 'Password'),
                   ],
