@@ -19,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isLoading = false;
   final formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -28,6 +29,28 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> handleLogin({bool isGoogleLogin = false}) async {
+    setState(() {
+      isLoading = true;
+    });
+    if (isGoogleLogin) {
+      await authFormSubmitGoogleHelper(context);
+    } else {
+      authFormSubmitHelper(
+          context,
+          formKey,
+          loginHelper,
+          {
+            'email': _emailController.text,
+            'password': _passwordController.text
+          },
+          'Login successful');
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -48,8 +71,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 NectarRegularButton(
                   label: 'Log in with Google',
-                  onPressed: () => authFormSubmitGoogleHelper(context),
+                  onPressed: () => handleLogin(isGoogleLogin: true),
                   iconData: Icons.g_mobiledata_sharp,
+                  parentIsLoading: isLoading,
                 ),
                 const SizedBox(height: 24),
                 const NectarRegularText('OR'),
@@ -79,15 +103,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 24),
                 NectarRegularButton(
                   label: 'Log in to Nectar',
-                  onPressed: () => authFormSubmitHelper(
-                      context,
-                      formKey,
-                      loginHelper,
-                      {
-                        'email': _emailController.text,
-                        'password': _passwordController.text
-                      },
-                      'Login successful'),
+                  parentIsLoading: isLoading,
+                  onPressed: handleLogin,
                 ),
                 const SizedBox(height: 24),
                 TextButton(

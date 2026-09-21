@@ -131,7 +131,7 @@ Future<String> logoutHelper() async {
 /// Google Sign up / Log in
 
 /// Screen form on-click callback for sign up and log in for Google.
-void authFormSubmitGoogleHelper(BuildContext context) async {
+Future<void> authFormSubmitGoogleHelper(BuildContext context) async {
   final resultMessage = await _authGoogle();
   if (!context.mounted) {
     return;
