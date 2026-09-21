@@ -157,194 +157,196 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
               icon: Icon(Icons.edit_sharp))
         ],
         child: NectarContainer(
+            margin: EdgeInsets.only(bottom: 20),
             child: ListView(children: <Widget>[
-          Column(
-              spacing: 20,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                NectarLargeText(
-                  widget.nectarCard.mainName,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                if (widget.nectarCard.shortDescription != '')
-                  NectarRegularText(widget.nectarCard.shortDescription),
-                if (hasPersonalInfo)
-                  Divider(
-                    height: 5,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                if (hasPersonalInfo)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      NectarLargeText(
-                        'Personal',
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 20,
+                  children: [
+                    NectarLargeText(
+                      widget.nectarCard.mainName,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    if (widget.nectarCard.shortDescription != '')
+                      NectarRegularText(widget.nectarCard.shortDescription),
+                    if (hasPersonalInfo)
+                      Divider(
+                        height: 5,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
-                      if (hasName)
-                        GestureDetector(
-                          onTap: _addToContacts,
-                          child: Icon(
-                            Icons.bookmark_add_sharp,
+                    if (hasPersonalInfo)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          NectarLargeText(
+                            'Personal',
+                          ),
+                          if (hasName)
+                            GestureDetector(
+                              onTap: _addToContacts,
+                              child: Icon(
+                                Icons.bookmark_add_sharp,
+                                color: Theme.of(context).colorScheme.secondary,
+                                size: 24,
+                              ),
+                            ),
+                        ],
+                      ),
+                    if (hasName)
+                      Row(spacing: 5, children: [
+                        Icon(
+                          Icons.person_sharp,
+                          color: Theme.of(context).colorScheme.secondary,
+                          size: 24,
+                        ),
+                        (widget.nectarCard.personalInfo['lastName'] == '')
+                            ? NectarRegularText(
+                                '${widget.nectarCard.personalInfo['firstName']}')
+                            : NectarRegularText(
+                                '${widget.nectarCard.personalInfo['firstName']} ${widget.nectarCard.personalInfo['lastName']}'),
+                      ]),
+                    if (widget.nectarCard.personalInfo['email'] != '')
+                      Row(
+                        spacing: 5,
+                        children: [
+                          Icon(
+                            Icons.email_sharp,
                             color: Theme.of(context).colorScheme.secondary,
                             size: 24,
                           ),
-                        ),
-                    ],
-                  ),
-                if (hasName)
-                  Row(spacing: 5, children: [
-                    Icon(
-                      Icons.person_sharp,
-                      color: Theme.of(context).colorScheme.secondary,
-                      size: 24,
-                    ),
-                    (widget.nectarCard.personalInfo['lastName'] == '')
-                        ? NectarRegularText(
-                            '${widget.nectarCard.personalInfo['firstName']}')
-                        : NectarRegularText(
-                            '${widget.nectarCard.personalInfo['firstName']} ${widget.nectarCard.personalInfo['lastName']}'),
-                  ]),
-                if (widget.nectarCard.personalInfo['email'] != '')
-                  Row(
-                    spacing: 5,
-                    children: [
-                      Icon(
-                        Icons.email_sharp,
-                        color: Theme.of(context).colorScheme.secondary,
-                        size: 24,
+                          GestureDetector(
+                            onTap: _launchEmailApp,
+                            child: NectarRegularText(
+                                widget.nectarCard.personalInfo['email']!),
+                          ),
+                        ],
                       ),
+                    if (widget.nectarCard.personalInfo['phone'] != '')
                       GestureDetector(
-                        onTap: _launchEmailApp,
-                        child: NectarRegularText(
-                            widget.nectarCard.personalInfo['email']!),
+                        onTap: _launchPhoneApp,
+                        child: Row(spacing: 5, children: [
+                          Icon(
+                            Icons.phone_sharp,
+                            color: Theme.of(context).colorScheme.secondary,
+                            size: 24,
+                          ),
+                          NectarRegularText(
+                              widget.nectarCard.personalInfo['phone']!),
+                        ]),
                       ),
-                    ],
-                  ),
-                if (widget.nectarCard.personalInfo['phone'] != '')
-                  GestureDetector(
-                    onTap: _launchPhoneApp,
-                    child: Row(spacing: 5, children: [
-                      Icon(
-                        Icons.phone_sharp,
-                        color: Theme.of(context).colorScheme.secondary,
-                        size: 24,
+                    if (hasSocialInfo)
+                      Divider(
+                        height: 5,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
+                    if (hasSocialInfo)
+                      NectarLargeText(
+                        'Social Media',
+                      ),
+                    if (widget.nectarCard.socialMedia['website'] != '')
+                      GestureDetector(
+                          onTap: () {
+                            _launchSocialLink(
+                                widget.nectarCard.socialMedia['website']!);
+                          },
+                          child: NectarIconRow(
+                              label:
+                                  '${widget.nectarCard.socialMedia['website']}',
+                              icon: Icons.link_sharp)),
+                    if (widget.nectarCard.socialMedia['linkedin'] != '')
+                      GestureDetector(
+                        onTap: () {
+                          _launchSocialLink(
+                              'https://linkedin.com/${widget.nectarCard.socialMedia['linkedin']}');
+                        },
+                        child: NectarIconRow(
+                            faIconData: FontAwesomeIcons.linkedin,
+                            label:
+                                'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
+                      ),
+                    if (widget.nectarCard.socialMedia['twitter'] != '')
+                      GestureDetector(
+                        onTap: () {
+                          _launchSocialLink(
+                              'https://x.com/${widget.nectarCard.socialMedia['twitter']}');
+                        },
+                        child: NectarIconRow(
+                            faIconData: FontAwesomeIcons.twitter,
+                            label:
+                                'x.com/${widget.nectarCard.socialMedia['twitter']}'),
+                      ),
+                    if (widget.nectarCard.socialMedia['instagram'] != '')
+                      GestureDetector(
+                        onTap: () {
+                          _launchSocialLink(
+                              'https://instagram.com/${widget.nectarCard.socialMedia['instagram']}');
+                        },
+                        child: NectarIconRow(
+                            faIconData: FontAwesomeIcons.instagram,
+                            label:
+                                'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
+                      ),
+                    if (widget.nectarCard.socialMedia['facebook'] != '')
+                      GestureDetector(
+                        onTap: () {
+                          _launchSocialLink(
+                              'https://facebook.com/${widget.nectarCard.socialMedia['facebook']}');
+                        },
+                        child: NectarIconRow(
+                            faIconData: FontAwesomeIcons.facebook,
+                            label:
+                                'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
+                      ),
+                    if (hasAddressInfo)
+                      Divider(
+                        height: 5,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    if (hasAddressInfo)
+                      NectarLargeText(
+                        'Location',
+                      ),
+                    if (widget.nectarCard.addressInfo['street'] != '')
                       NectarRegularText(
-                          widget.nectarCard.personalInfo['phone']!),
-                    ]),
-                  ),
-                if (hasSocialInfo)
-                  Divider(
-                    height: 5,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                if (hasSocialInfo)
-                  NectarLargeText(
-                    'Social Media',
-                  ),
-                if (widget.nectarCard.socialMedia['website'] != '')
-                  GestureDetector(
-                      onTap: () {
-                        _launchSocialLink(
-                            widget.nectarCard.socialMedia['website']!);
-                      },
-                      child: NectarIconRow(
-                          label: '${widget.nectarCard.socialMedia['website']}',
-                          icon: Icons.link_sharp)),
-                if (widget.nectarCard.socialMedia['linkedin'] != '')
-                  GestureDetector(
-                    onTap: () {
-                      _launchSocialLink(
-                          'https://linkedin.com/${widget.nectarCard.socialMedia['linkedin']}');
-                    },
-                    child: NectarIconRow(
-                        faIconData: FontAwesomeIcons.linkedin,
-                        label:
-                            'linkedin.com/${widget.nectarCard.socialMedia['linkedin']}'),
-                  ),
-                if (widget.nectarCard.socialMedia['twitter'] != '')
-                  GestureDetector(
-                    onTap: () {
-                      _launchSocialLink(
-                          'https://x.com/${widget.nectarCard.socialMedia['twitter']}');
-                    },
-                    child: NectarIconRow(
-                        faIconData: FontAwesomeIcons.twitter,
-                        label:
-                            'x.com/${widget.nectarCard.socialMedia['twitter']}'),
-                  ),
-                if (widget.nectarCard.socialMedia['instagram'] != '')
-                  GestureDetector(
-                    onTap: () {
-                      _launchSocialLink(
-                          'https://instagram.com/${widget.nectarCard.socialMedia['instagram']}');
-                    },
-                    child: NectarIconRow(
-                        faIconData: FontAwesomeIcons.instagram,
-                        label:
-                            'instagram.com/${widget.nectarCard.socialMedia['instagram']}'),
-                  ),
-                if (widget.nectarCard.socialMedia['facebook'] != '')
-                  GestureDetector(
-                    onTap: () {
-                      _launchSocialLink(
-                          'https://facebook.com/${widget.nectarCard.socialMedia['facebook']}');
-                    },
-                    child: NectarIconRow(
-                        faIconData: FontAwesomeIcons.facebook,
-                        label:
-                            'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
-                  ),
-                if (hasAddressInfo)
-                  Divider(
-                    height: 5,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                if (hasAddressInfo)
-                  NectarLargeText(
-                    'Location',
-                  ),
-                if (widget.nectarCard.addressInfo['street'] != '')
-                  NectarRegularText(
-                      'Street: ${widget.nectarCard.addressInfo['street']}'),
-                if (widget.nectarCard.addressInfo['city'] != '')
-                  NectarRegularText(
-                      'City: ${widget.nectarCard.addressInfo['city']}'),
-                if (widget.nectarCard.addressInfo['state'] != '')
-                  NectarRegularText(
-                      'State/Province: ${widget.nectarCard.addressInfo['state']}'),
-                if (widget.nectarCard.addressInfo['country'] != '')
-                  NectarRegularText(
-                      'Country: ${widget.nectarCard.addressInfo['country']}'),
-                if (widget.nectarCard.addressInfo['postalCode'] != '')
-                  NectarRegularText(
-                      'Postal: ${widget.nectarCard.addressInfo['postalCode']}'),
-                // if (hasCompanyInfo)
-                //   Divider(
-                //     height: 5,
-                //     color: Theme.of(context).colorScheme.primary,
-                //   ),
-                // if (hasCompanyInfo)
-                //   NectarLargeText(
-                //     'Details',
-                //   ),
-                // if (widget.nectarCard.companyInfo['companyName'] != '')
-                //   NectarRegularText(
-                //       '${widget.nectarCard.companyInfo['companyName']}'),
-                // if (widget.nectarCard.companyInfo['businessType'] != '')
-                //   NectarRegularText(
-                //       '${widget.nectarCard.companyInfo['businessType']}'),
-                // if (widget.nectarCard.companyInfo['role'] != '')
-                //   Text.rich(TextSpan(children: [
-                //     TextSpan(
-                //         text: 'Role: ',
-                //         style: TextStyle(fontWeight: FontWeight.bold)),
-                //     TextSpan(text: widget.nectarCard.companyInfo['role']!),
-                //   ])),
-                // if (widget.nectarCard.companyInfo['department'] != '')
-                //   NectarRegularText(
-                //       'Department: ${widget.nectarCard.companyInfo['department']}'),
-              ])
-        ])));
+                          'Street: ${widget.nectarCard.addressInfo['street']}'),
+                    if (widget.nectarCard.addressInfo['city'] != '')
+                      NectarRegularText(
+                          'City: ${widget.nectarCard.addressInfo['city']}'),
+                    if (widget.nectarCard.addressInfo['state'] != '')
+                      NectarRegularText(
+                          'State/Province: ${widget.nectarCard.addressInfo['state']}'),
+                    if (widget.nectarCard.addressInfo['country'] != '')
+                      NectarRegularText(
+                          'Country: ${widget.nectarCard.addressInfo['country']}'),
+                    if (widget.nectarCard.addressInfo['postalCode'] != '')
+                      NectarRegularText(
+                          'Postal: ${widget.nectarCard.addressInfo['postalCode']}'),
+                    // if (hasCompanyInfo)
+                    //   Divider(
+                    //     height: 5,
+                    //     color: Theme.of(context).colorScheme.primary,
+                    //   ),
+                    // if (hasCompanyInfo)
+                    //   NectarLargeText(
+                    //     'Details',
+                    //   ),
+                    // if (widget.nectarCard.companyInfo['companyName'] != '')
+                    //   NectarRegularText(
+                    //       '${widget.nectarCard.companyInfo['companyName']}'),
+                    // if (widget.nectarCard.companyInfo['businessType'] != '')
+                    //   NectarRegularText(
+                    //       '${widget.nectarCard.companyInfo['businessType']}'),
+                    // if (widget.nectarCard.companyInfo['role'] != '')
+                    //   Text.rich(TextSpan(children: [
+                    //     TextSpan(
+                    //         text: 'Role: ',
+                    //         style: TextStyle(fontWeight: FontWeight.bold)),
+                    //     TextSpan(text: widget.nectarCard.companyInfo['role']!),
+                    //   ])),
+                    // if (widget.nectarCard.companyInfo['department'] != '')
+                    //   NectarRegularText(
+                    //       'Department: ${widget.nectarCard.companyInfo['department']}'),
+                  ])
+            ])));
   }
 }

@@ -4,15 +4,20 @@ class NectarContainer extends StatelessWidget {
   final Widget child;
   final AlignmentGeometry? alignment;
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   const NectarContainer(
-      {super.key, required this.child, this.alignment, this.margin});
+      {super.key,
+      required this.child,
+      this.alignment,
+      this.margin,
+      this.padding = const EdgeInsets.all(20)});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: alignment,
-      padding: EdgeInsets.all(20),
+      padding: padding,
       margin: margin,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimary,
