@@ -30,21 +30,33 @@ class AddSingleCardScreen extends StatefulWidget {
 
 class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     with TickerProviderStateMixin {
-  // vars for main form
+  // form vars
   final _formKey = GlobalKey<FormState>();
+
   final _mainNameController = TextEditingController();
+  final _shortDescriptionController = TextEditingController();
+
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
-  final _jobController = TextEditingController();
-  final _companyController = TextEditingController();
+
+  final _companyNameController = TextEditingController();
+  final _businessTypeController = TextEditingController();
+  final _roleController = TextEditingController();
+  final _departmentController = TextEditingController();
+
   final _websiteController = TextEditingController();
-  final _addressController = TextEditingController();
+  final _linkedInController = TextEditingController();
+  final _twitterController = TextEditingController();
+  final _instagramController = TextEditingController();
+  final _facebookController = TextEditingController();
+
+  final _streetController = TextEditingController();
   final _cityController = TextEditingController();
   final _stateController = TextEditingController();
   final _countryController = TextEditingController();
-  final _postalController = TextEditingController();
+  final _postalCodeController = TextEditingController();
 
   // controller for TabBar and TabView
   late final TabController _tabController;
@@ -65,19 +77,29 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   @override
   void dispose() {
     _mainNameController.dispose();
+    _shortDescriptionController.dispose();
+
     _firstNameController.dispose();
     _lastNameController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
-    _jobController.dispose();
-    _companyController.dispose();
+
+    _companyNameController.dispose();
+    _roleController.dispose();
+    _businessTypeController.dispose();
+    _departmentController.dispose();
+
     _websiteController.dispose();
-    _addressController.dispose();
+    _linkedInController.dispose();
+    _twitterController.dispose();
+    _instagramController.dispose();
+    _facebookController.dispose();
+
+    _streetController.dispose();
     _cityController.dispose();
     _stateController.dispose();
     _countryController.dispose();
-    _postalController.dispose();
-    _tabController.dispose();
+    _postalCodeController.dispose();
     super.dispose();
   }
 
@@ -181,7 +203,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             myTextFormField(
                               context: context,
                               controller: _mainNameController,
-                              labelText: 'Main Card Name',
+                              labelText: 'Main name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                               validators: <FormFieldValidatorFn>[
@@ -189,7 +211,16 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                               ],
                             ),
                             const SizedBox(height: 24),
-                            NectarRegularText('Optional info below'),
+                            myTextFormField(
+                              context: context,
+                              controller: _shortDescriptionController,
+                              labelText: 'Short description',
+                              capitalize: true,
+                              maxLines: 3,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            NectarRegularText('Personal'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -223,21 +254,41 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
+                            NectarRegularText('Company'),
+                            const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _jobController,
-                              labelText: 'Job',
+                              controller: _companyNameController,
+                              labelText: 'Company name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _companyController,
-                              labelText: 'Company',
+                              controller: _businessTypeController,
+                              labelText: 'Business type',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _roleController,
+                              labelText: 'Role',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _departmentController,
+                              labelText: 'Department',
+                              capitalize: true,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            NectarRegularText('Social Media'),
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
@@ -249,8 +300,42 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _addressController,
-                              labelText: 'Address',
+                              controller: _linkedInController,
+                              labelText: 'LinkedIn',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _twitterController,
+                              labelText: 'X',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _instagramController,
+                              labelText: 'Instagram',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _facebookController,
+                              labelText: 'Facebook',
+                              keyboardType: TextInputType.url,
+                              textInputAction: TextInputAction.next,
+                            ),
+                            const SizedBox(height: 24),
+                            NectarRegularText('Address'),
+                            const SizedBox(height: 24),
+                            myTextFormField(
+                              context: context,
+                              controller: _streetController,
+                              labelText: 'Street',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
                             ),
@@ -281,7 +366,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             const SizedBox(height: 24),
                             myTextFormField(
                               context: context,
-                              controller: _postalController,
+                              controller: _postalCodeController,
                               labelText: 'Postal code',
                               textInputAction: TextInputAction.done,
                             ),
@@ -372,6 +457,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                                   _formKey,
                                   {
                                     'mainName': _mainNameController.text,
+                                    'shortDescription':
+                                        _shortDescriptionController.text,
                                     'personalInfo': {
                                       'firstName': _firstNameController.text,
                                       'lastName': _lastNameController.text,
@@ -379,18 +466,26 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                                       'phone': _phoneController.text,
                                     },
                                     'companyInfo': {
-                                      'job': _jobController.text,
-                                      'company': _companyController.text,
+                                      'companyName':
+                                          _companyNameController.text,
+                                      'businessType':
+                                          _businessTypeController.text,
+                                      'role': _roleController.text,
+                                      'department': _departmentController.text,
                                     },
                                     'socialMedia': {
                                       'website': _websiteController.text,
+                                      'linkedIn': _linkedInController.text,
+                                      'twitter': _twitterController.text,
+                                      'instagram': _instagramController.text,
+                                      'facebook': _facebookController.text,
                                     },
                                     'addressInfo': {
-                                      'address': _addressController.text,
+                                      'address': _streetController.text,
                                       'city': _cityController.text,
                                       'state': _stateController.text,
                                       'country': _countryController.text,
-                                      'postal': _postalController.text,
+                                      'postal': _postalCodeController.text,
                                     },
                                     'uid': snapshotAuth.data!.uid,
                                   },
