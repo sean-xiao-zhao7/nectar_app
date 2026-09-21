@@ -200,9 +200,6 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               capitalize: true,
                               maxLines: 3,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.required('Short description'),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             NectarRegularText('Personal'),
@@ -213,9 +210,6 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               labelText: 'First name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.required('First name'),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
@@ -224,9 +218,6 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                               labelText: 'Last name',
                               capitalize: true,
                               textInputAction: TextInputAction.next,
-                              validators: <FormFieldValidatorFn>[
-                                FormValidators.required('Last name'),
-                              ],
                             ),
                             const SizedBox(height: 24),
                             myTextFormField(
