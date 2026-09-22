@@ -106,7 +106,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   }
 
   // Call AI service to get schema for an image user provides
-  Future<void> scanCard(String uid, {bool isCamera = false}) async {
+  Future<void> _initImageProcess(String uid, {bool isCamera = false}) async {
     try {
       // analyze image from gallery or camera
       await _getImage(ImageSource.gallery, isCamera: isCamera);
@@ -416,7 +416,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             setState(() {
                               isLoading = true;
                             });
-                            scanCard(snapshotAuth.data!.uid);
+                            _initImageProcess(snapshotAuth.data!.uid);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
                           iconData: Icons.image_sharp,
@@ -428,7 +428,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             setState(() {
                               isLoading = true;
                             });
-                            scanCard(snapshotAuth.data!.uid, isCamera: true);
+                            _initImageProcess(snapshotAuth.data!.uid,
+                                isCamera: true);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
                           iconData: Icons.camera_alt_sharp,
