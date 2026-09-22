@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:camera/camera.dart';
 
 import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 import 'package:nectar_app/components/layout/nectar_app_bar.dart';
@@ -106,13 +108,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   // Call AI service to get schema for an image user provides
   Future<void> scanCard(String uid, {bool isCamera = false}) async {
     try {
-      if (isCamera) {
-        // anaylze image from camera
-        await _launchImagePicker(ImageSource.gallery);
-      } else {
-        // analyze image from gallery
-        await _launchImagePicker(ImageSource.gallery);
-      }
+      // analyze image from gallery or camera
+      await _getImage(ImageSource.gallery, isCamera: isCamera);
 
       if (imageFile == null) {
         setState(() {
@@ -156,18 +153,33 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
     }
   }
 
-  // handle image picking
-  Future<void> _launchImagePicker(ImageSource source) async {
+  // Pick image from gallery or get from camera
+  Future<void> _getImage(ImageSource source, {bool isCamera = false}) async {
     try {
-      final XFile? pickedFile = await _picker.pickImage(
-        source: source,
-        imageQuality: 1,
-      );
+      final XFile? pickedFile;
+      if (isCamera) {
+        // https://docs.flutter.dev/cookbook/plugins/picture-using-camera
+        WidgetsFlutterBinding.ensureInitialized();
+        final cameras = await availableCameras();
+        final firstCamera = cameras.first;
+
+        CameraController controller = CameraController(
+          firstCamera,
+          ResolutionPreset.medium,
+        );
+        await controller.initialize();
+        pickedFile = await controller.takePicture();
+      } else {
+        pickedFile = await _picker.pickImage(
+          source: source,
+          imageQuality: 1,
+        );
+      }
       setState(() {
         imageFile = pickedFile;
       });
-    } catch (e) {
-      // show snack with error
+    } catch (error) {
+      rethrow;
     }
   }
 

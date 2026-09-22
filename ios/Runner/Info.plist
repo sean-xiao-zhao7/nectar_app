@@ -108,5 +108,7 @@
 			<string>sms</string>
 			<string>tel</string>
 		</array>
+		<key>NSCameraUsageDescription</key>
+		<string>To obtain photos for adding info cards within the app.</string>
 	</dict>
 </plist>
