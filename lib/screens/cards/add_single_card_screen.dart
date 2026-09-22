@@ -104,9 +104,16 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
   }
 
   // Call AI service to get schema for an image user provides
-  void scanCard(String uid) {
-    // ask user for image
-    _launchImagePicker(ImageSource.gallery).then((_) {
+  Future<void> scanCard(String uid, {bool isCamera = false}) async {
+    try {
+      if (isCamera) {
+        // anaylze image from camera
+        await _launchImagePicker(ImageSource.gallery);
+      } else {
+        // analyze image from gallery
+        await _launchImagePicker(ImageSource.gallery);
+      }
+
       if (imageFile == null) {
         setState(() {
           isLoading = false;
@@ -114,41 +121,39 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
         return;
       }
       // send image into A.I. service
-      AICardRecognitionService.generateNectarCard(
+      await AICardRecognitionService.generateNectarCard(
         '',
         uid,
         isOwnCard: widget.isOwnCard,
         imagePath: imageFile!.path,
-      ).then((value) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: NectarRegularText(
-              'Added a new card to your collection.',
-              color: Theme.of(context).colorScheme.onSecondary,
-            )),
-          );
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => const CardsCollectionScreen(),
-            ),
-          );
-        }
-      }).onError(
-        (error, stackTrace) {
-          setState(() {
-            isLoading = false;
-          });
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content: NectarRegularText(
-                      'Error adding card. Please try again later.')),
-            );
-          }
-        },
       );
-    });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: NectarRegularText(
+            'Added a new card to your collection.',
+            color: Theme.of(context).colorScheme.onSecondary,
+          )),
+        );
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (_) => const CardsCollectionScreen(),
+          ),
+        );
+      }
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: NectarRegularText(
+                  'Error adding card. Please try again later.')),
+        );
+      }
+    }
   }
 
   // handle image picking
