@@ -145,9 +145,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
       });
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: NectarRegularText(
-                  'Error adding card. Please try again later.')),
+          SnackBar(content: NectarRegularText('Error: $error')),
         );
       }
     }
@@ -430,7 +428,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                             setState(() {
                               isLoading = true;
                             });
-                            scanCard(snapshotAuth.data!.uid);
+                            scanCard(snapshotAuth.data!.uid, isCamera: true);
                           },
                           padding: EdgeInsets.symmetric(vertical: 30),
                           iconData: Icons.camera_alt_sharp,

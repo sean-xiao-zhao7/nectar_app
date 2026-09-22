@@ -94,5 +94,6 @@ ThemeData initTheme(Brightness brightness) {
         dividerColor: nectarWhite,
         unselectedLabelStyle:
             TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-      ));
+      ),
+      snackBarTheme: SnackBarThemeData(backgroundColor: nectarRegularYellow));
 }
