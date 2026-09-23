@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
+import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/models/nectar_user.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
@@ -132,27 +131,34 @@ Future<String> logoutHelper() async {
 
 /// Screen form on-click callback for sign up and log in for Google.
 Future<void> authFormSubmitGoogleHelper(BuildContext context) async {
-  final resultMessage = await _authGoogle();
-  if (!context.mounted) {
-    return;
-  }
+  try {
+    final resultMessage = await _authGoogle();
 
-  if (resultMessage.isEmpty) {
+    if (!context.mounted) {
+      return;
+    }
+
+    if (resultMessage.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Google login successful.')),
+      );
+
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(
+          builder: (_) => const HomeScreen(),
+        ),
+      );
+      return;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Google login successful.')),
+      SnackBar(content: Text(resultMessage)),
     );
-
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const HomeScreen(),
-      ),
+  } catch (error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error.toString())),
     );
-    return;
   }
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(resultMessage)),
-  );
 }
 
 /// Log in / Sign up using Google provider.
@@ -169,7 +175,6 @@ Future<String> _authGoogle() async {
         GoogleAuthProvider.credential(idToken: googleAuth.idToken);
     final firesbaseResult =
         await FirebaseAuth.instance.signInWithCredential(googleCredential);
-    // print(firesbaseResult);
 
     if (firesbaseResult.additionalUserInfo!.isNewUser) {
       await _addUserDB(
@@ -184,6 +189,7 @@ Future<String> _authGoogle() async {
     if (e.code == GoogleSignInExceptionCode.canceled) {
       resultMessage = e.description!;
     }
+    rethrow;
   }
 
   return resultMessage;
