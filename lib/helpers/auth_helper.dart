@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,6 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/models/nectar_user.dart';
+import 'package:nectar_app/nectar_options.dart';
 import 'package:nectar_app/screens/home_screen.dart';
 
 /// Email and password sign up / log in
@@ -168,8 +170,13 @@ Future<void> authFormSubmitGoogleHelper(BuildContext context) async {
 Future<String> _authGoogle() async {
   String resultMessage = '';
   try {
-    final GoogleSignInAccount googleUser =
-        await GoogleSignIn.instance.authenticate();
+    final GoogleSignIn signIn = GoogleSignIn.instance;
+
+    // this line is only needed for android
+    unawaited(signIn.initialize(
+        serverClientId: DefaultNectarOptions.android.clientServerId));
+
+    final GoogleSignInAccount googleUser = await signIn.authenticate();
     final GoogleSignInAuthentication googleAuth = googleUser.authentication;
     final googleCredential =
         GoogleAuthProvider.credential(idToken: googleAuth.idToken);
