@@ -159,8 +159,11 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
         // https://docs.flutter.dev/cookbook/plugins/picture-using-camera
         WidgetsFlutterBinding.ensureInitialized();
         final cameras = await availableCameras();
-        final firstCamera = cameras.first;
+        if (cameras.isEmpty) {
+          throw ('No camera.');
+        }
 
+        final firstCamera = cameras.first;
         CameraController controller = CameraController(
           firstCamera,
           ResolutionPreset.medium,
