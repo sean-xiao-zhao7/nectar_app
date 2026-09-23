@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:197889035376:android:107e5830508fbceedab8b5",
         "android_client_info": {
-          "package_name": "com.nectar.app"
+          "package_name": "com.example.nectar_app"
         }
       },
       "oauth_client": [
@@ -44,7 +44,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:197889035376:android:ab7a2ab0c4e47514dab8b5",
+        "mobilesdk_app_id": "1:197889035376:android:ae4a485411f07b8bdab8b5",
         "android_client_info": {
           "package_name": "com.nectar.app"
         }
