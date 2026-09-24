@@ -17,6 +17,7 @@ class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       leading: Builder(
         builder: (context) => appBarLead != null
             ? appBarLead!
