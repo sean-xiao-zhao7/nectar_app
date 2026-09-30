@@ -47,13 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       label: 'Log in',
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       labelTextColor: Theme.of(context).colorScheme.tertiary,
-                      onPressed: () => myNavigate(context, LoginScreen())),
+                      onPressed: () => nectarNavigate(context, LoginScreen())),
                   NectarRegularButton(
                       label: 'Sign up',
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       labelTextColor: Theme.of(context).colorScheme.tertiary,
                       iconData: Icons.mail_sharp,
-                      onPressed: () => myNavigate(context, RegisterScreen()))
+                      onPressed: () => nectarNavigate(context, RegisterScreen()))
                 ]);
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Nectar Home',
               appBarActions: [
                 IconButton(
-                    onPressed: () => {myNavigate(context, HelpHomeScreen())},
+                    onPressed: () => {nectarNavigate(context, HelpHomeScreen())},
                     icon: Icon(Icons.help_outline_sharp, size: 28,))
               ],
               child: Column(

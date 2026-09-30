@@ -28,7 +28,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
         label: 'Add a card',
         hasDelay: false,
         iconData: Icons.add_sharp,
-        onPressed: () => myNavigate(
+        onPressed: () => nectarNavigate(
             context,
             AddSingleCardScreen(
               isOwnCard: true,
@@ -90,7 +90,7 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
               appBarActions: [
                 IconButton(
                     onPressed: () => {
-                          myNavigate(
+                          nectarNavigate(
                               context,
                               AddSingleCardScreen(
                                 isOwnCard: true,

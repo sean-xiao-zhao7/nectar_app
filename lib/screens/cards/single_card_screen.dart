@@ -147,7 +147,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         appBarActions: [
           IconButton(
               onPressed: () => {
-                    myNavigate(
+                    nectarNavigate(
                         context,
                         EditSingleCardScreen(
                           nectarCard: widget.nectarCard,

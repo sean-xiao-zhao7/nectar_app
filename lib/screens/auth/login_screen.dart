@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
-
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
-
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 /// Log in an existing user
 class LoginScreen extends StatefulWidget {
@@ -56,6 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
       title: 'Log in',
+      appBarActions: [
+        IconButton(
+            onPressed: () => {nectarNavigate(context, HelpHomeScreen())},
+            icon: Icon(Icons.help_outline_sharp))
+      ],
       child: Form(
         key: formKey,
         child: Column(

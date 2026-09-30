@@ -62,7 +62,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                                 hasDelay: false,
                                 iconData: Icons.add_sharp,
                                 onPressed: () =>
-                                    myNavigate(context, AddSingleCardScreen())),
+                                    nectarNavigate(context, AddSingleCardScreen())),
                           ]));
                     } else {
                       return CardsListView(cardsList: snapshotCards.data!);
@@ -81,7 +81,7 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
               appBarActions: [
                 IconButton(
                     onPressed: () => {
-                          myNavigate(
+                          nectarNavigate(
                               context,
                               AddSingleCardScreen(
                                 isOwnCard: false,

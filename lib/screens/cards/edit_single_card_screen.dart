@@ -132,7 +132,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
       });
       if (mounted) {
         nectarSnackBar(context, 'Card deleted.');
-        myNavigate(context, HomeScreen());
+        nectarNavigate(context, HomeScreen());
       }
     }).catchError((message) {
       setState(() {
