@@ -16,6 +16,7 @@ class NectarRegularButton extends StatefulWidget {
   final IconData? iconData;
   final bool? hasDelay;
   final bool parentIsLoading;
+  final Color? backgroundColor;
 
   const NectarRegularButton(
       {super.key,
@@ -25,7 +26,8 @@ class NectarRegularButton extends StatefulWidget {
       this.padding,
       this.iconData = Icons.login_sharp,
       this.hasDelay = true,
-      this.parentIsLoading = false});
+      this.parentIsLoading = false,
+      this.backgroundColor});
 
   @override
   State<NectarRegularButton> createState() => _NectarRegularButtonState();
@@ -34,9 +36,13 @@ class NectarRegularButton extends StatefulWidget {
 class _NectarRegularButtonState extends State<NectarRegularButton> {
   // _isLoading is only used for a 1 second delay, this overrides parent's isLoading
   bool _isLoading = false;
+  Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
+    backgroundColor = widget.backgroundColor ??
+        Theme.of(context).colorScheme.primaryContainer;
+
     final button = ElevatedButton.icon(
       // disable button and show loading spinning if either parent passes an isLoading, or 1 second delay is activated
       onPressed: _isLoading || widget.parentIsLoading
@@ -59,7 +65,7 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
       style: ElevatedButton.styleFrom(
           padding: widget.padding ??
               const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer),
+          backgroundColor: backgroundColor),
       label: NectarLargeText(
         widget.label,
         color: Theme.of(context).colorScheme.onPrimaryContainer,
