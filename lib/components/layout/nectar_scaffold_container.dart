@@ -11,12 +11,13 @@ class NectarScaffoldContainer extends StatelessWidget {
   final String title;
   final List<Widget>? appBarActions;
   final Widget? appBarLead;
-  const NectarScaffoldContainer(
-      {super.key,
-      required this.child,
-      required this.title,
-      this.appBarLead,
-      this.appBarActions});
+  const NectarScaffoldContainer({
+    super.key,
+    this.appBarLead,
+    this.appBarActions,
+    required this.title,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

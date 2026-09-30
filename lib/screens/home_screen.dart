@@ -12,6 +12,7 @@ import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_user.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
+import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -114,6 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
           return NectarScaffoldContainer(
               title: 'Nectar Home',
+              appBarActions: [
+                IconButton(
+                    onPressed: () => {myNavigate(context, HelpHomeScreen())},
+                    icon: Icon(Icons.help_outline_sharp, size: 28,))
+              ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
