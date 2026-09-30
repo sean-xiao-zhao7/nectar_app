@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/layout/nectar_footer.dart';
@@ -7,7 +8,10 @@ import 'package:nectar_app/components/layout/nectar_divider.dart';
 import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/auth_helper.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_user.dart';
+import 'package:nectar_app/screens/auth/login_screen.dart';
+import 'package:nectar_app/screens/auth/register_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -26,17 +30,24 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshotAuth.connectionState == ConnectionState.active &&
               !snapshotAuth.hasData) {
             widgetTree = Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 20,
                 children: [
                   NectarLargeText(
-                    'Welcome to Nectar!',
+                    'Welcome to Nectar',
                   ),
-                  NectarRegularText(
-                      'Sign in to your account by tapping the top left drawer, then "Log in".'),
-                  NectarRegularText(
-                      'Or if you don\'t already have an account, sign up with us today using the "Sign up" option.'),
+                  NectarLargeText(
+                    'Your virtual cards collection.',
+                    textAlign: TextAlign.center,
+                  ),
+                  NectarRegularButton(
+                      label: 'Log in',
+                      onPressed: () => myNavigate(context, LoginScreen())),
+                  NectarRegularButton(
+                      label: 'Sign up',
+                      iconData: Icons.person_sharp,
+                      onPressed: () => myNavigate(context, RegisterScreen()))
                 ]);
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
@@ -97,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return NectarScaffoldContainer(
-              title: 'Nectar',
+              title: 'Nectar Home',
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
