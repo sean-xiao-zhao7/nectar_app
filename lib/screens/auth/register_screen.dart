@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
-import 'package:nectar_app/components/layout/nectar_app_bar.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
-
 import 'package:nectar_app/helpers/auth_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
 
@@ -37,9 +35,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
       title: 'Sign up',
-      appBarLead: NectarAppBar(
-        title: 'Sign up',
-      ),
       child: SafeArea(
         child: Column(
           children: [

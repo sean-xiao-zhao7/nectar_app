@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
 
 import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
-import 'package:nectar_app/components/layout/nectar_app_bar.dart';
-import 'package:nectar_app/components/layout/nectar_drawer.dart';
+import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
@@ -398,12 +396,9 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                 });
           }
 
-          return Scaffold(
-              drawer: NectarDrawer(),
-              appBar: NectarAppBar(
-                title: 'Add a new card',
-              ),
-              body: Column(children: <Widget>[
+          return NectarScaffoldContainer(
+              title: 'Add a new card',
+              child: Column(children: <Widget>[
                 Expanded(
                     // the tabBar is at the bottom of the switchable tab views
                     child: TabBarView(controller: _tabController, children: [

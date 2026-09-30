@@ -7,7 +7,7 @@ import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 import 'package:nectar_app/screens/cards/my_cards_screen.dart';
-import 'package:nectar_app/screens/home_screen.dart';
+import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 /// The main drawer
 ///
@@ -74,24 +74,6 @@ class NectarDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.home_sharp,
-                  size: 34,
-                ),
-                title: Text(
-                  'Home',
-                  style: menuTextStyle,
-                ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const HomeScreen(),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: Icon(
                   Icons.login_sharp,
                   size: 34,
                 ),
@@ -122,6 +104,24 @@ class NectarDrawer extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
                       builder: (_) => const RegisterScreen(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.help_outline_sharp,
+                  size: 32,
+                ),
+                title: Text(
+                  'About Nectar',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => const HelpHomeScreen(),
                     ),
                   );
                 },
