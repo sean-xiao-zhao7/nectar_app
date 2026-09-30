@@ -11,12 +11,10 @@ import 'package:nectar_app/components/text/nectar_regular_text.dart';
 class NectarRegularButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
-  final bool isFullWidth;
   final EdgeInsetsGeometry? padding;
   final IconData? iconData;
-  final bool? hasDelay;
-  final bool parentIsLoading;
-  final Color? backgroundColor;
+  final bool? hasDelay, parentIsLoading, isFullWidth;
+  final Color? backgroundColor, labelTextColor;
 
   const NectarRegularButton(
       {super.key,
@@ -27,7 +25,8 @@ class NectarRegularButton extends StatefulWidget {
       this.iconData = Icons.login_sharp,
       this.hasDelay = true,
       this.parentIsLoading = false,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.labelTextColor});
 
   @override
   State<NectarRegularButton> createState() => _NectarRegularButtonState();
@@ -36,16 +35,18 @@ class NectarRegularButton extends StatefulWidget {
 class _NectarRegularButtonState extends State<NectarRegularButton> {
   // _isLoading is only used for a 1 second delay, this overrides parent's isLoading
   bool _isLoading = false;
-  Color? backgroundColor;
+  Color? backgroundColor, labelTextColor;
 
   @override
   Widget build(BuildContext context) {
     backgroundColor = widget.backgroundColor ??
         Theme.of(context).colorScheme.primaryContainer;
+    labelTextColor = widget.labelTextColor ??
+        Theme.of(context).colorScheme.onPrimaryContainer;
 
     final button = ElevatedButton.icon(
       // disable button and show loading spinning if either parent passes an isLoading, or 1 second delay is activated
-      onPressed: _isLoading || widget.parentIsLoading
+      onPressed: _isLoading || widget.parentIsLoading!
           ? null
           : () {
               if (widget.hasDelay!) {
@@ -68,9 +69,9 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
           backgroundColor: backgroundColor),
       label: NectarLargeText(
         widget.label,
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: labelTextColor,
       ),
-      icon: _isLoading || widget.parentIsLoading
+      icon: _isLoading || widget.parentIsLoading!
           ? SizedBox(
               height: 20,
               width: 20,
@@ -80,10 +81,11 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
           : Icon(
               widget.iconData,
               size: 24,
+              color: widget.labelTextColor ?? labelTextColor,
             ),
     );
 
-    if (widget.isFullWidth) {
+    if (widget.isFullWidth!) {
       return SizedBox(
         width: double.infinity,
         child: button,

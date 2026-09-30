@@ -110,7 +110,7 @@ class NectarDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.account_circle_sharp,
+                  Icons.mail_sharp,
                   size: 32,
                 ),
                 title: Text(

@@ -36,17 +36,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   NectarLargeText(
                     'Welcome to Nectar',
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   NectarLargeText(
                     'Your virtual cards collection.',
-                    textAlign: TextAlign.center,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                   NectarRegularButton(
                       label: 'Log in',
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      labelTextColor: Theme.of(context).colorScheme.tertiary,
                       onPressed: () => myNavigate(context, LoginScreen())),
                   NectarRegularButton(
                       label: 'Sign up',
-                      iconData: Icons.person_sharp,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      labelTextColor: Theme.of(context).colorScheme.tertiary,
+                      iconData: Icons.mail_sharp,
                       onPressed: () => myNavigate(context, RegisterScreen()))
                 ]);
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
