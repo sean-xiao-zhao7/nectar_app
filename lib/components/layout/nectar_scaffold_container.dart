@@ -30,6 +30,6 @@ class NectarScaffoldContainer extends StatelessWidget {
         ),
         body: DefaultTextStyle.merge(
             style: TextStyle(fontSize: 16),
-            child: Container(padding: EdgeInsets.all(20), child: child)));
+            child: Container(padding: EdgeInsets.all(26), child: child)));
   }
 }
