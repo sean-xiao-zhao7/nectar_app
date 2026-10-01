@@ -27,7 +27,10 @@ class _LogoutScreenState extends State<LogoutScreen> {
         appBarActions: [
           IconButton(
               onPressed: () => {nectarNavigate(context, HelpHomeScreen())},
-              icon: Icon(Icons.help_outline_sharp))
+              icon: Icon(
+                Icons.help_outline_sharp,
+                size: 30,
+              ))
         ],
         child: NectarLargeText('You have logged out of Nectar.'));
   }

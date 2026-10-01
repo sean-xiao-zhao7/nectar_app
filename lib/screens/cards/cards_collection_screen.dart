@@ -61,8 +61,8 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                                 label: 'Add a card',
                                 hasDelay: false,
                                 iconData: Icons.add_sharp,
-                                onPressed: () =>
-                                    nectarNavigate(context, AddSingleCardScreen())),
+                                onPressed: () => nectarNavigate(
+                                    context, AddSingleCardScreen())),
                           ]));
                     } else {
                       return CardsListView(cardsList: snapshotCards.data!);
@@ -87,7 +87,10 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                                 isOwnCard: false,
                               ))
                         },
-                    icon: Icon(Icons.add_to_photos_sharp))
+                    icon: Icon(
+                      Icons.add_to_photos_sharp,
+                      size: 30,
+                    ))
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

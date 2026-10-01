@@ -9,9 +9,11 @@ import 'package:nectar_app/components/text/nectar_regular_text.dart';
 import 'package:nectar_app/helpers/ai_card_recognition_service.dart';
 import 'package:nectar_app/helpers/cards_helper.dart';
 import 'package:nectar_app/helpers/form_helper.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
+import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 /// Add a new Nectar card for current user
 ///
@@ -399,6 +401,15 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
           return NectarScaffoldContainer(
               title: 'Add a new card',
               padding: 0,
+              appBarActions: [
+                IconButton(
+                    onPressed: () =>
+                        {nectarNavigate(context, HelpHomeScreen())},
+                    icon: Icon(
+                      Icons.help_outline_sharp,
+                      size: 30,
+                    ))
+              ],
               child: Column(children: <Widget>[
                 Expanded(
                     // the tabBar is at the bottom of the switchable tab views

@@ -22,7 +22,10 @@ class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
         builder: (context) => appBarLead != null
             ? appBarLead!
             : IconButton(
-                icon: const Icon(Icons.menu_sharp),
+                icon: const Icon(
+                  Icons.menu_sharp,
+                  size: 30,
+                ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
       ),

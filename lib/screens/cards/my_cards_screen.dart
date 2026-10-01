@@ -96,7 +96,10 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                                 isOwnCard: true,
                               ))
                         },
-                    icon: Icon(Icons.add_to_photos_sharp))
+                    icon: Icon(
+                      Icons.add_to_photos_sharp,
+                      size: 30,
+                    ))
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

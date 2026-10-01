@@ -9,6 +9,13 @@ class HelpHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
       title: 'Nectar Help',
+      appBarLead: IconButton(
+        icon: const Icon(
+          Icons.arrow_back_sharp,
+          size: 30,
+        ),
+        onPressed: () => Navigator.pop(context),
+      ),
       child: ListView(
         children: [
           Column(

@@ -141,7 +141,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
     return NectarScaffoldContainer(
         title: 'Card Details',
         appBarLead: IconButton(
-          icon: const Icon(Icons.arrow_back_sharp),
+          icon: const Icon(
+            Icons.arrow_back_sharp,
+            size: 30,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
         appBarActions: [
@@ -154,7 +157,10 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                           isOwnCard: widget.isOwnCard,
                         ))
                   },
-              icon: Icon(Icons.edit_sharp))
+              icon: Icon(
+                Icons.edit_sharp,
+                size: 30,
+              ))
         ],
         child: NectarContainer(
             margin: EdgeInsets.only(bottom: 20),

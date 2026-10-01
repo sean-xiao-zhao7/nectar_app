@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         {nectarNavigate(context, HelpHomeScreen())},
                     icon: Icon(
                       Icons.help_outline_sharp,
-                      size: 28,
+                      size: 30,
                     ))
               ],
               child: Column(

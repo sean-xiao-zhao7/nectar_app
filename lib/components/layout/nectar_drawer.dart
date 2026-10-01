@@ -75,7 +75,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.login_sharp,
-                  size: 34,
+                  size: 36,
                 ),
                 title: Text(
                   'Log in',
@@ -93,7 +93,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.mail_sharp,
-                  size: 32,
+                  size: 36,
                 ),
                 title: Text(
                   'Sign up',
@@ -111,7 +111,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.help_outline_sharp,
-                  size: 32,
+                  size: 36,
                 ),
                 title: Text(
                   'About Nectar',
@@ -156,13 +156,10 @@ class NectarDrawer extends StatelessWidget {
                       ]),
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
               ListTile(
                 leading: Icon(
                   Icons.collections_sharp,
-                  size: 34,
+                  size: 36,
                 ),
                 title: Text(
                   'Cards Collection',
@@ -180,7 +177,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.credit_card_sharp,
-                  size: 34,
+                  size: 36,
                 ),
                 title: Text(
                   'My Cards',
@@ -198,7 +195,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.add_to_photos_sharp,
-                  size: 34,
+                  size: 36,
                 ),
                 title: Text(
                   'Add A New Card',
@@ -216,7 +213,7 @@ class NectarDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(
                   Icons.logout_sharp,
-                  size: 34,
+                  size: 36,
                 ),
                 title: Text(
                   'Log Out',
@@ -236,7 +233,7 @@ class NectarDrawer extends StatelessWidget {
 
           return Drawer(
             child: SafeArea(
-              child: Column(spacing: 10, children: drawerMenu),
+              child: Column(spacing: 18, children: drawerMenu),
             ),
           );
         });

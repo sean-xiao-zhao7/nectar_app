@@ -357,7 +357,10 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
           return NectarScaffoldContainer(
               title: 'Edit Card',
               appBarLead: IconButton(
-                icon: const Icon(Icons.arrow_back_sharp),
+                icon: const Icon(
+                  Icons.arrow_back_sharp,
+                  size: 30,
+                ),
                 onPressed: () => Navigator.pop(context),
               ),
               appBarActions: [
@@ -365,6 +368,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                   icon: const Icon(
                     Icons.delete_forever_sharp,
                     color: Colors.red,
+                    size: 30,
                   ),
                   onPressed: () => deleteCard(),
                 ),
