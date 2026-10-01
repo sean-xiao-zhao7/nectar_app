@@ -12,13 +12,13 @@ class HelpHomeScreen extends StatelessWidget {
       child: ListView(
         children: [
           Column(
-            spacing: 20,
+            spacing: 18,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text('What is Nectar?'),
               NectarContainer(
                   child: Column(
-                spacing: 20,
+                spacing: 18,
                 children: [
                   Text('Nectar is a virtual cards collection app.'),
                   Text(
@@ -30,7 +30,7 @@ class HelpHomeScreen extends StatelessWidget {
               Text('What can become a card?'),
               NectarContainer(
                   child: Column(
-                spacing: 20,
+                spacing: 18,
                 children: [
                   Text(
                       'Nectar can extract information from an image of a business card containing personal or business information.'),

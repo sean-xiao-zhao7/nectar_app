@@ -11,7 +11,7 @@ class NectarContainer extends StatelessWidget {
       required this.child,
       this.alignment,
       this.margin,
-      this.padding = const EdgeInsets.all(20)});
+      this.padding = const EdgeInsets.all(18)});
 
   @override
   Widget build(BuildContext context) {

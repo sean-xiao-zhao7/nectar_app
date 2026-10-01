@@ -90,10 +90,10 @@ ThemeData initTheme(Brightness brightness) {
       drawerTheme: const DrawerThemeData(),
       tabBarTheme: TabBarThemeData(
         labelColor: nectarRegularYellow,
-        labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         dividerColor: nectarWhite,
         unselectedLabelStyle:
-            TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
       ),
       snackBarTheme: SnackBarThemeData(backgroundColor: nectarRegularYellow));
 }
