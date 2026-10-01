@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             widgetTree = Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 20,
+                spacing: 18,
                 children: [
                   NectarLargeText(
                     'Welcome to Nectar',
@@ -53,7 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       labelTextColor: Theme.of(context).colorScheme.tertiary,
                       iconData: Icons.mail_sharp,
-                      onPressed: () => nectarNavigate(context, RegisterScreen()))
+                      onPressed: () =>
+                          nectarNavigate(context, RegisterScreen())),
+                  SizedBox(
+                    height: 100,
+                  ),
                 ]);
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
@@ -117,15 +121,19 @@ class _HomeScreenState extends State<HomeScreen> {
               title: 'Nectar Home',
               appBarActions: [
                 IconButton(
-                    onPressed: () => {nectarNavigate(context, HelpHomeScreen())},
-                    icon: Icon(Icons.help_outline_sharp, size: 28,))
+                    onPressed: () =>
+                        {nectarNavigate(context, HelpHomeScreen())},
+                    icon: Icon(
+                      Icons.help_outline_sharp,
+                      size: 28,
+                    ))
               ],
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Container(
-                          padding: EdgeInsets.all(30),
+                          padding: EdgeInsets.all(18),
                           decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.onPrimary,
                               borderRadius:

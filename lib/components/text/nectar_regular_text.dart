@@ -18,7 +18,7 @@ class NectarRegularText extends StatelessWidget {
     this.maxLines,
     this.overflow = TextOverflow.fade,
     this.color,
-    this.fontSize = 16,
+    this.fontSize = 18,
     this.fontWeight,
   });
 

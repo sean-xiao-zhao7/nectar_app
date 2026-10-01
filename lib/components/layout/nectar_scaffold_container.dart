@@ -7,14 +7,16 @@ import 'package:nectar_app/components/layout/nectar_app_bar.dart';
 // Uses custom drawer, app bar, text style.
 // Gets app bar children to be passed.
 class NectarScaffoldContainer extends StatelessWidget {
-  final Widget? child;
   final String title;
+  final Widget? child, appBarLead;
   final List<Widget>? appBarActions;
-  final Widget? appBarLead;
+  final double? padding;
+
   const NectarScaffoldContainer({
     super.key,
     this.appBarLead,
     this.appBarActions,
+    this.padding,
     required this.title,
     required this.child,
   });
@@ -30,6 +32,7 @@ class NectarScaffoldContainer extends StatelessWidget {
         ),
         body: DefaultTextStyle.merge(
             style: TextStyle(fontSize: 18),
-            child: Container(padding: EdgeInsets.all(18), child: child)));
+            child: Container(
+                padding: EdgeInsets.all(padding ?? 18), child: child)));
   }
 }

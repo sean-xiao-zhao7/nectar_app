@@ -7,7 +7,7 @@ class NectarFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(top: 20, bottom: 10),
+        padding: EdgeInsets.only(top: 18, bottom: 8),
         child: NectarRegularText(
           '\u00a9 2026 Nectar Inc.',
           color: Theme.of(context).colorScheme.tertiary,

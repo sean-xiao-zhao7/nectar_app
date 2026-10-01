@@ -376,8 +376,8 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
                       : [
                           Expanded(
                             child: Container(
-                                margin: EdgeInsets.only(bottom: 20),
-                                padding: EdgeInsets.all(20),
+                                margin: EdgeInsets.only(bottom: 18),
+                                padding: EdgeInsets.all(18),
                                 decoration: BoxDecoration(
                                     color:
                                         Theme.of(context).colorScheme.onPrimary,

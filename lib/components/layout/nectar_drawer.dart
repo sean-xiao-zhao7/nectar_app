@@ -25,7 +25,7 @@ class NectarDrawer extends StatelessWidget {
         fontSize: 20,
         fontWeight: FontWeight.w600);
     final TextStyle profileSubTextStyle =
-        TextStyle(fontSize: 14, fontWeight: FontWeight.w400);
+        TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
     final TextStyle menuTextStyle =
         TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
 
@@ -41,7 +41,7 @@ class NectarDrawer extends StatelessWidget {
                 width: double.infinity,
                 child: Container(
                   margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.only(left: 25, right: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 18),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
@@ -133,7 +133,7 @@ class NectarDrawer extends StatelessWidget {
                 width: double.infinity,
                 child: Container(
                   margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.only(left: 25, right: 25),
+                  padding: EdgeInsets.symmetric(horizontal: 18),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),

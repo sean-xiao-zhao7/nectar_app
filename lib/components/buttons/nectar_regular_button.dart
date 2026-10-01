@@ -64,8 +64,7 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
               }
             },
       style: ElevatedButton.styleFrom(
-          padding: widget.padding ??
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+          padding: widget.padding ?? const EdgeInsets.all(18),
           backgroundColor: backgroundColor),
       label: NectarLargeText(
         widget.label,

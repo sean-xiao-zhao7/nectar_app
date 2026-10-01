@@ -398,15 +398,16 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
 
           return NectarScaffoldContainer(
               title: 'Add a new card',
+              padding: 0,
               child: Column(children: <Widget>[
                 Expanded(
                     // the tabBar is at the bottom of the switchable tab views
                     child: TabBarView(controller: _tabController, children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: 18),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 30,
+                      spacing: 40,
                       children: [
                         NectarRegularButton(
                           parentIsLoading: isLoading,
@@ -441,8 +442,8 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
                       children: [
                         Expanded(
                           child: Container(
-                              margin: EdgeInsets.all(20),
-                              padding: EdgeInsets.all(20),
+                              margin: EdgeInsets.all(18),
+                              padding: EdgeInsets.all(18),
                               decoration: BoxDecoration(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary,
