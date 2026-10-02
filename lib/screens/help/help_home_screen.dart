@@ -21,7 +21,7 @@ class HelpHomeScreen extends StatelessWidget {
         children: [
           Column(
             spacing: 18,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text('What is Nectar?'),
               NectarContainer(
@@ -37,13 +37,16 @@ class HelpHomeScreen extends StatelessWidget {
                       'You can find all your cards in "Cards Collection" screen.'),
                 ],
               )),
-              Text('What can become a card?'),
+              Text('What is a Nectar card?'),
               NectarContainer(
                   child: Column(
                 spacing: 18,
                 children: [
                   Text(
                       'Nectar can extract information from an image of a business card containing personal or business information.'),
+                  NectarDivider(),
+                  Text(
+                      'The generated card can then be found in your "Cards Collection".')
                 ],
               )),
               Text('Parts of Nectar'),
