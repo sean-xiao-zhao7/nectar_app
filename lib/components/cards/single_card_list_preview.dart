@@ -22,37 +22,51 @@ class SingleCardListPreview extends StatelessWidget {
     // Some info might be empty - if a person or a company
     Widget infoBlock = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
+      spacing: 5,
       children: [
-        if (nectarCard.companyInfo['companyName'] != '')
-          Row(spacing: 10, children: [
-            Icon(
-              Icons.business_sharp,
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            Expanded(
-                child:
-                    NectarRegularText(nectarCard.companyInfo['companyName']!))
-          ]),
         if (nectarCard.companyInfo['businessType'] != '')
           Row(spacing: 10, children: [
             Icon(
-              Icons.category_sharp,
-              color: Theme.of(context).colorScheme.secondary,
+              Icons.hive,
+              color: Theme.of(context).colorScheme.primary,
+              size: 34,
             ),
             Expanded(
                 child:
                     NectarRegularText(nectarCard.companyInfo['businessType']!))
           ]),
+        if (nectarCard.companyInfo['companyName'] != '')
+          Row(spacing: 10, children: [
+            Icon(
+              Icons.storefront_sharp,
+              color: Theme.of(context).colorScheme.primary,
+              size: 34,
+            ),
+            Expanded(
+                child:
+                    NectarRegularText(nectarCard.companyInfo['companyName']!))
+          ]),
         if (nectarCard.personalInfo['firstName'] != '')
           Row(spacing: 10, children: [
             Icon(
-              Icons.person_sharp,
-              color: Theme.of(context).colorScheme.secondary,
+              Icons.contact_page,
+              color: Theme.of(context).colorScheme.primary,
+              size: 34,
             ),
             Expanded(
               child: NectarRegularText(
                   "${nectarCard.personalInfo['firstName']!} ${nectarCard.personalInfo['lastName']!}"),
+            )
+          ]),
+        if (nectarCard.addressInfo['city'] != '')
+          Row(spacing: 10, children: [
+            Icon(
+              Icons.location_pin,
+              color: Theme.of(context).colorScheme.primary,
+              size: 34,
+            ),
+            Expanded(
+              child: NectarRegularText(nectarCard.addressInfo['city']!),
             )
           ]),
       ],

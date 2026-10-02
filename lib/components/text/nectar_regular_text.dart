@@ -30,7 +30,7 @@ class NectarRegularText extends StatelessWidget {
       maxLines: maxLines,
       overflow: overflow,
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: color,
+            color: color ?? Theme.of(context).colorScheme.tertiary,
             fontSize: fontSize,
             fontWeight: fontWeight,
           ),
