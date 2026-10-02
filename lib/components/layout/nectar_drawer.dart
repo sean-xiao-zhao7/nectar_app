@@ -69,9 +69,6 @@ class NectarDrawer extends StatelessWidget {
                       ]),
                 ),
               ),
-              SizedBox(
-                height: 5,
-              ),
               ListTile(
                 leading: Icon(
                   Icons.login_sharp,

@@ -43,11 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Your virtual cards collection.',
                     color: Theme.of(context).colorScheme.secondary,
                   ),
+                  NectarDivider(),
                   NectarRegularButton(
                       label: 'Log in',
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       labelTextColor: Theme.of(context).colorScheme.tertiary,
                       onPressed: () => nectarNavigate(context, LoginScreen())),
+                  // NectarDivider(),
                   NectarRegularButton(
                       label: 'Sign up',
                       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -55,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       iconData: Icons.mail_sharp,
                       onPressed: () =>
                           nectarNavigate(context, RegisterScreen())),
+                  NectarDivider(),
                   SizedBox(
                     height: 100,
                   ),

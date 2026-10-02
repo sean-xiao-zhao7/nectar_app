@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/nectar_container.dart';
+import 'package:nectar_app/components/layout/nectar_divider.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 
 class HelpHomeScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class HelpHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
-      title: 'Nectar Help',
+      title: 'About Nectar',
       appBarLead: IconButton(
         icon: const Icon(
           Icons.arrow_back_sharp,
@@ -28,10 +29,12 @@ class HelpHomeScreen extends StatelessWidget {
                 spacing: 18,
                 children: [
                   Text('Nectar is a virtual cards collection app.'),
+                  NectarDivider(),
                   Text(
                       'You can add new cards by uploading an image or taking a photo, and the app will automatically transform into an Nectar Virtual Card (NVC).'),
+                  NectarDivider(),
                   Text(
-                      'You can find all your cards in "Cards Collection" screen.')
+                      'You can find all your cards in "Cards Collection" screen.'),
                 ],
               )),
               Text('What can become a card?'),
@@ -43,6 +46,37 @@ class HelpHomeScreen extends StatelessWidget {
                       'Nectar can extract information from an image of a business card containing personal or business information.'),
                 ],
               )),
+              Text('Parts of Nectar'),
+              NectarContainer(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      spacing: 30,
+                      children: [
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Cards Collection',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: ' contains all cards you have saved.'),
+                    ])),
+                    NectarDivider(),
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'My Cards',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' contains cards representing yourself that you want to share with others.'),
+                    ])),
+                    NectarDivider(),
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Add A New Card',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text: ' allows you to scan and save a new card.'),
+                    ])),
+                  ]))
             ],
           ),
         ],
