@@ -23,6 +23,7 @@ dependencies:
   url_launcher: ^6.3.2
   font_awesome_flutter: ^11.0.0
   camera: ^0.12.1
+  pretty_qr_code: ^3.6.0
 
 dev_dependencies:
   flutter_test:

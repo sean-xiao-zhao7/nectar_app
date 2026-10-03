@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:nectar_app/components/text/nectar_icon_row.dart';
+import 'package:nectar_app/components/layout/nectar_divider.dart';
 import 'package:open_mail/open_mail.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
+import 'package:nectar_app/components/text/nectar_icon_row.dart';
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
 import 'package:nectar_app/components/text/nectar_large_text.dart';
@@ -135,8 +136,6 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
         .any((property) => property.isNotEmpty);
     bool hasAddressInfo = widget.nectarCard.addressInfo.values
         .any((property) => property.isNotEmpty);
-    // bool hasCompanyInfo = widget.nectarCard.companyInfo.values
-    //     .any((property) => property.isNotEmpty);
 
     return NectarScaffoldContainer(
         title: 'Card Details',
@@ -175,11 +174,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                     ),
                     if (widget.nectarCard.shortDescription != '')
                       NectarRegularText(widget.nectarCard.shortDescription),
-                    if (hasPersonalInfo)
-                      Divider(
-                        height: 5,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    if (hasPersonalInfo) NectarDivider(height: 5),
                     if (hasPersonalInfo)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -240,11 +235,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                               widget.nectarCard.personalInfo['phone']!),
                         ]),
                       ),
-                    if (hasSocialInfo)
-                      Divider(
-                        height: 5,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    if (hasSocialInfo) NectarDivider(height: 5),
                     if (hasSocialInfo)
                       NectarLargeText(
                         'Social Media',
@@ -303,11 +294,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                             label:
                                 'facebook.com/${widget.nectarCard.socialMedia['facebook']}'),
                       ),
-                    if (hasAddressInfo)
-                      Divider(
-                        height: 5,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
+                    if (hasAddressInfo) NectarDivider(height: 5),
                     if (hasAddressInfo)
                       NectarLargeText(
                         'Location',
@@ -327,32 +314,14 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
                     if (widget.nectarCard.addressInfo['postalCode'] != '')
                       NectarRegularText(
                           'Postal: ${widget.nectarCard.addressInfo['postalCode']}'),
-                    // if (hasCompanyInfo)
-                    //   Divider(
-                    //     height: 5,
-                    //     color: Theme.of(context).colorScheme.primary,
-                    //   ),
-                    // if (hasCompanyInfo)
-                    //   NectarLargeText(
-                    //     'Details',
-                    //   ),
-                    // if (widget.nectarCard.companyInfo['companyName'] != '')
-                    //   NectarRegularText(
-                    //       '${widget.nectarCard.companyInfo['companyName']}'),
-                    // if (widget.nectarCard.companyInfo['businessType'] != '')
-                    //   NectarRegularText(
-                    //       '${widget.nectarCard.companyInfo['businessType']}'),
-                    // if (widget.nectarCard.companyInfo['role'] != '')
-                    //   Text.rich(TextSpan(children: [
-                    //     TextSpan(
-                    //         text: 'Role: ',
-                    //         style: TextStyle(fontWeight: FontWeight.bold)),
-                    //     TextSpan(text: widget.nectarCard.companyInfo['role']!),
-                    //   ])),
-                    // if (widget.nectarCard.companyInfo['department'] != '')
-                    //   NectarRegularText(
-                    //       'Department: ${widget.nectarCard.companyInfo['department']}'),
-                  ])
+                    NectarDivider(),
+                    PrettyQrView.data(
+                      data: 'lorem ipsum dolor sit amet',
+                      decoration: const PrettyQrDecoration(
+                        quietZone: PrettyQrQuietZone.standard,
+                      ),
+                    )
+                  ]),
             ])));
   }
 }
