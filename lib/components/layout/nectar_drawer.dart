@@ -7,6 +7,7 @@ import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 import 'package:nectar_app/screens/cards/my_cards_screen.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 /// The main drawer
@@ -80,11 +81,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const LoginScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const LoginScreen(), replace: true);
                 },
               ),
               ListTile(
@@ -98,11 +95,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const RegisterScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const RegisterScreen(), replace: true);
                 },
               ),
               ListTile(
@@ -116,11 +109,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const HelpHomeScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const HelpHomeScreen());
                 },
               ),
             ];
@@ -164,11 +153,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const CardsCollectionScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const CardsCollectionScreen(), replace: true);
                 },
               ),
               ListTile(
@@ -182,11 +167,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const MyCardsScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const MyCardsScreen(), replace: true);
                 },
               ),
               ListTile(
@@ -200,11 +181,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const AddSingleCardScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const AddSingleCardScreen());
                 },
               ),
               ListTile(
@@ -218,11 +195,7 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(
-                    MaterialPageRoute<void>(
-                      builder: (_) => const LogoutScreen(),
-                    ),
-                  );
+                  nectarNavigate(context, const LogoutScreen(), clearStack: true);
                 },
               ),
             ];

@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_user.dart';
 import 'package:nectar_app/nectar_options.dart';
 import 'package:nectar_app/screens/home_screen.dart';
@@ -36,11 +37,7 @@ void authFormSubmitHelper(
         SnackBar(content: NectarRegularText(successText)),
       );
 
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => const HomeScreen(),
-        ),
-      );
+      nectarNavigate(context, const HomeScreen(), clearStack: true);
     }
   } else {
     if (context.mounted) {
@@ -145,11 +142,7 @@ Future<void> authFormSubmitGoogleHelper(BuildContext context) async {
         const SnackBar(content: Text('Google login successful.')),
       );
 
-      Navigator.of(context).push(
-        MaterialPageRoute<void>(
-          builder: (_) => const HomeScreen(),
-        ),
-      );
+      nectarNavigate(context, const HomeScreen(), clearStack: true);
       return;
     }
 

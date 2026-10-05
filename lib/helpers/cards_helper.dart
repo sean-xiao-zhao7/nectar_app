@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
 import 'package:nectar_app/screens/cards/my_cards_screen.dart';
@@ -29,12 +30,10 @@ Future<void> addNewCardFormHelper(
       const SnackBar(content: Text('Added a new card.')),
     );
 
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => isOwnCard
-            ? const MyCardsScreen()
-            : const CardsCollectionScreen(),
-      ),
+    nectarNavigate(
+      context,
+      isOwnCard ? const MyCardsScreen() : const CardsCollectionScreen(),
+      replace: true,
     );
     return;
   }
@@ -85,12 +84,10 @@ Future<void> editCardFormHelper(
       const SnackBar(content: Text('Edited card.')),
     );
 
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => isOwnCard
-            ? const MyCardsScreen()
-            : const CardsCollectionScreen(),
-      ),
+    nectarNavigate(
+      context,
+      isOwnCard ? const MyCardsScreen() : const CardsCollectionScreen(),
+      replace: true,
     );
     return;
   }

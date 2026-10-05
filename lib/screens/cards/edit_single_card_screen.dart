@@ -11,7 +11,8 @@ import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/helpers/ui_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
-import 'package:nectar_app/screens/home_screen.dart';
+import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
+import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 
 /// Edit an exiting Nectar card for current user
 ///
@@ -127,14 +128,20 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
     deleteSingleCard(widget.nectarCard.cardId, widget.nectarCard.ownerUserId,
             isOwnCard: widget.isOwnCard)
         .then((message) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
       });
-      if (mounted) {
-        nectarSnackBar(context, 'Card deleted.');
-        nectarNavigate(context, HomeScreen());
-      }
+      nectarSnackBar(context, 'Card deleted.');
+      nectarNavigate(
+        context,
+        widget.isOwnCard
+            ? const MyCardsScreen()
+            : const CardsCollectionScreen(),
+        clearStack: true,
+      );
     }).catchError((message) {
+      if (!mounted) return;
       setState(() {
         _isLoading = false;
       });

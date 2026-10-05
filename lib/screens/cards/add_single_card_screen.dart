@@ -13,6 +13,7 @@ import 'package:nectar_app/helpers/nav_helper.dart';
 import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/cards_collection_screen.dart';
+import 'package:nectar_app/screens/cards/my_cards_screen.dart';
 import 'package:nectar_app/screens/help/help_home_screen.dart';
 
 /// Add a new Nectar card for current user
@@ -129,14 +130,18 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               content: NectarRegularText(
-            'Added a new card to your collection.',
+            widget.isOwnCard
+                ? 'Added a new card to My Cards.'
+                : 'Added a new card to your collection.',
             color: Theme.of(context).colorScheme.onSecondary,
           )),
         );
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (_) => const CardsCollectionScreen(),
-          ),
+        nectarNavigate(
+          context,
+          widget.isOwnCard
+              ? const MyCardsScreen()
+              : const CardsCollectionScreen(),
+          replace: true,
         );
       }
     } catch (error) {
