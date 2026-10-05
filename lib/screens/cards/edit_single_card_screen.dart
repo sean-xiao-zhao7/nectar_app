@@ -125,6 +125,7 @@ class _EditSingleCardScreenState extends State<EditSingleCardScreen> {
     setState(() {
       _isLoading = true;
     });
+
     deleteSingleCard(widget.nectarCard.cardId, widget.nectarCard.ownerUserId,
             isOwnCard: widget.isOwnCard)
         .then((message) {

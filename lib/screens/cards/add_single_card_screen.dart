@@ -178,7 +178,7 @@ class _AddSingleCardScreenState extends State<AddSingleCardScreen>
       } else {
         pickedFile = await _picker.pickImage(
           source: source,
-          imageQuality: 1,
+          imageQuality: 70,
         );
       }
       setState(() {

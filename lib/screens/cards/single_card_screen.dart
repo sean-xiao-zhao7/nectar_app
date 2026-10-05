@@ -75,7 +75,7 @@ class _SingleCardScreenState extends State<SingleCardScreen> {
   // Use url_launcher to launch social media link
   Future<bool> _launchSocialLink(String link) async {
     try {
-      if (!link.startsWith('https://')) link = 'https://$link';
+      if (!link.startsWith(RegExp(r'https?://'))) link = 'https://$link';
       bool result = await launchUrl(Uri.parse(link));
       if (mounted && !result) {
         nectarSnackBar(context, 'Unable to launch social media.');
