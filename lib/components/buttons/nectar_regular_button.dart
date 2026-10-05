@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/text/nectar_large_text.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 /// Default button for Nectar
@@ -12,7 +13,9 @@ class NectarRegularButton extends StatefulWidget {
   final String label;
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry? padding;
+  final Widget? icon;
   final IconData? iconData;
+  final FaIconData? faIconData;
   final bool hasDelay, parentIsLoading, isFullWidth;
   final Color? backgroundColor, labelTextColor;
 
@@ -22,7 +25,9 @@ class NectarRegularButton extends StatefulWidget {
       required this.onPressed,
       this.isFullWidth = true,
       this.padding,
+      this.icon,
       this.iconData = Icons.login_sharp,
+      this.faIconData,
       this.hasDelay = true,
       this.parentIsLoading = false,
       this.backgroundColor,
@@ -58,6 +63,24 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
     }
   }
 
+  Widget _buildIcon(Color iconColor) {
+    if (widget.icon != null) {
+      return widget.icon!;
+    }
+    if (widget.faIconData != null) {
+      return FaIcon(
+        widget.faIconData,
+        size: 26,
+        color: iconColor,
+      );
+    }
+    return Icon(
+      widget.iconData,
+      size: 30,
+      color: iconColor,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final backgroundColor = widget.backgroundColor ??
@@ -86,11 +109,7 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
                 strokeWidth: 3,
                 color: widget.labelTextColor ?? labelTextColor,
               ))
-          : Icon(
-              widget.iconData,
-              size: 24,
-              color: widget.labelTextColor ?? labelTextColor,
-            ),
+          : _buildIcon(widget.labelTextColor ?? labelTextColor),
     );
 
     if (widget.isFullWidth) {

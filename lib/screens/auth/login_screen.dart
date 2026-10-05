@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:nectar_app/components/buttons/nectar_regular_button.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
             NectarRegularButton(
               label: 'Log in with Google',
               onPressed: () => handleLogin(isGoogleLogin: true),
-              iconData: Icons.g_mobiledata_sharp,
+              faIconData: FontAwesomeIcons.google,
               parentIsLoading: isLoading,
             ),
             const SizedBox(height: 24),
