@@ -13,7 +13,7 @@ class NectarRegularButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry? padding;
   final IconData? iconData;
-  final bool? hasDelay, parentIsLoading, isFullWidth;
+  final bool hasDelay, parentIsLoading, isFullWidth;
   final Color? backgroundColor, labelTextColor;
 
   const NectarRegularButton(
@@ -35,34 +35,42 @@ class NectarRegularButton extends StatefulWidget {
 class _NectarRegularButtonState extends State<NectarRegularButton> {
   // _isLoading is only used for a 1 second delay, this overrides parent's isLoading
   bool _isLoading = false;
-  Color? backgroundColor, labelTextColor;
+
+  Future<void> _handlePressed() async {
+    if (widget.onPressed == null) return;
+
+    // triggers a 1 second delay if needed
+    if (widget.hasDelay == true) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (!mounted) return;
+      setState(() {
+        _isLoading = false;
+      });
+    }
+
+    if (mounted) {
+      widget.onPressed!();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    backgroundColor = widget.backgroundColor ??
+    final backgroundColor = widget.backgroundColor ??
         Theme.of(context).colorScheme.primaryContainer;
-    labelTextColor = widget.labelTextColor ??
+    final labelTextColor = widget.labelTextColor ??
         Theme.of(context).colorScheme.onPrimaryContainer;
 
+    final isButtonLoading = _isLoading || (widget.parentIsLoading);
+    final isButtonDisabled = widget.onPressed == null || isButtonLoading;
+
     final button = ElevatedButton.icon(
-      // disable button and show loading spinning if either parent passes an isLoading, or 1 second delay is activated
-      onPressed: _isLoading || widget.parentIsLoading!
-          ? null
-          : () {
-              if (widget.hasDelay!) {
-                setState(() {
-                  _isLoading = true;
-                });
-                Future.delayed(const Duration(seconds: 1), () {
-                  widget.onPressed!();
-                });
-                setState(() {
-                  _isLoading = false;
-                });
-              } else {
-                widget.onPressed!();
-              }
-            },
+      // disable button and show loading spinner if disabled, parent passes isLoading, or delay is active
+      onPressed: isButtonDisabled ? null : _handlePressed,
       style: ElevatedButton.styleFrom(
           padding: widget.padding ?? const EdgeInsets.all(18),
           backgroundColor: backgroundColor),
@@ -70,12 +78,13 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
         widget.label,
         color: labelTextColor,
       ),
-      icon: _isLoading || widget.parentIsLoading!
+      icon: isButtonLoading
           ? SizedBox(
               height: 20,
               width: 20,
-              child: const CircularProgressIndicator(
+              child: CircularProgressIndicator(
                 strokeWidth: 3,
+                color: widget.labelTextColor ?? labelTextColor,
               ))
           : Icon(
               widget.iconData,
@@ -84,7 +93,7 @@ class _NectarRegularButtonState extends State<NectarRegularButton> {
             ),
     );
 
-    if (widget.isFullWidth!) {
+    if (widget.isFullWidth) {
       return SizedBox(
         width: double.infinity,
         child: button,
