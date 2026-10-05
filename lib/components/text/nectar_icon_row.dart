@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 /// An icon and a text side by side
@@ -32,14 +31,19 @@ class NectarIconRow extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
           );
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      spacing: faIconData == null ? 5 : 10,
-      children: [
-        if (iconFirst) iconWidget,
-        Text(label),
-        if (!iconFirst) iconWidget
-      ],
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: faIconData == null ? 5 : 10,
+        children: [
+          if (iconFirst) iconWidget,
+          Text(
+            label,
+          ),
+          if (!iconFirst) iconWidget
+        ],
+      ),
     );
   }
 }
