@@ -87,7 +87,7 @@ class SingleCardListPreview extends StatelessWidget {
       child: NectarContainer(
         margin: EdgeInsets.only(bottom: 20),
         child: SizedBox(
-            height: 170,
+            height: 210,
             child: Column(
               spacing: 10,
               children: [
