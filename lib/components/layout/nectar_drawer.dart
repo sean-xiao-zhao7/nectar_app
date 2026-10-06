@@ -186,6 +186,20 @@ class NectarDrawer extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.help_outline_sharp,
+                  size: 36,
+                ),
+                title: Text(
+                  'About Nectar',
+                  style: menuTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  nectarNavigate(context, const HelpHomeScreen());
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.logout_sharp,
                   size: 36,
                 ),

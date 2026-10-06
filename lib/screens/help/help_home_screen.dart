@@ -31,10 +31,10 @@ class HelpHomeScreen extends StatelessWidget {
                   Text('Nectar is a virtual cards collection app.'),
                   NectarDivider(),
                   Text(
-                      'You can add new cards by uploading an image or taking a photo, and the app will automatically transform into an Nectar Virtual Card (NVC).'),
+                      'You can add new cards by uploading an image or taking a photo, and the app will automatically transform it into an Nectar Virtual Card (NVC).'),
                   NectarDivider(),
                   Text(
-                      'You can find all your cards in "Cards Collection" screen.'),
+                      'You can find all your cards in the "Cards Collection" screen.'),
                 ],
               )),
               Text('What is a Nectar card?'),
@@ -78,6 +78,65 @@ class HelpHomeScreen extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
                           text: ' allows you to scan and save a new card.'),
+                    ])),
+                  ])),
+              Text('Card Creation'),
+              NectarContainer(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      spacing: 30,
+                      children: [
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'AI Card Scanner',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' automatically extracts contact details, company information, and social media handles from card photos using Gemini AI.'),
+                    ])),
+                    NectarDivider(),
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Manual Creation',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' allows you to create and customize virtual cards field-by-field without scanning an image.'),
+                    ])),
+                  ])),
+              Text('Card Actions & Sharing'),
+              NectarContainer(
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      spacing: 30,
+                      children: [
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Quick Actions',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' lets you tap phone numbers, email addresses, and social links to launch apps directly.'),
+                    ])),
+                    NectarDivider(),
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'Save to Contacts',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' allows you to export card information directly to your phone\'s address book with a single tap.'),
+                    ])),
+                    NectarDivider(),
+                    Text.rich(TextSpan(children: [
+                      TextSpan(
+                          text: 'QR Code Sharing',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(
+                          text:
+                              ' displays a QR code for each virtual card for fast in-person networking and exchange.'),
                     ])),
                   ]))
             ],
