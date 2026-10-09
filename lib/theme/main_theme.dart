@@ -51,49 +51,50 @@ ThemeData initTheme(Brightness brightness) {
   const nectarRed = Colors.red;
 
   return baseTheme.copyWith(
-      scaffoldBackgroundColor: nectarLightYellow,
-      colorScheme: ColorScheme(
-        primary: nectarLightYellow,
-        onPrimary: nectarWhite,
-        secondary: nectarDarkYellow,
-        onSecondary: nectarWhite,
-        tertiary: nectarDarkerYellow,
-        onTertiary: nectarWhite,
-        error: nectarRed,
-        onError: nectarWhite,
-        surface: nectarLightYellow,
-        onSurface: nectarMediumYellow,
-        primaryContainer: nectarWhite,
-        onPrimaryContainer: nectarMediumYellow,
-        brightness: Brightness.light,
+    colorScheme: ColorScheme(
+      primary: nectarLightYellow,
+      onPrimary: nectarWhite,
+      secondary: nectarDarkYellow,
+      onSecondary: nectarWhite,
+      tertiary: nectarDarkerYellow,
+      onTertiary: nectarWhite,
+      error: nectarRed,
+      onError: nectarWhite,
+      surface: nectarLightYellow,
+      onSurface: nectarMediumYellow,
+      primaryContainer: nectarWhite,
+      onPrimaryContainer: nectarMediumYellow,
+      brightness: Brightness.light,
+    ),
+    scaffoldBackgroundColor: nectarLightYellow,
+    appBarTheme: AppBarTheme(
+      iconTheme: const IconThemeData(color: nectarDarkYellow),
+      backgroundColor: nectarWhite,
+      titleTextStyle: GoogleFonts.inter(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: nectarDarkYellow,
       ),
-      appBarTheme: AppBarTheme(
-        iconTheme: const IconThemeData(color: nectarDarkYellow),
-        backgroundColor: nectarWhite,
-        titleTextStyle: GoogleFonts.inter(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: nectarDarkYellow,
-        ),
-      ),
-      textTheme: GoogleFonts.interTextTheme().copyWith(
-        bodyLarge: TextStyle(fontSize: 20, color: nectarDarkerYellow),
-        bodyMedium: TextStyle(fontSize: 18, color: nectarDarkerYellow),
-        bodySmall: TextStyle(fontSize: 16, color: nectarDarkerYellow),
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: <TargetPlatform, PageTransitionsBuilder>{
-          TargetPlatform.android: _FadeSlideFromTopTransitionsBuilder(),
-          TargetPlatform.iOS: _FadeSlideFromTopTransitionsBuilder(),
-        },
-      ),
-      drawerTheme: const DrawerThemeData(),
-      tabBarTheme: TabBarThemeData(
-        labelColor: nectarRegularYellow,
-        labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-        dividerColor: nectarWhite,
-        unselectedLabelStyle:
-            TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-      ),
-      snackBarTheme: SnackBarThemeData(backgroundColor: nectarRegularYellow));
+    ),
+    drawerTheme: const DrawerThemeData(),
+    tabBarTheme: TabBarThemeData(
+      labelColor: nectarRegularYellow,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+      dividerColor: nectarWhite,
+      unselectedLabelStyle:
+          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    ),
+    snackBarTheme: SnackBarThemeData(backgroundColor: nectarRegularYellow),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: _FadeSlideFromTopTransitionsBuilder(),
+        TargetPlatform.iOS: _FadeSlideFromTopTransitionsBuilder(),
+      },
+    ),
+    textTheme: GoogleFonts.interTextTheme().copyWith(
+      bodyLarge: TextStyle(fontSize: 20, color: nectarDarkerYellow),
+      bodyMedium: TextStyle(fontSize: 18, color: nectarDarkerYellow),
+      bodySmall: TextStyle(fontSize: 16, color: nectarDarkerYellow),
+    ),
+  );
 }

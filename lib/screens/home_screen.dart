@@ -33,11 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
             widgetTree = Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 18,
+                spacing: 20,
                 children: [
-                  SizedBox(
-                    height: 20,
-                  ),
                   NectarLargeText(
                     'Welcome to Nectar',
                     color: Theme.of(context).colorScheme.secondary,
@@ -75,46 +72,49 @@ class _HomeScreenState extends State<HomeScreen> {
                           ConnectionState.done &&
                       snapshotUserInfo.hasData) {
                     return ListView(children: [
-                      SizedBox(
-                        height: 20,
-                      ),
                       Column(
-                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           spacing: 20,
                           children: [
-                            NectarLargeText(
-                              'Welcome to Nectar',
+                            Container(
+                              margin: EdgeInsets.only(top: 20),
+                              child: NectarLargeText(
+                                'Welcome to Nectar',
+                                fontSize: 20,
+                              ),
                             ),
                             NectarRegularText(
                                 'Please access the various features of Nectar from the top left menu.'),
                             NectarDivider(),
-                            Text.rich(TextSpan(children: [
-                              TextSpan(
-                                  text: 'Cards Collection',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(
-                                  text: ' contains the cards you have saved.'),
-                            ])),
-                            Text.rich(TextSpan(children: [
-                              TextSpan(
-                                  text: 'My Cards',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(
-                                  text:
-                                      ' contains the cards with your own information.'),
-                            ])),
-                            Text.rich(TextSpan(children: [
-                              TextSpan(
-                                  text: 'Add A New Card',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(text: ' allows you to add a new card.'),
-                            ])),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 5,
+                              children: [
+                                NectarLargeText('Cards Collection'),
+                                Text('Contains the cards you have saved.'),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 5,
+                              children: [
+                                NectarLargeText('My Cards'),
+                                Text(
+                                    'Contains the cards with your own information.'),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 5,
+                              children: [
+                                NectarLargeText('Add A New Card'),
+                                Text('Allows you to add a new card.'),
+                              ],
+                            ),
                             NectarDivider(),
-                            Text('We hope you enjoy using Nectar.')
+                            Text('We hope you enjoy using Nectar.'),
+                            Text(
+                                'Please visit the help section if you have any questions.')
                           ])
                     ]);
                   } else {

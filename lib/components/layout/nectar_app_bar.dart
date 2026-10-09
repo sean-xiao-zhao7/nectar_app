@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nectar_app/components/text/nectar_large_text.dart';
 
 class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -30,10 +29,17 @@ class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
       ),
       actions: appBarActions,
-      title: NectarLargeText(
-        color: Theme.of(context).colorScheme.tertiary,
-        title,
+      title: Icon(
+        Icons.hive,
+        color: Theme.of(context).colorScheme.primary,
       ),
+
+      // NectarRegularText(
+      //   color: Theme.of(context).colorScheme.tertiary,
+      //   fontWeight: FontWeight.normal,
+      //   title,
+      // ),
+
       bottom: appBarBottom,
     );
   }
