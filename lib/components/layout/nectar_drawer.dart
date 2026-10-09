@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nectar_app/components/icons/nectar_large_icon.dart';
+import 'package:nectar_app/components/layout/nectar_divider.dart';
 
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/logout_screen.dart';
@@ -23,14 +25,14 @@ class NectarDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
       color: Theme.of(context).colorScheme.tertiary,
-      fontSize: 20,
+      fontSize: 18,
     );
     final TextStyle profileSubTextStyle = TextStyle(
-      fontSize: 20,
+      fontSize: 18,
       color: Theme.of(context).colorScheme.tertiary,
     );
     final TextStyle menuTextStyle = TextStyle(
-      fontSize: 20,
+      fontSize: 18,
       color: Theme.of(context).colorScheme.tertiary,
     );
 
@@ -75,9 +77,8 @@ class NectarDrawer extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.login_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Log in',
@@ -89,9 +90,8 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.mail_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Sign up',
@@ -104,9 +104,8 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.help_outline_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'About Nectar',
@@ -121,9 +120,8 @@ class NectarDrawer extends StatelessWidget {
           } else {
             drawerMenu = [
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.account_box_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   (user.displayName == null ? user.email! : user.displayName!),
@@ -135,10 +133,10 @@ class NectarDrawer extends StatelessWidget {
                       replace: true);
                 },
               ),
+              NectarDivider(),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.collections_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Cards Collection',
@@ -151,9 +149,8 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.credit_card_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'My Cards',
@@ -165,9 +162,8 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.add_to_photos_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Add A New Card',
@@ -178,10 +174,10 @@ class NectarDrawer extends StatelessWidget {
                   nectarNavigate(context, const AddSingleCardScreen());
                 },
               ),
+              NectarDivider(),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.help_outline_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Help',
@@ -193,9 +189,8 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               ListTile(
-                leading: Icon(
+                leading: NectarLargeIcon(
                   Icons.logout_sharp,
-                  size: 36,
                 ),
                 title: Text(
                   'Log Out',
@@ -213,7 +208,7 @@ class NectarDrawer extends StatelessWidget {
           return Drawer(
             child: SafeArea(
               child: Container(
-                  margin: EdgeInsets.only(top: 10),
+                  margin: EdgeInsets.all(10),
                   child: Column(spacing: 18, children: drawerMenu)),
             ),
           );

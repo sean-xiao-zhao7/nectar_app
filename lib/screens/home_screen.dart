@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               margin: EdgeInsets.only(top: 20),
                               child: NectarLargeText(
                                 'Welcome to Nectar',
-                                fontSize: 20,
+                                fontSize: 22,
                               ),
                             ),
                             NectarRegularText(
