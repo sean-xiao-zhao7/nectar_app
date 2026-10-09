@@ -25,6 +25,7 @@ class HelpHomeScreen extends StatelessWidget {
         onPressed: () => Navigator.pop(context),
       ),
       child: ListView(
+        padding: EdgeInsets.only(bottom: 0),
         children: [
           NectarColumn(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -138,10 +139,10 @@ class HelpHomeScreen extends StatelessWidget {
                             ' displays a QR code for each virtual card for fast in-person networking and exchange.'),
                   ])),
                 ],
-              ))
+              )),
             ],
           ),
-          NectarFooter(),
+          NectarFooter()
         ],
       ),
     );
