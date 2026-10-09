@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class NectarDivider extends StatelessWidget {
   final double? height;
-  const NectarDivider({super.key, this.height});
+  const NectarDivider({super.key, this.height = 10});
 
   @override
   Widget build(BuildContext context) {

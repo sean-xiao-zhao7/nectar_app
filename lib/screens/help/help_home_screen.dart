@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nectar_app/components/layout/nectar_container.dart';
 import 'package:nectar_app/components/layout/nectar_divider.dart';
+import 'package:nectar_app/components/layout/nectar_footer.dart';
 import 'package:nectar_app/components/layout/nectar_scaffold_container.dart';
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 
 class HelpHomeScreen extends StatelessWidget {
   const HelpHomeScreen({super.key});
@@ -20,13 +22,17 @@ class HelpHomeScreen extends StatelessWidget {
       child: ListView(
         children: [
           Column(
-            spacing: 18,
+            spacing: 20,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('What is Nectar?'),
+              SizedBox(
+                height: 0,
+              ),
+              NectarLargeText('What is Nectar?'),
               NectarContainer(
                   child: Column(
-                spacing: 18,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 20,
                 children: [
                   Text('Nectar is a virtual cards collection app.'),
                   NectarDivider(),
@@ -37,10 +43,10 @@ class HelpHomeScreen extends StatelessWidget {
                       'You can find all your cards in the "Cards Collection" screen.'),
                 ],
               )),
-              Text('What is a Nectar card?'),
+              NectarLargeText('What is a Nectar card?'),
               NectarContainer(
                   child: Column(
-                spacing: 18,
+                spacing: 20,
                 children: [
                   Text(
                       'Nectar can extract information from an image of a business card containing personal or business information.'),
@@ -49,7 +55,7 @@ class HelpHomeScreen extends StatelessWidget {
                       'The generated card can then be found in your "Cards Collection".')
                 ],
               )),
-              Text('Parts of Nectar'),
+              NectarLargeText('Parts of Nectar'),
               NectarContainer(
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -80,7 +86,7 @@ class HelpHomeScreen extends StatelessWidget {
                           text: ' allows you to scan and save a new card.'),
                     ])),
                   ])),
-              Text('Card Creation'),
+              NectarLargeText('Card Creation'),
               NectarContainer(
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -105,7 +111,7 @@ class HelpHomeScreen extends StatelessWidget {
                               ' allows you to create and customize virtual cards field-by-field without scanning an image.'),
                     ])),
                   ])),
-              Text('Card Actions & Sharing'),
+              NectarLargeText('Card Actions & Sharing'),
               NectarContainer(
                   child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -141,6 +147,7 @@ class HelpHomeScreen extends StatelessWidget {
                   ]))
             ],
           ),
+          NectarFooter(),
         ],
       ),
     );

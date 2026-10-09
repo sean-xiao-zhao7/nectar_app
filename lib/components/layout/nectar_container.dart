@@ -11,7 +11,7 @@ class NectarContainer extends StatelessWidget {
       required this.child,
       this.alignment,
       this.margin,
-      this.padding = const EdgeInsets.all(18)});
+      this.padding = const EdgeInsets.all(20)});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,6 @@ class NectarContainer extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.onPrimary,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.12),

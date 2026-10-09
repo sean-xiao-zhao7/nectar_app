@@ -8,10 +8,12 @@ class NectarFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.only(top: 14, bottom: 14),
-        child: NectarRegularText(
-          '\u00a9 2026 Nectar Inc.',
-          color: Theme.of(context).colorScheme.secondary,
-          fontSize: 14,
+        child: Center(
+          child: NectarRegularText(
+            '\u00a9 2026 Nectar Inc.',
+            color: Theme.of(context).colorScheme.secondary,
+            fontSize: 16,
+          ),
         ));
   }
 }
