@@ -35,6 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 18,
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   NectarLargeText(
                     'Welcome to Nectar',
                     color: Theme.of(context).colorScheme.secondary,
@@ -72,14 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           ConnectionState.done &&
                       snapshotUserInfo.hasData) {
                     return ListView(children: [
+                      SizedBox(
+                        height: 20,
+                      ),
                       Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 30,
+                          spacing: 20,
                           children: [
                             NectarLargeText(
                               'Welcome to Nectar',
-                              textAlign: TextAlign.center,
                             ),
                             NectarRegularText(
                                 'Please access the various features of Nectar from the top left menu.'),
@@ -119,14 +124,14 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return NectarScaffoldContainer(
-              title: 'Nectar Home',
+              title: 'Home',
               appBarActions: [
                 IconButton(
                     onPressed: () =>
                         {nectarNavigate(context, HelpHomeScreen())},
                     icon: Icon(
-                      Icons.help_outline_sharp,
-                      size: 30,
+                      Icons.help_sharp,
+                      size: 26,
                     ))
               ],
               child: Column(
@@ -134,11 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Expanded(
                       child: Container(
-                          padding: EdgeInsets.all(18),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
                           decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.onPrimary,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withValues(alpha: 0.12),

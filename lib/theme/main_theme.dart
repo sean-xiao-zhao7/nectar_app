@@ -77,9 +77,9 @@ ThemeData initTheme(Brightness brightness) {
         ),
       ),
       textTheme: GoogleFonts.interTextTheme().copyWith(
-        headlineLarge: GoogleFonts.lora(),
-        headlineMedium: GoogleFonts.lora(),
-        headlineSmall: GoogleFonts.lora(),
+        bodyLarge: TextStyle(fontSize: 20, color: nectarDarkerYellow),
+        bodyMedium: TextStyle(fontSize: 18, color: nectarDarkerYellow),
+        bodySmall: TextStyle(fontSize: 16, color: nectarDarkerYellow),
       ),
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: <TargetPlatform, PageTransitionsBuilder>{

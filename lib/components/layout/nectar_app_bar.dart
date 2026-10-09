@@ -31,7 +31,7 @@ class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: appBarActions,
       title: NectarLargeText(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.tertiary,
         title,
       ),
       bottom: appBarBottom,
