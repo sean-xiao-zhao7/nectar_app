@@ -22,13 +22,17 @@ class NectarDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle profileTextStyle = TextStyle(
-        color: Theme.of(context).colorScheme.secondary,
-        fontSize: 20,
-        fontWeight: FontWeight.w600);
-    final TextStyle profileSubTextStyle =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.w400);
-    final TextStyle menuTextStyle =
-        TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
+      color: Theme.of(context).colorScheme.tertiary,
+      fontSize: 20,
+    );
+    final TextStyle profileSubTextStyle = TextStyle(
+      fontSize: 20,
+      color: Theme.of(context).colorScheme.tertiary,
+    );
+    final TextStyle menuTextStyle = TextStyle(
+      fontSize: 20,
+      color: Theme.of(context).colorScheme.tertiary,
+    );
 
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
@@ -95,7 +99,8 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  nectarNavigate(context, const RegisterScreen(), replace: true);
+                  nectarNavigate(context, const RegisterScreen(),
+                      replace: true);
                 },
               ),
               ListTile(
@@ -115,32 +120,20 @@ class NectarDrawer extends StatelessWidget {
             ];
           } else {
             drawerMenu = [
-              SizedBox(
-                width: double.infinity,
-                child: Container(
-                  margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.symmetric(horizontal: 18),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          (user.displayName == null
-                              ? user.email!
-                              : user.displayName!),
-                          style: profileTextStyle,
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                      ]),
+              ListTile(
+                leading: Icon(
+                  Icons.account_box_sharp,
+                  size: 36,
                 ),
+                title: Text(
+                  (user.displayName == null ? user.email! : user.displayName!),
+                  style: profileTextStyle,
+                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  nectarNavigate(context, const CardsCollectionScreen(),
+                      replace: true);
+                },
               ),
               ListTile(
                 leading: Icon(
@@ -153,7 +146,8 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  nectarNavigate(context, const CardsCollectionScreen(), replace: true);
+                  nectarNavigate(context, const CardsCollectionScreen(),
+                      replace: true);
                 },
               ),
               ListTile(
@@ -209,7 +203,8 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
-                  nectarNavigate(context, const LogoutScreen(), clearStack: true);
+                  nectarNavigate(context, const LogoutScreen(),
+                      clearStack: true);
                 },
               ),
             ];
@@ -217,7 +212,9 @@ class NectarDrawer extends StatelessWidget {
 
           return Drawer(
             child: SafeArea(
-              child: Column(spacing: 18, children: drawerMenu),
+              child: Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Column(spacing: 18, children: drawerMenu)),
             ),
           );
         });

@@ -76,7 +76,9 @@ ThemeData initTheme(Brightness brightness) {
         color: nectarDarkYellow,
       ),
     ),
-    drawerTheme: const DrawerThemeData(),
+    drawerTheme: const DrawerThemeData(
+        backgroundColor: nectarWhite,
+        scrimColor: Color.fromARGB(162, 255, 209, 72)),
     tabBarTheme: TabBarThemeData(
       labelColor: nectarRegularYellow,
       labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
