@@ -14,6 +14,10 @@ import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
 import 'package:nectar_app/screens/help/help_home_screen.dart';
 
+/// Home screen for Nectar
+///
+/// Welcomes users and displays authentication options (Log in / Sign up)
+/// when logged out, or an overview and feature navigation guide when authenticated.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

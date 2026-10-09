@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Full-height expanded container for Nectar screens
+///
+/// Wraps [child] in an [Expanded] container styled with rounded corners (10px),
+/// theme background ([ColorScheme.onPrimary]), and a subtle drop shadow.
 class NectarExpandedContainer extends StatelessWidget {
   final Widget child;
   final AlignmentGeometry? alignment;

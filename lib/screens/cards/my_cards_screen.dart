@@ -13,6 +13,10 @@ import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 
+/// Personal cards screen for Nectar
+///
+/// Displays virtual cards representing the user themselves, intended
+/// for personal identity and sharing with others.
 class MyCardsScreen extends StatefulWidget {
   const MyCardsScreen({super.key});
 

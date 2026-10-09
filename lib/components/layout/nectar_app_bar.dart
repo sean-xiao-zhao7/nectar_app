@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Top application bar for Nectar
+///
+/// Implements [PreferredSizeWidget] with a centered hive icon, optional custom
+/// leading widget ([appBarLead]) defaulting to a drawer menu button,
+/// optional action buttons ([appBarActions]), and optional bottom bar ([appBarBottom]).
 class NectarAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? appBarLead;

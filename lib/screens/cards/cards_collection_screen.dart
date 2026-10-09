@@ -12,6 +12,10 @@ import 'package:nectar_app/models/nectar_card.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/cards/add_single_card_screen.dart';
 
+/// Cards collection screen for Nectar
+///
+/// Displays all saved virtual cards belonging to the authenticated user,
+/// with support for card search and navigation to add/view cards.
 class CardsCollectionScreen extends StatefulWidget {
   const CardsCollectionScreen({super.key});
 

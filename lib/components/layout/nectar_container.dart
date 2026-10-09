@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Default container box for Nectar
+///
+/// Wraps [child] in a styled [Container] with card-like drop shadow,
+/// theme-based background ([ColorScheme.onPrimary]), and default padding of 20px.
 class NectarContainer extends StatelessWidget {
   final Widget child;
   final AlignmentGeometry? alignment;

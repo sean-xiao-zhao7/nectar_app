@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// Centered loading indicator for Nectar
+///
+/// Displays a centered [CircularProgressIndicator] defaulting to the theme's
+/// primary color ([ColorScheme.primary]).
 class Nectarloadingindicator extends StatelessWidget {
   final Color? color;
 

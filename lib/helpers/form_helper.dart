@@ -50,6 +50,7 @@ InputDecoration fieldDecoration(BuildContext context, String labelText) {
 /// Current validators: required(empty), email, minLength
 typedef FormFieldValidatorFn = String? Function(String? value);
 
+/// Provides factory functions for standard form field validation.
 class FormValidators {
   static const List<String> available = <String>[
     'required',
