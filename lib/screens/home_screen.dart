@@ -78,11 +78,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           spacing: 30,
                           children: [
                             NectarLargeText(
-                              'Welcome to Nectar!',
+                              'Welcome to Nectar',
                               textAlign: TextAlign.center,
                             ),
                             NectarRegularText(
-                                'Please use the menu to the top left to access the various features of Nectar.'),
+                                'Please access the various features of Nectar from the top left menu.'),
                             NectarDivider(),
                             Text.rich(TextSpan(children: [
                               TextSpan(
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                               TextSpan(
-                                  text: ' contains all cards you have saved.'),
+                                  text: ' contains the cards you have saved.'),
                             ])),
                             Text.rich(TextSpan(children: [
                               TextSpan(
@@ -99,19 +99,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                       TextStyle(fontWeight: FontWeight.bold)),
                               TextSpan(
                                   text:
-                                      ' contains cards representing yourself that you want to share with others.'),
+                                      ' contains the cards with your own information.'),
                             ])),
                             Text.rich(TextSpan(children: [
                               TextSpan(
                                   text: 'Add A New Card',
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
-                              TextSpan(
-                                  text:
-                                      ' allows you to scan and save a new card.'),
+                              TextSpan(text: ' allows you to add a new card.'),
                             ])),
                             NectarDivider(),
-                            Text('We hope you enjoy using Nectar!')
+                            Text('We hope you enjoy using Nectar.')
                           ])
                     ]);
                   } else {

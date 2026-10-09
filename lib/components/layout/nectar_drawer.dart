@@ -190,7 +190,7 @@ class NectarDrawer extends StatelessWidget {
                   size: 36,
                 ),
                 title: Text(
-                  'About Nectar',
+                  'Help',
                   style: menuTextStyle,
                 ),
                 onTap: () {
