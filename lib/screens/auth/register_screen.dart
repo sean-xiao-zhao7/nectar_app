@@ -38,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
       title: 'Sign up',
+      padding: 20,
       appBarActions: [
         IconButton(
           onPressed: () => nectarNavigate(context, const HelpHomeScreen()),

@@ -57,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return NectarScaffoldContainer(
       title: 'Log in',
+      padding: 20,
       appBarActions: [
         IconButton(
             onPressed: () => {nectarNavigate(context, HelpHomeScreen())},
