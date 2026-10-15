@@ -16,6 +16,9 @@ class CardsListView extends StatelessWidget {
     return Expanded(
       child: ListView(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           for (NectarCard card in cardsList)
             SingleCardListPreview(nectarCard: card, isOwnCard: isOwnCard)
         ],

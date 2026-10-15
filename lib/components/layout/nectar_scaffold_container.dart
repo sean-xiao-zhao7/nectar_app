@@ -6,6 +6,7 @@ import 'package:nectar_app/components/layout/nectar_app_bar.dart';
 //
 // Uses custom drawer, app bar, text style.
 // Gets app bar children to be passed.
+// Default no padding, Nectar Yellow background colour.
 class NectarScaffoldContainer extends StatelessWidget {
   final String title;
   final Widget? child, appBarLead;

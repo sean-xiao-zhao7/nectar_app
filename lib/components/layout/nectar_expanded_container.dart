@@ -1,46 +1,26 @@
 import 'package:flutter/material.dart';
 
-/// Full-height expanded container for Nectar screens
-///
-/// Wraps [child] in an [Expanded] container styled with rounded corners (10px),
-/// theme background ([ColorScheme.onPrimary]), and a subtle drop shadow.
-class NectarExpandedContainer extends StatelessWidget {
-  final Widget child;
-  final AlignmentGeometry? alignment;
-  final EdgeInsetsGeometry? margin;
-  final EdgeInsetsGeometry? padding;
+import 'package:nectar_app/components/layout/nectar_column.dart';
+import 'package:nectar_app/components/layout/nectar_container.dart';
 
-  const NectarExpandedContainer(
-      {super.key,
-      required this.child,
-      this.alignment,
-      this.margin,
-      this.padding = const EdgeInsets.all(20)});
+/// Full-height and width expanded container for Nectar screens
+///
+/// A NectarContainer inside a NectarColumn with Expanded.
+/// A full-width/height white background.
+class NectarExpandedContainer extends StatelessWidget {
+  final CrossAxisAlignment? crossAxisAlignment;
+  final Widget child;
+
+  const NectarExpandedContainer({
+    super.key,
+    this.crossAxisAlignment,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Container(
-            alignment: alignment,
-            padding: padding,
-            margin: margin,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.onPrimary,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.12),
-                    blurRadius: 3,
-                    offset: Offset(0, 3),
-                  ),
-                ]),
-            child: child,
-          ),
-        ),
-      ],
-    );
+    return NectarColumn(
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.stretch,
+        children: [Expanded(child: NectarContainer(child: child))]);
   }
 }

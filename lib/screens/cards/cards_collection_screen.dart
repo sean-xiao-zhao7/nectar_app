@@ -32,6 +32,8 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
         builder: (BuildContext context, AsyncSnapshot<User?> snapshotAuth) {
           // widgetTree is the dynamic content on the screen based on state
           Widget widgetTree = Center(child: CircularProgressIndicator());
+
+          // if user is not logged in, redirect
           if (snapshotAuth.connectionState == ConnectionState.done &&
               !snapshotAuth.hasData) {
             Navigator.of(context).push(
@@ -39,17 +41,18 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                 builder: (_) => const LoginScreen(),
               ),
             );
+
+            // if user is logged in, get cards
           } else if (snapshotAuth.connectionState == ConnectionState.active &&
               snapshotAuth.hasData) {
-            // second futurebuilder fetches card list
             widgetTree = FutureBuilder<List<NectarCard>>(
                 future:
                     fetchUserAllCards(snapshotAuth.data!.uid, isOwnCard: false),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<NectarCard>> snapshotCards) {
-                  // switch display elements based on cards
                   if (snapshotCards.connectionState == ConnectionState.done &&
                       snapshotCards.hasData) {
+                    // if user has no cards
                     if (snapshotCards.data!.isEmpty) {
                       return NectarContainer(
                           child: Column(
@@ -69,9 +72,11 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                                     context, AddSingleCardScreen())),
                           ]));
                     } else {
+                      // user has some cards
                       return CardsListView(cardsList: snapshotCards.data!);
                     }
                   } else {
+                    // fetching
                     return NectarContainer(
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
