@@ -15,14 +15,22 @@ Widget myTextFormField(
     int? maxLines}) {
   return TextFormField(
     controller: controller,
-    decoration: fieldDecoration(context, labelText),
+    decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        label: Text(labelText),
+        labelStyle: TextStyle(color: Theme.of(context).colorScheme.tertiary),
+        enabledBorder: UnderlineInputBorder(
+          borderSide:
+              BorderSide(color: Theme.of(context).colorScheme.secondary),
+        ),
+        fillColor: Colors.white,
+        filled: true),
     textInputAction: textInputAction,
     validator: (value) => runValidators(value, validators),
     keyboardType: keyboardType,
     obscureText: obscureText,
     textCapitalization:
         capitalize ? TextCapitalization.sentences : TextCapitalization.none,
-    style: TextStyle(fontSize: 18),
     initialValue: initialValue,
     maxLines: maxLines,
   );
