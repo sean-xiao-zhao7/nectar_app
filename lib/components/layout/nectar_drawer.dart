@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:nectar_app/components/icons/nectar_large_icon.dart';
 import 'package:nectar_app/components/layout/nectar_divider.dart';
-
+import 'package:nectar_app/components/text/nectar_large_text.dart';
 import 'package:nectar_app/screens/auth/login_screen.dart';
 import 'package:nectar_app/screens/auth/logout_screen.dart';
 import 'package:nectar_app/screens/auth/register_screen.dart';
@@ -57,12 +58,19 @@ class NectarDrawer extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
-                        Text(
-                          'Nectar',
-                          style: profileTextStyle,
-                        ),
+                        Row(spacing: 10, children: [
+                          NectarLargeIcon(
+                            Icons.hive_sharp,
+                            color: Theme.of(context).colorScheme.primary,
+                            size: 28,
+                          ),
+                          NectarLargeText(
+                            'Nectar',
+                            fontSize: 22,
+                          ),
+                        ]),
                         SizedBox(
                           height: 10,
                         ),
@@ -71,11 +79,12 @@ class NectarDrawer extends StatelessWidget {
                           style: profileSubTextStyle,
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                       ]),
                 ),
               ),
+              NectarDivider(),
               ListTile(
                 leading: NectarLargeIcon(
                   Icons.login_sharp,
@@ -108,7 +117,7 @@ class NectarDrawer extends StatelessWidget {
                   Icons.help_outline_sharp,
                 ),
                 title: Text(
-                  'About Nectar',
+                  'About',
                   style: menuTextStyle,
                 ),
                 onTap: () {
@@ -116,6 +125,8 @@ class NectarDrawer extends StatelessWidget {
                   nectarNavigate(context, const HelpHomeScreen());
                 },
               ),
+              NectarDivider(),
+              // NectarFooter(),
             ];
           } else {
             drawerMenu = [
