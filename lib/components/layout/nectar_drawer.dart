@@ -24,10 +24,6 @@ class NectarDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle profileTextStyle = TextStyle(
-      color: Theme.of(context).colorScheme.tertiary,
-      fontSize: 18,
-    );
     final TextStyle profileSubTextStyle = TextStyle(
       fontSize: 18,
       color: Theme.of(context).colorScheme.tertiary,
@@ -134,9 +130,12 @@ class NectarDrawer extends StatelessWidget {
                 leading: NectarLargeIcon(
                   Icons.account_box_sharp,
                 ),
-                title: Text(
-                  (user.displayName == null ? user.email! : user.displayName!),
-                  style: profileTextStyle,
+                title: NectarLargeText(
+                  fontSize: 22,
+                  (user.displayName == null
+                      ? user.email!
+                      : user.displayName!
+                          .substring(0, user.displayName!.indexOf(' '))),
                 ),
                 // onTap: () {
                 //   Navigator.of(context).pop();
@@ -150,7 +149,7 @@ class NectarDrawer extends StatelessWidget {
                   Icons.collections_sharp,
                 ),
                 title: Text(
-                  'Cards Collection',
+                  'Collection',
                   style: menuTextStyle,
                 ),
                 onTap: () {
