@@ -138,11 +138,11 @@ class NectarDrawer extends StatelessWidget {
                   (user.displayName == null ? user.email! : user.displayName!),
                   style: profileTextStyle,
                 ),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  nectarNavigate(context, const CardsCollectionScreen(),
-                      replace: true);
-                },
+                // onTap: () {
+                //   Navigator.of(context).pop();
+                //   nectarNavigate(context, const CardsCollectionScreen(),
+                //       replace: true);
+                // },
               ),
               NectarDivider(),
               ListTile(
