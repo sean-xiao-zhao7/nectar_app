@@ -24,15 +24,6 @@ class NectarDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle profileSubTextStyle = TextStyle(
-      fontSize: 18,
-      color: Theme.of(context).colorScheme.tertiary,
-    );
-    final TextStyle menuTextStyle = TextStyle(
-      fontSize: 18,
-      color: Theme.of(context).colorScheme.tertiary,
-    );
-
     return StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
@@ -72,7 +63,6 @@ class NectarDrawer extends StatelessWidget {
                         ),
                         Text(
                           'Virtual Cards Collection',
-                          style: profileSubTextStyle,
                         ),
                         SizedBox(
                           height: 10,
@@ -87,7 +77,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'Log in',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -100,7 +89,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'Sign up',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -114,7 +102,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'About',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -122,7 +109,6 @@ class NectarDrawer extends StatelessWidget {
                 },
               ),
               NectarDivider(),
-              // NectarFooter(),
             ];
           } else {
             drawerMenu = [
@@ -150,7 +136,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'Collection',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -163,8 +148,7 @@ class NectarDrawer extends StatelessWidget {
                   Icons.credit_card_sharp,
                 ),
                 title: Text(
-                  'My Cards',
-                  style: menuTextStyle,
+                  'My Own Cards',
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -176,8 +160,7 @@ class NectarDrawer extends StatelessWidget {
                   Icons.add_to_photos_sharp,
                 ),
                 title: Text(
-                  'Add A New Card',
-                  style: menuTextStyle,
+                  'Add Card',
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -191,7 +174,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'Help',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -204,7 +186,6 @@ class NectarDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   'Log Out',
-                  style: menuTextStyle,
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
