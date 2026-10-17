@@ -78,6 +78,8 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                       return CardsListView(
                         cardsList: snapshotCards.data!,
                         isOwnCard: true,
+                        topText:
+                            'These cards represent yourself.',
                       );
                     }
                   } else {

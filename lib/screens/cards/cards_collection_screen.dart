@@ -73,7 +73,10 @@ class _CardsCollectionScreenState extends State<CardsCollectionScreen> {
                           ]));
                     } else {
                       // user has some cards
-                      return CardsListView(cardsList: snapshotCards.data!);
+                      return CardsListView(
+                        cardsList: snapshotCards.data!,
+                        topText: 'Below is all cards you have saved.',
+                      );
                     }
                   } else {
                     // fetching
