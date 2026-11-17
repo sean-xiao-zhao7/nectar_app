@@ -42,3 +42,5 @@ app.*.map.json
 # ignore options
 lib/firebase_options.dart
 lib/nectar_options.dart
+
+ios/Runner/GoogleService-Info.plist
