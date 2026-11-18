@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:nectar_app/components/text/nectar_regular_text.dart';
 
 /// Bottom footer for Nectar screens
